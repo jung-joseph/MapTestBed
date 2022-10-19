@@ -22,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		538511862900AC2B004FB303 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		53B225CD28FF547100D14717 /* MKCoordinateRegion+ extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+ extensions.swift"; sourceTree = "<group>"; };
 		53B225CF28FF59C400D14717 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		53BD202728D806F400480B29 /* MapTestBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTestBed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +68,7 @@
 		53BD202928D806F400480B29 /* MapTestBed */ = {
 			isa = PBXGroup;
 			children = (
+				538511862900AC2B004FB303 /* Info.plist */,
 				53BD202A28D806F400480B29 /* MapTestBedApp.swift */,
 				53BD203E28D80AB600480B29 /* AppState.swift */,
 				53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */,
@@ -302,6 +304,7 @@
 				DEVELOPMENT_TEAM = 8GFL38QM4Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapTestBed/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App must use your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App must use your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App must use your location";
@@ -334,6 +337,7 @@
 				DEVELOPMENT_TEAM = 8GFL38QM4Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapTestBed/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App must use your location";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App must use your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App must use your location";

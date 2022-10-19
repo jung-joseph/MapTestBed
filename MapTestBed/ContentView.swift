@@ -10,7 +10,7 @@ import MapKit
 
 struct ContentView: View {
     
- 
+    @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
         NavigationView {

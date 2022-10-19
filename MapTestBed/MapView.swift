@@ -24,6 +24,7 @@ struct MapView: UIViewRepresentable {
     init(annotations: [LandmarkAnnotation], selectedLandmark: LandmarkAnnotation?) {
         self.annotations = annotations
         self.selectedLandmark = selectedLandmark
+        
 }
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView( )
