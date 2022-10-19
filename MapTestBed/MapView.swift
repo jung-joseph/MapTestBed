@@ -16,16 +16,22 @@ struct MapView: UIViewRepresentable {
     
     private var annotations: [LandmarkAnnotation] = []
     private var selectedLandmark: LandmarkAnnotation?
-
+    
+   
+    
+//    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.16444, longitude: -106.5117), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    
     init(annotations: [LandmarkAnnotation], selectedLandmark: LandmarkAnnotation?) {
         self.annotations = annotations
         self.selectedLandmark = selectedLandmark
-    }
+}
     func makeUIView(context: Context) -> MKMapView {
-        let map = MKMapView()
+        let map = MKMapView( )
         map.showsUserLocation = true
         map.delegate = context.coordinator
         map.mapType = .hybrid
+        
+        
         return map
     }
     

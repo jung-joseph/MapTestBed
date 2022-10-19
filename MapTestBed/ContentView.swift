@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    
+ 
+    
     var body: some View {
-        VStack {
-            MapScreen()
-        }.ignoresSafeArea()
-        
+        NavigationView {
+            VStack {
+                MapScreen()
+            }.ignoresSafeArea()
+                .navigationTitle("MapTest Bed")
+        }
     }
 }
 
