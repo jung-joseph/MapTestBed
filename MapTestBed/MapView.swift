@@ -36,11 +36,31 @@ struct MapView: UIViewRepresentable {
         return map
     }
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
+    func updateUIView(_ map: MKMapView, context: Context) {
+        
+        map.removeAnnotations(map.annotations)
+        
+        registerMapAnnotations(map:map)
+        map.addAnnotations(annotations)
+        
+        if let selectedLandmark = selectedLandmark {
+            map.selectAnnotation(selectedLandmark, animated: true)
+        }
+    }
+    
+    private func registerMapAnnotations(map: MKMapView) {
+        print("registering  \(annotations.count) annotations")
+        
+        for annotation in annotations {
+            map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: annotation.title ?? "")
+        }
+
         
     }
     
     func makeCoordinator() -> MapViewCoordinator {
         return MapViewCoordinator()
     }
+    
+    
 }

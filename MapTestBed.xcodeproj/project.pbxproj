@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5393555E2901F29000183754 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555D2901F29000183754 /* SearchResultsViewModel.swift */; };
+		539355602901F34000183754 /* LocalSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555F2901F34000183754 /* LocalSearchService.swift */; };
+		539355622901F8D300183754 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355612901F8D300183754 /* SearchResultsList.swift */; };
+		539355642901F90400183754 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355632901F90400183754 /* UserSettings.swift */; };
+		539355662901F90E00183754 /* DistanceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355652901F90E00183754 /* DistanceFormatter.swift */; };
+		539355682901F92F00183754 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355672901F92F00183754 /* DistanceUnit.swift */; };
+		5393556A2901F97A00183754 /* Measurement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355692901F97A00183754 /* Measurement+Extensions.swift */; };
 		53B225CE28FF547100D14717 /* MKCoordinateRegion+ extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B225CD28FF547100D14717 /* MKCoordinateRegion+ extensions.swift */; };
 		53B225D028FF59C400D14717 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B225CF28FF59C400D14717 /* LocationManager.swift */; };
 		53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD202A28D806F400480B29 /* MapTestBedApp.swift */; };
@@ -19,10 +26,19 @@
 		53BD203F28D80AB600480B29 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD203E28D80AB600480B29 /* AppState.swift */; };
 		53BD204128D80AE200480B29 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD204028D80AE200480B29 /* Landmark.swift */; };
 		53BD204328D80AFD00480B29 /* LandmarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */; };
+		53FDD5E32902E45F0018002B /* MapCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E22902E45F0018002B /* MapCalloutView.swift */; };
+		53FDD5E52902E5760018002B /* CallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E42902E5760018002B /* CallOutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		538511862900AC2B004FB303 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5393555D2901F29000183754 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		5393555F2901F34000183754 /* LocalSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalSearchService.swift; sourceTree = "<group>"; };
+		539355612901F8D300183754 /* SearchResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
+		539355632901F90400183754 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		539355652901F90E00183754 /* DistanceFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceFormatter.swift; sourceTree = "<group>"; };
+		539355672901F92F00183754 /* DistanceUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
+		539355692901F97A00183754 /* Measurement+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Measurement+Extensions.swift"; sourceTree = "<group>"; };
 		53B225CD28FF547100D14717 /* MKCoordinateRegion+ extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+ extensions.swift"; sourceTree = "<group>"; };
 		53B225CF28FF59C400D14717 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		53BD202728D806F400480B29 /* MapTestBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTestBed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +52,8 @@
 		53BD203E28D80AB600480B29 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		53BD204028D80AE200480B29 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotation.swift; sourceTree = "<group>"; };
+		53FDD5E22902E45F0018002B /* MapCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCalloutView.swift; sourceTree = "<group>"; };
+		53FDD5E42902E5760018002B /* CallOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallOutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +99,15 @@
 				53BD203A28D8088200480B29 /* MapViewCoordinator.swift */,
 				53B225CD28FF547100D14717 /* MKCoordinateRegion+ extensions.swift */,
 				53B225CF28FF59C400D14717 /* LocationManager.swift */,
+				5393555D2901F29000183754 /* SearchResultsViewModel.swift */,
+				5393555F2901F34000183754 /* LocalSearchService.swift */,
+				539355612901F8D300183754 /* SearchResultsList.swift */,
+				539355632901F90400183754 /* UserSettings.swift */,
+				539355652901F90E00183754 /* DistanceFormatter.swift */,
+				539355672901F92F00183754 /* DistanceUnit.swift */,
+				539355692901F97A00183754 /* Measurement+Extensions.swift */,
+				53FDD5E22902E45F0018002B /* MapCalloutView.swift */,
+				53FDD5E42902E5760018002B /* CallOutView.swift */,
 			);
 			path = MapTestBed;
 			sourceTree = "<group>";
@@ -164,13 +191,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				53BD204328D80AFD00480B29 /* LandmarkAnnotation.swift in Sources */,
+				539355602901F34000183754 /* LocalSearchService.swift in Sources */,
+				53FDD5E52902E5760018002B /* CallOutView.swift in Sources */,
+				5393555E2901F29000183754 /* SearchResultsViewModel.swift in Sources */,
 				53BD204128D80AE200480B29 /* Landmark.swift in Sources */,
+				53FDD5E32902E45F0018002B /* MapCalloutView.swift in Sources */,
 				53B225D028FF59C400D14717 /* LocationManager.swift in Sources */,
 				53BD203B28D8088200480B29 /* MapViewCoordinator.swift in Sources */,
 				53B225CE28FF547100D14717 /* MKCoordinateRegion+ extensions.swift in Sources */,
 				53BD202D28D806F400480B29 /* ContentView.swift in Sources */,
+				539355682901F92F00183754 /* DistanceUnit.swift in Sources */,
 				53BD203928D8072100480B29 /* MapView.swift in Sources */,
+				5393556A2901F97A00183754 /* Measurement+Extensions.swift in Sources */,
+				539355662901F90E00183754 /* DistanceFormatter.swift in Sources */,
+				539355622901F8D300183754 /* SearchResultsList.swift in Sources */,
 				53BD203F28D80AB600480B29 /* AppState.swift in Sources */,
+				539355642901F90400183754 /* UserSettings.swift in Sources */,
 				53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */,
 				53BD203D28D80AA300480B29 /* MapScreen.swift in Sources */,
 			);
@@ -314,6 +350,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -348,6 +385,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
