@@ -10,10 +10,9 @@ import MapKit
 
 struct MapScreen: View {
     
-    @EnvironmentObject var appState: AppState
     
     var body: some View {
-        MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
+        MapView()
     }
 }
 

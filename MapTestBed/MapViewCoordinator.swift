@@ -11,15 +11,10 @@ import SwiftUI
 
 final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
-    @EnvironmentObject var appState: AppState
-    @EnvironmentObject var locationManager: LocationManager
+
 
     
-    //    var parent: MapView
-    //
-    //    init(_ parent: MapView) {
-    //        self.parent = parent
-    //    }
+
     
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
@@ -32,44 +27,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        print("in Did Select ")
-        
-        
-        guard let annotation = view.annotation as? LandmarkAnnotation else {
-            return
-        }
-        print("annotationTitle: \(String(describing: annotation.title))")
-        print("annotationAddress: \(String(describing: annotation.address))")
-        print("annotationCoordinates: \(annotation.coordinate)")
-        
-        view.canShowCallout = true
-        
-        let options = MKMapSnapshotter.Options()
-        let size = 250.0
-        options.size = CGSize(width: size, height: size/2)
-        options.showsBuildings = true
-        options.mapType = .hybrid
-        options.camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 500, pitch: 65, heading: 0)
-        let snapshotter = MKMapSnapshotter(options: options)
-        
-        
-        snapshotter.start { snapshot, error in
-            guard let snapshot = snapshot, error == nil else {
-                print(error as Any)
-                return
-                
-            }
-            
-            
-            
-            DispatchQueue.main.async {
-                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
-                imageView.image = snapshot.image
-                let customView = CallOutView(annotation: annotation,snapShot: imageView.image)
-                let callout = MapCalloutView(rootView: AnyView(customView))
-                view.detailCalloutAccessoryView = callout
-            }
-        }
+ 
         
     }
     

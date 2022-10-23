@@ -14,16 +14,13 @@ import UIKit
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
-    private var annotations: [LandmarkAnnotation] = []
-    private var selectedLandmark: LandmarkAnnotation?
-    
+
    
     
 //    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.16444, longitude: -106.5117), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
-    init(annotations: [LandmarkAnnotation], selectedLandmark: LandmarkAnnotation?) {
-        self.annotations = annotations
-        self.selectedLandmark = selectedLandmark
+    init() {
+  
         
 }
     func makeUIView(context: Context) -> MKMapView {
@@ -38,22 +35,11 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ map: MKMapView, context: Context) {
         
-        map.removeAnnotations(map.annotations)
-        
-        registerMapAnnotations(map:map)
-        map.addAnnotations(annotations)
-        
-        if let selectedLandmark = selectedLandmark {
-            map.selectAnnotation(selectedLandmark, animated: true)
-        }
+ 
     }
     
     private func registerMapAnnotations(map: MKMapView) {
-        print("registering  \(annotations.count) annotations")
-        
-        for annotation in annotations {
-            map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: annotation.title ?? "")
-        }
+
 
         
     }
