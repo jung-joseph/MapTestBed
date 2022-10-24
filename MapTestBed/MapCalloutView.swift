@@ -26,9 +26,11 @@ class MapCalloutView: UIView {
 	Obviously you can pass in any properties to your custom view.
 	*/
 	init(rootView: AnyView) {
-		super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 		body.rootView = AnyView(rootView)
 		setupView()
+        
+    
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

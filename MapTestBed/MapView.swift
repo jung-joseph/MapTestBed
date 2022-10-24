@@ -24,17 +24,22 @@ struct MapView: UIViewRepresentable {
     init(annotations: [LandmarkAnnotation], selectedLandmark: LandmarkAnnotation?) {
         self.annotations = annotations
         self.selectedLandmark = selectedLandmark
-        
-}
+    }
+    
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView( )
         map.showsUserLocation = true
         map.delegate = context.coordinator
         map.mapType = .hybrid
-        
-        
         return map
     }
+    
+//    func makeUIView(context: UIViewRepresentableContext<MyMapView>) -> WrappableMapView {
+//        mapView.showsUserLocation = true
+//        mapView.delegate = mapView
+//        mapView.mapType = .hybrid
+//        return mapView
+//    }
     
     func updateUIView(_ map: MKMapView, context: Context) {
         
@@ -46,6 +51,9 @@ struct MapView: UIViewRepresentable {
         if let selectedLandmark = selectedLandmark {
             map.selectAnnotation(selectedLandmark, animated: true)
         }
+        
+
+        
     }
     
     private func registerMapAnnotations(map: MKMapView) {
@@ -64,3 +72,5 @@ struct MapView: UIViewRepresentable {
     
     
 }
+
+

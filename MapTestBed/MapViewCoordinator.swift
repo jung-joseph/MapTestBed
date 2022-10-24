@@ -34,13 +34,19 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         
         print("in Did Select ")
         
-        
+        // Create SwiftUI callout for this annotation
         guard let annotation = view.annotation as? LandmarkAnnotation else {
             return
         }
         print("annotationTitle: \(String(describing: annotation.title))")
         print("annotationAddress: \(String(describing: annotation.address))")
         print("annotationCoordinates: \(annotation.coordinate)")
+        
+        let start = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate) )
+        print("currentLocation: \(start)")
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate ) )
+        print("destination: \(destination)")
+        
         
         view.canShowCallout = true
         
@@ -70,6 +76,23 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
                 view.detailCalloutAccessoryView = callout
             }
         }
+        
+
+        // construct route
+
+        
+        
+        self?.calculateRoute(start: start, destination: destination) { route in
+            if let route = route {
+
+                view.detailCalloutAccessoryView = nil
+
+                let controller = RouteContentViewContoller(route: route)
+                let routePopover = RoutePopOver(controller: controller)
+            }
+
+        }
+        
         
     }
     
