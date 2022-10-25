@@ -29,6 +29,7 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let map = MKMapView( )
         map.showsUserLocation = true
+        map.showsTraffic = true
         map.delegate = context.coordinator
         map.mapType = .hybrid
         return map
@@ -43,6 +44,7 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ map: MKMapView, context: Context) {
         
+        print("updateUIView called")
         map.removeAnnotations(map.annotations)
         
         registerMapAnnotations(map:map)

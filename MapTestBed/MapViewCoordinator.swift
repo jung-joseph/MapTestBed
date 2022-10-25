@@ -8,12 +8,13 @@
 import Foundation
 import MapKit
 import SwiftUI
+import UIKit
 
 final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var locationManager: LocationManager
-
+    
     
     //    var parent: MapView
     //
@@ -42,7 +43,9 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         print("annotationAddress: \(String(describing: annotation.address))")
         print("annotationCoordinates: \(annotation.coordinate)")
         
-        let start = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate) )
+//        let start = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate) )
+        let start = MKMapItem.forCurrentLocation()
+        print("coordinates: \(start.placemark.coordinate)")
         print("currentLocation: \(start)")
         let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate ) )
         print("destination: \(destination)")
@@ -58,40 +61,67 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         options.camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 500, pitch: 65, heading: 0)
         let snapshotter = MKMapSnapshotter(options: options)
         
-        
-        snapshotter.start { snapshot, error in
-            guard let snapshot = snapshot, error == nil else {
-                print(error as Any)
-                return
+//        DispatchQueue.main.async {
+            snapshotter.start { snapshot, error in
+                guard let snapshot = snapshot, error == nil else {
+                    print(error as Any)
+                    return
+                }
                 
-            }
-            
-            
-            
+                
+                
             DispatchQueue.main.async {
                 let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
-                let customView = CallOutView(annotation: annotation,snapShot: imageView.image)
+                                let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image)
+                //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                 let callout = MapCalloutView(rootView: AnyView(customView))
                 view.detailCalloutAccessoryView = callout
             }
         }
         
-
+        
         // construct route
-
         
         
-        self?.calculateRoute(start: start, destination: destination) { route in
-            if let route = route {
-
-                view.detailCalloutAccessoryView = nil
-
-                let controller = RouteContentViewContoller(route: route)
-                let routePopover = RoutePopOver(controller: controller)
-            }
-
-        }
+        
+//        self.calculateRoute(start: start, destination: destination) { route in
+//            if let route = route {
+//                print("Calculating Route inside didSelect")
+//                print("start: \(start)")
+//                print("destination: \(destination)")
+//
+////                view.detailCalloutAccessoryView = nil
+//                
+//                let controller = RouteContentViewController(route: route)
+//                let routePopover = RoutePopover(controller: controller)
+//                
+//                let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
+//                                                            mapView.frame.width/2, height: 0.0))
+//                
+//                //                    view.autoresizesSubviews = true
+//                
+//                mapView.addSubview(positioningView)
+//                
+//                // clear all annotations
+////                mapView.removeAnnotations(mapView.annotations)
+//                //
+//                
+//                
+////                mapView.addAnnotation(annotation)
+//                // clear all overlays
+//                mapView.removeOverlays(mapView.overlays)
+//                
+//                // add overlay on the map
+//                mapView.addOverlay(route.polyline, level: .aboveRoads)
+//                //                    routePopover.show(relativeTo: positioningView.frame, of: positioningView, preferredEdge: .minY)
+//                
+//                routePopover.show(routePopover, sender: self)
+//                
+//                // let
+//            }
+//            
+//        }
         
         
     }
@@ -99,92 +129,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     //    MARK: - viewFor annotation
     //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
-    
-    //
-    //
-    //        if let place = annotation.title {
-    //            print("place: \(place!)")
-    //            if (place == "My Location") {
-    //                return nil
-    //            }
-    //        } else {
-    //            print("place is nil")
-    //        }
-    //
-    //
-    //        guard let mapPlace = annotation.title else {return nil}
-    //        print("mapPlace: \(mapPlace!)")
-    //        print("subtitle: \(String(describing: annotation.subtitle))")
-    //        // attempt to find a previous used cell
-    ////        var view = mapView.dequeueReusableAnnotationView(withIdentifier: (mapPlace!)) as? MKMarkerAnnotationView
-    //
-    //        if let view = mapView.dequeueReusableAnnotationView(withIdentifier: (mapPlace!)) as? MKMarkerAnnotationView {
-    //            print("view for \(mapPlace!) found")
-    //            view.annotation = annotation
-    //            let view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: (mapPlace!))
-    //            view.subtitleVisibility = .visible
-    //            view.displayPriority = .required
-    //            view.canShowCallout = true
-    //            view.titleVisibility = .hidden
-    //
-    //            let annotation = view.annotation
-    //            let callout: MapCalloutView
-    //            let customView = CallOutView()
-    //            callout = MapCalloutView(rootView: AnyView(customView))
-    //            view.detailCalloutAccessoryView = callout
-    //
-    //            return view
-    //
-    //        } else {
-    //            print("view for \(mapPlace!)  not found")
-    //            let view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: (mapPlace!))
-    //            view.subtitleVisibility = .visible
-    //            view.displayPriority = .required
-    //            view.canShowCallout = true
-    //            view.titleVisibility = .hidden
-    //
-    //            let annotation = view.annotation
-    //            let callout: MapCalloutView
-    //
-    //            if (annotation?.subtitle != nil){
-    //                let customView = CallOutView()
-    //                callout = MapCalloutView(rootView: AnyView(customView))
-    //            } else {
-    //                let customView = Text("This view passes no title")
-    //                callout = MapCalloutView(rootView: AnyView(customView))
-    //            }
-    //
-    //            view.detailCalloutAccessoryView = callout
-    //            return view
-    //
-    //        }
-    
-    // we didn't find one; make a new cell
-    //        if(view == nil) {
-    //            let view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: (mapPlace!))
-    //            view.subtitleVisibility = .visible
-    //            view.displayPriority = .required
-    //            view.canShowCallout = true
-    //            view.titleVisibility = .hidden
-    //
-    //            let annotation = view.annotation
-    //            let callout: MapCalloutView
-    //
-    //            if (annotation?.subtitle != nil){
-    //                let customView = CallOutView()
-    //                callout = MapCalloutView(rootView: AnyView(customView))
-    //            } else {
-    //                let customView = Text("This view passes no title")
-    //                callout = MapCalloutView(rootView: AnyView(customView))
-    //            }
-    //
-    //            view.detailCalloutAccessoryView = callout
-    //
-    //        } else {
-    //            // we have a view to reuse, give it a new annotation
-    //            view.annotation = annotation
-    //        }
-    //        return view
+  
     //    }
     
     
@@ -201,6 +146,83 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     //    MARK: - calloutAccessoryControlTapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("CallOut control tapped")
+        
+       
+        guard let name = view.annotation else {return}
+//        let name = view.annotation
+        print("Callout \(String(describing: name.title)) tapped")
+        
+        
+//        let landmarkCalloutView = LandmarkCalloutView(annotation: name, selectShowDirections: <#T##(LandmarkAnnotation) -> Void#>)
+        
+        
+        let currentPlaceCoordinate = (view.annotation?.coordinate)!
+        
+        let start = MKMapItem.forCurrentLocation()
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: currentPlaceCoordinate))
+        
+        self.calculateRoute(start: start, destination: destination) {route in
+            if let route = route {
+                
+                view.detailCalloutAccessoryView = nil
+                
+                let controller = RouteContentViewController(route: route)
+                let routePopover = RoutePopover(controller: controller)
+                
+                let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
+                                                            mapView.frame.width/2, height: 0.0))
+//                    view.autoresizesSubviews = true
+
+                mapView.addSubview(positioningView)
+                
+                // clear all annotations
+                mapView.removeAnnotations(mapView.annotations)
+                // clear all overlays
+                mapView.removeOverlays(mapView.overlays)
+                
+                // add overlay on the map
+                mapView.addOverlay(route.polyline, level: .aboveRoads)
+//                    routePopover.show(relativeTo: positioningView.frame, of: positioningView, preferredEdge: .minY)
+                
+                routePopover.show(routePopover, sender: self)
+                print("Exiting calloutAccessoryControlTapped")
+                
+            }
+        }
+        
     }
     
+    //MARK: - calculate route
+    
+    func calculateRoute(start: MKMapItem, destination: MKMapItem, completion: @escaping (MKRoute?) -> Void) {
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.transportType = .automobile
+        directionsRequest.source = start
+        directionsRequest.destination = destination
+        
+        print(" calculating route")
+        
+        let directions = MKDirections(request: directionsRequest)
+        directions.calculate { response, error in
+            if let error = error {
+                print("Unable to calculate directions \(error)")
+            }
+            
+            guard let response = response,
+                  let route = response.routes.first else {
+                return
+            }
+            completion(route)
+        }
+    }
+    
+    // MARK: - renderFor overlay
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.lineWidth = 5.0
+        renderer.strokeColor = .blue
+        return renderer
+    }
+    
+
 }

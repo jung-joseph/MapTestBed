@@ -29,7 +29,6 @@
 		53FDD5E32902E45F0018002B /* MapCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E22902E45F0018002B /* MapCalloutView.swift */; };
 		53FDD5E52902E5760018002B /* CallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E42902E5760018002B /* CallOutView.swift */; };
 		53FDD5E729070DB60018002B /* RouteContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E629070DB60018002B /* RouteContentViewController.swift */; };
-		53FDD5E929070DCE0018002B /* RouteCallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E829070DCE0018002B /* RouteCallOutView.swift */; };
 		53FDD5EB290716520018002B /* RoutePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5EA290716520018002B /* RoutePopover.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +57,6 @@
 		53FDD5E22902E45F0018002B /* MapCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCalloutView.swift; sourceTree = "<group>"; };
 		53FDD5E42902E5760018002B /* CallOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallOutView.swift; sourceTree = "<group>"; };
 		53FDD5E629070DB60018002B /* RouteContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteContentViewController.swift; sourceTree = "<group>"; };
-		53FDD5E829070DCE0018002B /* RouteCallOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteCallOutView.swift; sourceTree = "<group>"; };
 		53FDD5EA290716520018002B /* RoutePopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutePopover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +113,6 @@
 				53FDD5E22902E45F0018002B /* MapCalloutView.swift */,
 				53FDD5E42902E5760018002B /* CallOutView.swift */,
 				53FDD5E629070DB60018002B /* RouteContentViewController.swift */,
-				53FDD5E829070DCE0018002B /* RouteCallOutView.swift */,
 				53FDD5EA290716520018002B /* RoutePopover.swift */,
 			);
 			path = MapTestBed;
@@ -218,7 +215,6 @@
 				539355622901F8D300183754 /* SearchResultsList.swift in Sources */,
 				53BD203F28D80AB600480B29 /* AppState.swift in Sources */,
 				539355642901F90400183754 /* UserSettings.swift in Sources */,
-				53FDD5E929070DCE0018002B /* RouteCallOutView.swift in Sources */,
 				53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */,
 				53BD203D28D80AA300480B29 /* MapScreen.swift in Sources */,
 			);

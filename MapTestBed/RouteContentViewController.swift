@@ -19,7 +19,7 @@ class RouteContentViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = RouteCalloutView(route: route)
+//        self.view = RouteCalloutView(route: route)
         
     }
     
