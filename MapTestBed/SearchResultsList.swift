@@ -70,8 +70,11 @@ struct SearchResultsList: View {
         
 }
 
+
 struct SearchResultsList_Previews: PreviewProvider {
     static var previews: some View {
         SearchResultsList(landmarks: [], showSearchResultsList: .constant(false) ,onSelect: {_ in })
     }
+    
+    
 }

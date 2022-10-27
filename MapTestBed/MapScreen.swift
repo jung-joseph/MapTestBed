@@ -14,6 +14,7 @@ struct MapScreen: View {
     
     var body: some View {
         MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
+            .ignoresSafeArea()
     }
 }
 

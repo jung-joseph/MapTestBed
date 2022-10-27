@@ -15,6 +15,10 @@ struct CallOutView: View {
     var selectedAnnotation: LandmarkAnnotation
     var snapShot: UIImage?
     
+    @EnvironmentObject var appState: AppState
+    
+    var distanceFormatter = DistanceFormatter()
+
     var body: some View {
         VStack{
             HStack{
@@ -60,7 +64,35 @@ struct CallOutView: View {
                             
                             routePopover.show(routePopover, sender: self)
                             
-                            // let
+//                            appState.route = route
+                            for step in route.steps {
+                                if step.instructions.isEmpty {
+                                    continue
+                                }
+                                
+                                let iconName = directionsIcon(step.instructions)
+                                let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
+                                let stepInstructions = step.instructions
+                                
+                                print("\(iconName)")
+                                print("\(stepInstructions)")
+                                print("\(distance)")
+                                
+                                let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
+                                print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
+                                appState.routeSteps.append(arrayElement)
+                                
+                            }
+                            
+                            //
+//                            for step in route.steps {
+//                                if step.instructions.isEmpty {
+//                                    continue
+//                                }
+//
+//                                print(step.instructions)
+//                            }
+                            
                         }
                         
                     }
@@ -89,8 +121,18 @@ struct CallOutView: View {
         }
         
     }
-    func myTestFunc(){
-        print("myTestFunc Called")
+    
+    //MARK: - directionIcons
+    private func directionsIcon(_ instruction: String) -> String {
+        if instruction.contains("Turn right"){
+            return "arrow.turn.up.right"
+        } else if instruction.contains("Turn left") {
+            return "arrow.turn.up.left"
+        } else if instruction.contains("destination") {
+            return "mappin.circle.fill"
+        } else {
+            return "arrow.up"
+        }
     }
     //MARK: - calculate route
     

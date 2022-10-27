@@ -6,11 +6,25 @@
 //
 
 import Foundation
-
+import MapKit
+import SwiftUI
 
 class AppState: ObservableObject {
     @Published var landmarks: [LandmarkAnnotation] = []
     @Published var selectedLandmark: LandmarkAnnotation?
+    @Published var route: MKRoute?
+    @Published var routeSteps: [RouteStep] = []
     
     
+}
+
+struct RouteStep: Hashable {
+    var id = UUID()
+    var imageName: String?
+    var instructions: String?
+    var distance: String?
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

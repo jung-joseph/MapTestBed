@@ -73,7 +73,8 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
             DispatchQueue.main.async {
                 let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
-                                let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image)
+                // customView = CallOutView is a SwiftUI View
+                let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image)
                 //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                 let callout = MapCalloutView(rootView: AnyView(customView))
                 view.detailCalloutAccessoryView = callout

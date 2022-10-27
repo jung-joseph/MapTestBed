@@ -18,7 +18,8 @@ struct MapTestBedApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            MainView()
                 .environmentObject(appState)
                 .environmentObject(locationManager)
                 .environmentObject(searchVM)

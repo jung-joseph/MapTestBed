@@ -8,7 +8,7 @@
 //import Foundation
 import MapKit
 
-class LandmarkAnnotation: NSObject, MKAnnotation, Identifiable, ObservableObject {
+class LandmarkAnnotation: NSObject, MKAnnotation, Identifiable, ObservableObject{
     
     let id = UUID()
 //    private var mapItem: MKMapItem
@@ -57,4 +57,6 @@ class LandmarkAnnotation: NSObject, MKAnnotation, Identifiable, ObservableObject
         
         return userLocation.distance(from: placeLocation)
     }
+    
+
 }

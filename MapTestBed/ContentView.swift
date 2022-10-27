@@ -25,6 +25,8 @@ struct ContentView: View {
             
             VStack{
                 Spacer()
+                Spacer()
+                
                 TextField("Search", text: $search)
                     .textFieldStyle(.roundedBorder)
                     .onSubmit {
@@ -48,6 +50,8 @@ struct ContentView: View {
                         .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
     
                     }
+                
+                
             }
         }
     }

@@ -17,7 +17,6 @@ struct MapView: UIViewRepresentable {
     private var annotations: [LandmarkAnnotation] = []
     private var selectedLandmark: LandmarkAnnotation?
     
-   
     
 //    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.16444, longitude: -106.5117), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
