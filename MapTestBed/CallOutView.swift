@@ -65,6 +65,9 @@ struct CallOutView: View {
                             routePopover.show(routePopover, sender: self)
                             
 //                            appState.route = route
+                            
+                            appState.routeSteps.removeAll() //remove all elements of previous routeSteps directions
+
                             for step in route.steps {
                                 if step.instructions.isEmpty {
                                     continue
@@ -80,6 +83,7 @@ struct CallOutView: View {
                                 
                                 let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
                                 print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
+                                
                                 appState.routeSteps.append(arrayElement)
                                 
                             }
