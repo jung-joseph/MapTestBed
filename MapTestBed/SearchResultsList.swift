@@ -14,7 +14,7 @@ struct SearchResultsList: View {
     let landmarks: [LandmarkAnnotation]
     var onSelect: (LandmarkAnnotation) -> Void
     @EnvironmentObject var appState:AppState
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var settings: Settings
     @EnvironmentObject var localSearchService: LocalSearchService
     @StateObject private var locationManager = LocationManager()
     @Binding var showSearchResultsList: Bool
@@ -32,7 +32,7 @@ struct SearchResultsList: View {
     func formatDistance(for landmark: LandmarkAnnotation) -> String {
         //        print("location  \(locationManager.location)")
         guard let distanceInMeters = landmark.getDistance(userLocation: locationManager.location) else {return ""}
-        distanceFormatter.unitOptions = userSettings.distanceUnit
+        distanceFormatter.unitOptions = settings.distanceUnit
         return distanceFormatter.format(distanceInMeters: distanceInMeters)
     }
     

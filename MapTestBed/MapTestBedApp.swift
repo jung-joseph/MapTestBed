@@ -13,7 +13,7 @@ struct MapTestBedApp: App {
     @StateObject var locationManager = LocationManager()
     @StateObject var searchVM = SearchResultsViewModel()
     @StateObject var localSearchService = LocalSearchService()
-    @StateObject var userSettings = UserSettings()
+    @StateObject var settings = Settings()
 
 
     var body: some Scene {
@@ -24,7 +24,9 @@ struct MapTestBedApp: App {
                 .environmentObject(locationManager)
                 .environmentObject(searchVM)
                 .environmentObject(localSearchService)
-                .environmentObject(userSettings)
+                .environmentObject(settings)
+                .preferredColorScheme(settings.isDarkMode ? .dark : .light)
+
 
 
         }

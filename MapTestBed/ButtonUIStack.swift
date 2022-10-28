@@ -11,7 +11,7 @@ struct ButtonUIStack: View {
     
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var appState: AppState
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var settings: Settings
     
     @State var search: String = ""
     @State var showSearchResultsList = false

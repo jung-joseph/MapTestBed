@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab = "Map"
-    
+    @EnvironmentObject var settings: Settings
+
     var body: some View {
         TabView(selection: $selectedTab){
             
@@ -29,10 +30,10 @@ struct MainView: View {
                 .tag("Search")
             
             
-            RouteView()
+            SettingsScreen(settings: settings)
                 .tabItem {
                     Image(systemName: "gear.circle.fill")
-                    Text("Route")
+                    Text("Settings")
                 }
         }
     }
