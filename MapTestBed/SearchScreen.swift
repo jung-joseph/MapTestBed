@@ -11,7 +11,7 @@ struct SearchScreen: View {
     
     @State private var search: String = ""
     @State  private var showSearchResultsList = false
-
+    @Binding var selectedTab: String
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var userSettings: UserSettings
@@ -29,7 +29,7 @@ struct SearchScreen: View {
                         showSearchResultsList = true
                 }
             
-            SearchResultsList(landmarks: appState.landmarks, showSearchResultsList: $showSearchResultsList) { landmark in
+            SearchResultsList(landmarks: appState.landmarks, showSearchResultsList: $showSearchResultsList, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark
             }
         }
@@ -38,6 +38,6 @@ struct SearchScreen: View {
 
 struct SearchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SearchScreen()
+        SearchScreen(selectedTab: .constant("Search"))
     }
 }

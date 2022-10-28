@@ -18,12 +18,14 @@ struct SearchResultsList: View {
     @EnvironmentObject var localSearchService: LocalSearchService
     @StateObject private var locationManager = LocationManager()
     @Binding var showSearchResultsList: Bool
+    @Binding var selectedTab: String
     
     var distanceFormatter = DistanceFormatter()
     
-    init(landmarks: [LandmarkAnnotation],showSearchResultsList: Binding<Bool> ,onSelect: @escaping(LandmarkAnnotation)-> Void) {
+    init(landmarks: [LandmarkAnnotation],showSearchResultsList: Binding<Bool> , selectedTab: Binding<String>, onSelect: @escaping(LandmarkAnnotation)-> Void) {
         self.landmarks = landmarks
         self._showSearchResultsList = showSearchResultsList // Must use "_" to initialize!
+        self._selectedTab = selectedTab
         self.onSelect = onSelect
     }
     
@@ -61,6 +63,7 @@ struct SearchResultsList: View {
                     withAnimation{
                         localSearchService.region = MKCoordinateRegion.regionFromLandmark(landmark)
                     }
+                    selectedTab = "Map"
                 }
                 
             }// List
@@ -73,7 +76,7 @@ struct SearchResultsList: View {
 
 struct SearchResultsList_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultsList(landmarks: [], showSearchResultsList: .constant(false) ,onSelect: {_ in })
+        SearchResultsList(landmarks: [], showSearchResultsList: .constant(false) , selectedTab: .constant("Search"),onSelect: {_ in })
     }
     
     

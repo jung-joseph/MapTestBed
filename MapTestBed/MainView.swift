@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var selectedTab = "Map"
+    
     var body: some View {
-        TabView{
+        TabView(selection: $selectedTab){
             
             MapScreen()
                 .tabItem {
                     Image(systemName: "map.fill")
                     Text("Map")
                 }
+                .tag("Map")
             
-            SearchScreen()
+            SearchScreen(selectedTab: $selectedTab)
                 .tabItem {
                     Image(systemName: "magnifyingglass.circle.fill")
                     Text("Search")
                 }
+                .tag("Search")
+
             
             RouteView()
                 .tabItem {
