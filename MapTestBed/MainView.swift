@@ -20,17 +20,18 @@ struct MainView: View {
                 }
                 .tag("Map")
             
+            
             SearchScreen(selectedTab: $selectedTab)
                 .tabItem {
                     Image(systemName: "magnifyingglass.circle.fill")
                     Text("Search")
                 }
                 .tag("Search")
-
+            
             
             RouteView()
                 .tabItem {
-                    Image(systemName: "map.circle")
+                    Image(systemName: "gear.circle.fill")
                     Text("Route")
                 }
         }
