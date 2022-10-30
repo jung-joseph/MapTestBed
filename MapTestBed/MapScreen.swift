@@ -16,11 +16,12 @@ struct MapScreen: View {
         ZStack{
             MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
                 .ignoresSafeArea()
-            VStack{
-                RouteView()
-                    .opacity(appState.routeSteps.count>0 ? 1.0 : 0)
-                Spacer()
-            }
+            
+//            VStack{
+//                RouteView()
+//                    .opacity(appState.routeSteps.count>0 ? 1.0 : 0)
+//                Spacer()
+//            }
         }
 
             

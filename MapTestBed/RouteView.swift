@@ -10,35 +10,39 @@ import SwiftUI
 struct RouteView: View {
     
     @EnvironmentObject var appState: AppState
-
+    
     
     var body: some View {
+    
         VStack {
             Text("Route")
                 .font(.title)
-            ForEach(appState.routeSteps, id: \.self) { step in
-                VStack{
-                    HStack{
-                        Spacer()
-                        Image(systemName: step.imageName ?? "")
-                        Text(step.instructions ?? "")
-
-                        Spacer()
-                        Spacer()
-
+            ScrollView {
+                ForEach(appState.routeSteps, id: \.self) { step in
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Image(systemName: step.imageName ?? "")
+                            Text(step.instructions ?? "")
+                            
+                            Spacer()
+                            Spacer()
+                            
+                        }
+                        .padding(.leading)
+                        HStack{
+                            Spacer()
+                            Text(step.distance ?? "0")
+                                .frame(alignment: .leading)
+                            Spacer()
+                            Spacer()
+                        }
+                        .padding(.leading)
                     }
-                    .padding(.leading)
-                    HStack{
-                        Spacer()
-                        Text(step.distance ?? "0")
-                            .frame(alignment: .leading)
-                        Spacer()
-                        Spacer()
-                    }
-                    .padding(.leading)
                 }
             }
         }
+ 
     }
 }
 

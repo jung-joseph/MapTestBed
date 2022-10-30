@@ -14,6 +14,8 @@ import UIKit
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
+    @EnvironmentObject var settings: Settings
+
     private var annotations: [LandmarkAnnotation] = []
     private var selectedLandmark: LandmarkAnnotation?
 
@@ -30,7 +32,11 @@ struct MapView: UIViewRepresentable {
         map.showsUserLocation = true
         map.showsTraffic = true
         map.delegate = context.coordinator
-        map.mapType = .hybrid
+        map.mapType = .standard
+
+       
+//        map.mapType = .standard
+
         return map
     }
     
@@ -44,6 +50,8 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ map: MKMapView, context: Context) {
         
         print("updateUIView called")
+        map.mapType = settings.mapType
+
         map.removeAnnotations(map.annotations)
         
         registerMapAnnotations(map:map)
