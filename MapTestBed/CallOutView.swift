@@ -22,6 +22,7 @@ struct CallOutView: View {
     var body: some View {
         VStack{
             HStack{
+//MARK: - Directions Button
                 Button(action:
                 {
                     print("In CallOutView")
@@ -102,15 +103,36 @@ struct CallOutView: View {
                     }
 //
                 },
-                       label: {Text("Directions")})
+                       label: {Text("Get Directions")})
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(5)
                     .shadow(radius: 10)
                     
-                Spacer()
+//MARK: - Set Final Destination Button
+                Button(action: {
+                    appState.endDestination = selectedAnnotation
+                },
+                       label: {Text("Set As Final Destination")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
+//MARK: - Set Interim Destination Button
+                Button(action: {
+                    appState.interimDestination = selectedAnnotation
+                },
+                       label: {Text("Set As Interim Destination")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
             }
+            
+            
             if (snapShot != nil) {
                 Image(uiImage: snapShot! )
             }

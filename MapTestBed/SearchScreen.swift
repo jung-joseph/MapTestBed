@@ -18,7 +18,9 @@ struct SearchScreen: View {
     
     var body: some View {
         VStack{
-            TextField("Search", text: $search)
+
+
+            TextField("Search Term", text: $search)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit {
                     DispatchQueue.main.async {
@@ -28,6 +30,83 @@ struct SearchScreen: View {
                     }
                         showSearchResultsList = true
                 }
+            
+            VStack{
+                HStack{
+                    Button("Clear"){
+                        search = ""
+                    }
+                    .onSubmit {
+//                        DispatchQueue.main.async {
+//                            searchVM.search(query: search) {   landmarks in
+//                                appState.landmarks = landmarks
+//                            }
+//                        }
+//                        showSearchResultsList = true
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .shadow(radius: 10)
+                    
+                    Button("Set Category of Interest"){
+                        appState.categoryOfInterest = search
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .shadow(radius: 10)
+                    
+                }
+                .padding()
+                
+                HStack{
+                    Button("Dog Parks", action:
+                    {
+                        search = "Dog Parks"
+                        appState.categoryOfInterest = "Dog Parks"
+                    })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .shadow(radius: 10)
+                    
+                    Button("Rest Areas", action:
+                    {
+                        search = "Rest Areas"
+                        appState.categoryOfInterest = "Rest Areas"
+                    })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .shadow(radius: 10)
+                    
+                    Button("EV Chargers", action:
+                    {
+                        search = "EV Chargers"
+                        appState.categoryOfInterest = "EV Chargers"
+                    })
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+                    .shadow(radius: 10)
+                    
+                }
+                .padding(.top, 0)
+                
+               
+                VStack(alignment: .leading){
+                        Text("End Destination: \(appState.endDestination?.title ?? "")")
+                        Text("Interim Destination: \(appState.interimDestination?.title ?? "")")
+                        Text("Interim Search Category: \(appState.categoryOfInterest ?? "")")
+                    }
+                
+            }
             
             SearchResultsList(landmarks: appState.landmarks, showSearchResultsList: $showSearchResultsList, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark

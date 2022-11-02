@@ -16,11 +16,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     @EnvironmentObject var locationManager: LocationManager
     
     
-    //    var parent: MapView
-    //
-    //    init(_ parent: MapView) {
-    //        self.parent = parent
-    //    }
+ 
     
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {

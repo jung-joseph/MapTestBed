@@ -26,12 +26,15 @@ struct SettingsScreen: View {
                 Divider()
                 
                 HStack{
-                    Text("Distance Units")
-                    Picker("", selection: $settings.distanceUnit){
-                        ForEach(DistanceUnit.allCases, id: \.self) {distance in
-                            Text(distance.title)
-                            
-                        }
+                    
+                    
+                        Text("Distance Units")
+                        Picker("", selection: $settings.distanceUnit){
+                            ForEach(DistanceUnit.allCases, id: \.self) {distance in
+                                Text(distance.title)
+                                
+                            }
+                    
                     }.fixedSize()
                         .padding(.trailing, 20)
                 }
