@@ -14,6 +14,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var settings: Settings
     
     
  
@@ -53,7 +54,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         let size = 250.0
         options.size = CGSize(width: size, height: size/2)
         options.showsBuildings = true
-        options.mapType = .hybrid
+        options.mapType = .standard
         options.camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 500, pitch: 65, heading: 0)
         let snapshotter = MKMapSnapshotter(options: options)
         
@@ -216,10 +217,17 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     // MARK: - renderFor overlay
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.lineWidth = 5.0
+        renderer.lineWidth = 3.0
         renderer.strokeColor = .blue
         return renderer
     }
     
-
+    
+//    //MARK: - viewFor overlay
+//    
+//     func mapView(_ mapView: MKMapView, viewFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        <#code#>
+//    }
+    
+    
 }

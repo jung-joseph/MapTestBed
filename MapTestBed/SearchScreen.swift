@@ -101,9 +101,9 @@ struct SearchScreen: View {
                 
                
                 VStack(alignment: .leading){
-                        Text("End Destination: \(appState.endDestination?.title ?? "")")
-                        Text("Interim Destination: \(appState.interimDestination?.title ?? "")")
-                        Text("Interim Search Category: \(appState.categoryOfInterest ?? "")")
+//                    Text("End Destination: \(appState.destinationLandmarks[appState.destinationLandmarks.count - 1]?.title ?? "")")
+//                        Text("Interim Destination: \(appState.destinationLandmarks[appState.destinationLandmarks.count - 2]?.title ?? "")")
+//                        Text("Interim Search Category: \(appState.categoryOfInterest ?? "")")
                     }
                 
             }
