@@ -11,6 +11,7 @@ import MapKit
 struct MainView: View {
     @State private var selectedTab = "Map"
     @State var showRouteSheet: Bool = false
+    @State var showDestinationsView: Bool = false
     @EnvironmentObject var settings: Settings
     
     var body: some View {
@@ -34,6 +35,12 @@ struct MainView: View {
                 }
                 .tag("Search")
             
+            DestinationsView()
+                .tabItem {
+                    Image(systemName: "mappin.and.ellipse")
+                    Text("Destinations")
+                }
+                .tag("Destinations")
             
             DummyView()
                 .onAppear(){
@@ -50,8 +57,6 @@ struct MainView: View {
 //            RouteView(mapView: <#T##MKMapView#>, selectedAnnotation: <#T##LandmarkAnnotation#>)
             RouteView()
                 .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.10)])
-            
- 
         }
             
             SettingsScreen(settings: settings)

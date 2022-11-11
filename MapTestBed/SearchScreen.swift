@@ -35,6 +35,10 @@ struct SearchScreen: View {
                 HStack{
                     Button("Clear"){
                         search = ""
+                        appState.destinationLandmarks.removeAll()
+                        appState.categoryOfInterest = ""
+                        appState.landmarks.removeAll()
+//                        showSearchResultsList.toggle()
                     }
                     .onSubmit {
 //                        DispatchQueue.main.async {
