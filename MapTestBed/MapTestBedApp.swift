@@ -27,8 +27,6 @@ struct MapTestBedApp: App {
                 .environmentObject(settings)
                 .preferredColorScheme(settings.isDarkMode ? .dark : .light)
 
-
-
         }
     }
 }

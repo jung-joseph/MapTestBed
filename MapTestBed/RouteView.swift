@@ -27,6 +27,7 @@ struct RouteView: View {
             ScrollView {
                 ForEach(appState.routeSteps, id: \.self) { step in
                     VStack{
+//                        Text("Route to: \(appState.destinationLandmarks[appState.routeSteps.indices])")
                         HStack{
 //                            Spacer()
                             Image(systemName: step.imageName ?? "")
