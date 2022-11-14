@@ -21,7 +21,6 @@
 		53B225CE28FF547100D14717 /* MKCoordinateRegion+ extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B225CD28FF547100D14717 /* MKCoordinateRegion+ extensions.swift */; };
 		53B225D028FF59C400D14717 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B225CF28FF59C400D14717 /* LocationManager.swift */; };
 		53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD202A28D806F400480B29 /* MapTestBedApp.swift */; };
-		53BD202D28D806F400480B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD202C28D806F400480B29 /* ContentView.swift */; };
 		53BD202F28D806F600480B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53BD202E28D806F600480B29 /* Assets.xcassets */; };
 		53BD203228D806F600480B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53BD203128D806F600480B29 /* Preview Assets.xcassets */; };
 		53BD203928D8072100480B29 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD203828D8072100480B29 /* MapView.swift */; };
@@ -58,7 +57,6 @@
 		53B225CF28FF59C400D14717 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		53BD202728D806F400480B29 /* MapTestBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapTestBed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53BD202A28D806F400480B29 /* MapTestBedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTestBedApp.swift; sourceTree = "<group>"; };
-		53BD202C28D806F400480B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		53BD202E28D806F600480B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53BD203128D806F600480B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		53BD203828D8072100480B29 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				53BD202A28D806F400480B29 /* MapTestBedApp.swift */,
 				53BD203E28D80AB600480B29 /* AppState.swift */,
 				53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */,
-				53BD202C28D806F400480B29 /* ContentView.swift */,
 				53BD202E28D806F600480B29 /* Assets.xcassets */,
 				53BD203028D806F600480B29 /* Preview Content */,
 				53BD203828D8072100480B29 /* MapView.swift */,
@@ -239,7 +236,6 @@
 				53B225CE28FF547100D14717 /* MKCoordinateRegion+ extensions.swift in Sources */,
 				53FDD613290B25280018002B /* RouteView.swift in Sources */,
 				53FDD611290AC88C0018002B /* SearchScreen.swift in Sources */,
-				53BD202D28D806F400480B29 /* ContentView.swift in Sources */,
 				539355682901F92F00183754 /* DistanceUnit.swift in Sources */,
 				53BD203928D8072100480B29 /* MapView.swift in Sources */,
 				5393556A2901F97A00183754 /* Measurement+Extensions.swift in Sources */,

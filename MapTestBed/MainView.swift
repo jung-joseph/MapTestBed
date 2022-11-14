@@ -35,9 +35,19 @@ struct MainView: View {
                 }
                 .tag("Search")
             
-            DestinationsView()
+//            DestinationsView()
+//                .tabItem {
+//                    Image(systemName: "mappin.and.ellipse")
+//                    Text("Destinations")
+//                }
+//                .tag("Destinations")
+            DummyView()
+                .onAppear(){
+                    selectedTab = "Map"
+                    showDestinationsView.toggle()
+                }
                 .tabItem {
-                    Image(systemName: "mappin.and.ellipse")
+                    Image(systemName: "map.fill").foregroundColor(tabColor)
                     Text("Destinations")
                 }
                 .tag("Destinations")
@@ -54,9 +64,13 @@ struct MainView: View {
                 .tag("Route")
         
         .sheet(isPresented: $showRouteSheet) {
-//            RouteView(mapView: <#T##MKMapView#>, selectedAnnotation: <#T##LandmarkAnnotation#>)
             RouteView()
-                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.10)])
+                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.05)])
+        }
+            
+        .sheet(isPresented: $showDestinationsView) {
+            DestinationsView()
+                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
         }
             
             SettingsScreen(settings: settings)

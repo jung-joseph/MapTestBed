@@ -16,11 +16,7 @@ struct DestinationsView: View {
         
         NavigationView {
             VStack{
-                Button("Print"){
-                    for destination in appState.destinationLandmarks {
-                        print("\(String(describing: destination?.title))")
-                    }
-                }
+ 
                 
                 List {
                     ForEach(appState.destinationLandmarks.indices, id: \.self) { index in
@@ -37,6 +33,10 @@ struct DestinationsView: View {
                 }
             }
             .navigationTitle("Destinations")
+            .onDisappear{
+                print("DestinationView onDisappear called")
+            }
+           
         }
     }
     func move(from source: IndexSet, to destination: Int) {

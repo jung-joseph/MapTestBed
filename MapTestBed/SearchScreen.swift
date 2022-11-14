@@ -20,14 +20,14 @@ struct SearchScreen: View {
         VStack{
 
 
-            TextField("Search Term", text: $search)
+            TextField("Search Map", text: $search)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit {
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         searchVM.search(query: search) {   landmarks in
                             appState.landmarks = landmarks
                         }
-                    }
+//                    }
                         showSearchResultsList = true
                 }
             
@@ -71,6 +71,11 @@ struct SearchScreen: View {
                     {
                         search = "Dog Parks"
                         appState.categoryOfInterest = "Dog Parks"
+                        searchVM.search(query: search) {   landmarks in
+                            appState.landmarks = landmarks
+                        }
+                        showSearchResultsList = true
+
                     })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .background(Color.blue)
@@ -82,6 +87,10 @@ struct SearchScreen: View {
                     {
                         search = "Rest Areas"
                         appState.categoryOfInterest = "Rest Areas"
+                        searchVM.search(query: search) {   landmarks in
+                            appState.landmarks = landmarks
+                        }
+                        showSearchResultsList = true
                     })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .background(Color.blue)
@@ -93,6 +102,10 @@ struct SearchScreen: View {
                     {
                         search = "EV Chargers"
                         appState.categoryOfInterest = "EV Chargers"
+                        searchVM.search(query: search) {   landmarks in
+                            appState.landmarks = landmarks
+                        }
+                        showSearchResultsList = true
                     })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .background(Color.blue)

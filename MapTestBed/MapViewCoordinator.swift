@@ -80,47 +80,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         }
 
         
-        // construct route
-        
-        
-        
-//        self.calculateRoute(start: start, destination: destination) { route in
-//            if let route = route {
-//                print("Calculating Route inside didSelect")
-//                print("start: \(start)")
-//                print("destination: \(destination)")
-//
-////                view.detailCalloutAccessoryView = nil
-//                
-//                let controller = RouteContentViewController(route: route)
-//                let routePopover = RoutePopover(controller: controller)
-//                
-//                let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
-//                                                            mapView.frame.width/2, height: 0.0))
-//                
-//                //                    view.autoresizesSubviews = true
-//                
-//                mapView.addSubview(positioningView)
-//                
-//                // clear all annotations
-////                mapView.removeAnnotations(mapView.annotations)
-//                //
-//                
-//                
-////                mapView.addAnnotation(annotation)
-//                // clear all overlays
-//                mapView.removeOverlays(mapView.overlays)
-//                
-//                // add overlay on the map
-//                mapView.addOverlay(route.polyline, level: .aboveRoads)
-//                //                    routePopover.show(relativeTo: positioningView.frame, of: positioningView, preferredEdge: .minY)
-//                
-//                routePopover.show(routePopover, sender: self)
-//                
-//                // let
-//            }
-//            
-//        }
+
         
         
     }
@@ -145,50 +105,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     //    MARK: - calloutAccessoryControlTapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 //        print("CallOut control tapped")
-//
-//
-//        guard let name = view.annotation else {return}
-////        let name = view.annotation
-//        print("Callout \(String(describing: name.title)) tapped")
-//
-//
-////        let landmarkCalloutView = LandmarkCalloutView(annotation: name, selectShowDirections: <#T##(LandmarkAnnotation) -> Void#>)
-//
-//
-//        let currentPlaceCoordinate = (view.annotation?.coordinate)!
-//
-//        let start = MKMapItem.forCurrentLocation()
-//        let destination = MKMapItem(placemark: MKPlacemark(coordinate: currentPlaceCoordinate))
-//
-//        self.calculateRoute(start: start, destination: destination) {route in
-//            if let route = route {
-//
-//                view.detailCalloutAccessoryView = nil
-//
-//                let controller = RouteContentViewController(route: route)
-//                let routePopover = RoutePopover(controller: controller)
-//
-//                let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
-//                                                            mapView.frame.width/2, height: 0.0))
-////                    view.autoresizesSubviews = true
-//
-//                mapView.addSubview(positioningView)
-//
-//                // clear all annotations
-//                mapView.removeAnnotations(mapView.annotations)
-//                // clear all overlays
-//                mapView.removeOverlays(mapView.overlays)
-//
-//                // add overlay on the map
-//                mapView.addOverlay(route.polyline, level: .aboveRoads)
-////                    routePopover.show(relativeTo: positioningView.frame, of: positioningView, preferredEdge: .minY)
-//
-//                routePopover.show(routePopover, sender: self)
-//                print("Exiting calloutAccessoryControlTapped")
-//
-//            }
-//        }
-//
+
     }
     
     //MARK: - calculate route

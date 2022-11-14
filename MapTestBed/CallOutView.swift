@@ -70,70 +70,9 @@ struct CallOutView: View {
 //                        computedRoutes.append(await directionsVM.calculateDirections(routePoints: routeCoords))
 
                         computedRoutes = await directionsVM.calculateDirections(routePoints: routeCoords)
-                        await processRoutesTest(computedRoutes: computedRoutes)
+                        await processRoutes(computedRoutes: computedRoutes)
                     }
-                    
-                    
-//                    for  index in 0...numberOfRoutes - 1{
-//                        //                    for index in 0...1{
-//
-//                        
-//                        print("Processing Routes")
-//                        print("Size of computedRoutes: \(computedRoutes.count)")
-//                        print("route#: \(index)")
-//                        //
-//                        //
-//                        let controller = RouteContentViewController(route: computedRoutes[index])
-//                        let routePopover = RoutePopover(controller: controller)
-//                        //
-//                        let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
-//                                                                    mapView.frame.width/2, height: 0.0))
-//                        //
-//                        //
-//                        mapView.addSubview(positioningView)
-//                        //
-//                        //
-//                        // Add annotation
-//                        mapView.addAnnotation(appState.destinationLandmarks[index]!) // Fix
-//                        //
-//                        //
-//                        //
-//                        //                            // add overlay on the map
-//                        mapView.addOverlay(computedRoutes[index].polyline, level: .aboveRoads)
-//                        
-//                        
-//                        routePopover.show(routePopover, sender: self)
-//                        
-//                        //                            appState.route = route
-//                        
-//                        
-//                        for step in computedRoutes[index].steps {
-//                            if step.instructions.isEmpty {
-//                                continue
-//                            }
-//                            
-//                            let iconName = directionsIcon(step.instructions)
-//                            let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
-//                            let stepInstructions = step.instructions
-//                            
-//                            print("\(iconName)")
-//                            print("\(stepInstructions)")
-//                            print("\(distance)")
-//                            
-//                            let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-//                            
-//                            print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
-//                            
-//                            appState.routeSteps.append(arrayElement)
-//                            
-//                        }
-//                        let placeName = appState.destinationLandmarks[index]?.title
-//                        appState.routeSteps.append(RouteStep(imageName: "", instructions: placeName, distance: ""))
-//                        // add a blank line
-//                        appState.routeSteps.append(RouteStep(imageName: "", instructions: "", distance: ""))
-//                        
-//                        
-//                    }
+//MARK: -
                     
                     
                 },
@@ -194,10 +133,14 @@ struct CallOutView: View {
                 Spacer()
             }
         }
+        .onDisappear{
+            print("CallOutView onDisappear called!")
+        }
         
     }
-
-    func processRoutesTest(computedRoutes: [MKRoute]) async {
+    
+//MARK: - PROCESS ROUTES
+    func processRoutes(computedRoutes: [MKRoute]) async {
         print("In processRoutesTest")
         print("number of Routes: \(computedRoutes.count)")
         let numberOfRoutes = computedRoutes.count
@@ -257,69 +200,7 @@ struct CallOutView: View {
         }
     }
     
-    func processRoutes(numberOfRoutes: Int,computedRoutes: [MKRoute]) async{
-        for index in 0...numberOfRoutes - 1{
-            //                    for index in 0...1{
 
-            
-            print("Processing Routes")
-            print("Size of computedRoutes: \(computedRoutes.count)")
-            print("route#: \(index)")
-            //
-            //
-            let controller = RouteContentViewController(route: computedRoutes[index])
-            let routePopover = RoutePopover(controller: controller)
-            //
-            let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width:
-                                                        mapView.frame.width/2, height: 0.0))
-            //
-            //
-            mapView.addSubview(positioningView)
-            //
-            //
-            // Add annotation
-            mapView.addAnnotation(appState.destinationLandmarks[index]!) // Fix
-            //
-            //
-            //
-            //                            // add overlay on the map
-            mapView.addOverlay(computedRoutes[index].polyline, level: .aboveRoads)
-            
-            
-            routePopover.show(routePopover, sender: self)
-            
-            //                            appState.route = route
-            
-            
-            for step in computedRoutes[index].steps {
-                if step.instructions.isEmpty {
-                    continue
-                }
-                
-                let iconName = directionsIcon(step.instructions)
-                let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
-                let stepInstructions = step.instructions
-                
-                print("\(iconName)")
-                print("\(stepInstructions)")
-                print("\(distance)")
-                
-                let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-                
-                print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
-                
-                appState.routeSteps.append(arrayElement)
-                
-            }
-            let placeName = appState.destinationLandmarks[index]?.title
-            appState.routeSteps.append(RouteStep(imageName: "", instructions: placeName, distance: ""))
-            // add a blank line
-            appState.routeSteps.append(RouteStep(imageName: "", instructions: "", distance: ""))
-            
-            
-        }
-        
-    }
     //MARK: - directionIcons
     private func directionsIcon(_ instruction: String) -> String {
         if instruction.contains("Turn right"){

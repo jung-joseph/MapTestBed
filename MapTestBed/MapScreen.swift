@@ -16,6 +16,9 @@ struct MapScreen: View {
         ZStack{
             MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
                 .ignoresSafeArea()
+                .onAppear{
+                    print("onAppear for MapView Called")
+                }
             
 //            VStack{
 //                RouteView()
