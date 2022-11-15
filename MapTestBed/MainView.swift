@@ -12,6 +12,10 @@ struct MainView: View {
     @State private var selectedTab = "Map"
     @State var showRouteSheet: Bool = false
     @State var showDestinationsView: Bool = false
+    @State var showSearchView: Bool = false
+    @State var showSettingsView: Bool = false
+
+    
     @EnvironmentObject var settings: Settings
     
     var body: some View {
@@ -27,13 +31,29 @@ struct MainView: View {
                 .tag("Map")
             
             
-            SearchScreen(selectedTab: $selectedTab)
+//            SearchScreen(selectedTab: $selectedTab)
+//                .tabItem {
+//                    Image(systemName: "magnifyingglass.circle.fill")
+//                        .foregroundColor(.red)
+//                    Text("Search")
+//                }
+//                .tag("Search")
+            
+            DummyView()
+                .onAppear(){
+                    selectedTab = "Map"
+                    showSearchView.toggle()
+                }
                 .tabItem {
-                    Image(systemName: "magnifyingglass.circle.fill")
-                        .foregroundColor(.red)
+                    Image(systemName: "magnifyingglass.circle.fill").foregroundColor(tabColor)
                     Text("Search")
                 }
                 .tag("Search")
+                .sheet(isPresented: $showSearchView) {
+                    SearchScreen(selectedTab: $selectedTab)
+                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
+                }
+            
             
 //            DestinationsView()
 //                .tabItem {
@@ -47,10 +67,14 @@ struct MainView: View {
                     showDestinationsView.toggle()
                 }
                 .tabItem {
-                    Image(systemName: "map.fill").foregroundColor(tabColor)
+                    Image(systemName: "mappin.and.ellipse").foregroundColor(tabColor)
                     Text("Destinations")
                 }
                 .tag("Destinations")
+                .sheet(isPresented: $showDestinationsView) {
+                    DestinationsView()
+                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
+                }
             
             DummyView()
                 .onAppear(){
@@ -58,7 +82,7 @@ struct MainView: View {
                     showRouteSheet.toggle()
                 }
                 .tabItem {
-                    Image(systemName: "map.fill").foregroundColor(tabColor)
+                    Image(systemName: "point.topleft.down.curvedto.point.bottomright.up.fill").foregroundColor(tabColor)
                     Text("Route")
                 }
                 .tag("Route")
@@ -68,16 +92,29 @@ struct MainView: View {
                 .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.05)])
         }
             
-        .sheet(isPresented: $showDestinationsView) {
-            DestinationsView()
-                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
-        }
+
             
-            SettingsScreen(settings: settings)
+//            SettingsScreen(settings: settings)
+//                .tabItem {
+//                    Image(systemName: "gear.circle.fill").foregroundColor(tabColor)
+//                    Text("Settings")
+//                }
+//                .tag("Settings")
+            DummyView()
+                .onAppear(){
+                    selectedTab = "Map"
+                    showSettingsView.toggle()
+                }
                 .tabItem {
                     Image(systemName: "gear.circle.fill").foregroundColor(tabColor)
                     Text("Settings")
                 }
+                .tag("Settings")
+        
+        .sheet(isPresented: $showSettingsView) {
+            SettingsScreen(settings: settings)
+                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
+        }
         }
 
     }

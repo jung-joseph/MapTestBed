@@ -13,19 +13,14 @@ struct MapScreen: View {
     @EnvironmentObject var appState: AppState
     
     var body: some View {
-        ZStack{
+        
             MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
-                .ignoresSafeArea()
+            .ignoresSafeArea(.all, edges: .top)
                 .onAppear{
                     print("onAppear for MapView Called")
                 }
             
-//            VStack{
-//                RouteView()
-//                    .opacity(appState.routeSteps.count>0 ? 1.0 : 0)
-//                Spacer()
-//            }
-        }
+
 
             
 

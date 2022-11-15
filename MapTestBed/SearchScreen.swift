@@ -19,9 +19,11 @@ struct SearchScreen: View {
     var body: some View {
         VStack{
 
-
+            Spacer()
+            Spacer()
             TextField("Search Map", text: $search)
                 .textFieldStyle(.roundedBorder)
+                .padding([.leading,.trailing],25)
                 .onSubmit {
 //                    DispatchQueue.main.async {
                         searchVM.search(query: search) {   landmarks in
@@ -66,53 +68,88 @@ struct SearchScreen: View {
                 }
                 .padding()
                 
-                HStack{
-                    Button("Dog Parks", action:
-                    {
-                        search = "Dog Parks"
-                        appState.categoryOfInterest = "Dog Parks"
-                        searchVM.search(query: search) {   landmarks in
-                            appState.landmarks = landmarks
-                        }
-                        showSearchResultsList = true
+                ScrollView(.horizontal){
+                    HStack{
+                        Button("Dog Parks", action:
+                        {
+                            search = "Dog Parks"
+                            appState.categoryOfInterest = "Dog Parks"
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            showSearchResultsList = true
 
-                    })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
-                    
-                    Button("Rest Areas", action:
-                    {
-                        search = "Rest Areas"
-                        appState.categoryOfInterest = "Rest Areas"
-                        searchVM.search(query: search) {   landmarks in
-                            appState.landmarks = landmarks
-                        }
-                        showSearchResultsList = true
-                    })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
-                    
-                    Button("EV Chargers", action:
-                    {
-                        search = "EV Chargers"
-                        appState.categoryOfInterest = "EV Chargers"
-                        searchVM.search(query: search) {   landmarks in
-                            appState.landmarks = landmarks
-                        }
-                        showSearchResultsList = true
-                    })
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
-                    
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                        .shadow(radius: 10)
+                        
+                        Button("EV Chargers", action:
+                        {
+                            search = "EV Chargers"
+                            appState.categoryOfInterest = "EV Chargers"
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            showSearchResultsList = true
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                        .shadow(radius: 10)
+                        
+                        Button("Historical Sites", action:
+                        {
+                            search = "Historical Sites"
+                            appState.categoryOfInterest = "Historical Sites"
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            showSearchResultsList = true
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                        .shadow(radius: 10)
+                        
+                        Button("Coffee", action:
+                        {
+                            search = "Coffee"
+                            appState.categoryOfInterest = "Coffee"
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            showSearchResultsList = true
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                        .shadow(radius: 10)
+                        
+                        
+                        
+                        Button("Rest Areas", action:
+                        {
+                            search = "Rest Areas"
+                            appState.categoryOfInterest = "Rest Areas"
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            showSearchResultsList = true
+                        })
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                        .shadow(radius: 10)
+                        
+
+                    }
                 }
                 .padding(.top, 0)
                 
