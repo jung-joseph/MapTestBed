@@ -19,6 +19,8 @@ class AppState: ObservableObject {
 //    @Published var endDestination: LandmarkAnnotation?
 //    @Published var interimDestination: LandmarkAnnotation?
     @Published var categoryOfInterest: String?
+    @Published var map = MKMapView()
+
 
 }
 

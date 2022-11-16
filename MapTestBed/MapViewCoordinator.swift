@@ -17,8 +17,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     @EnvironmentObject var settings: Settings
     
     
- 
-    
+
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
@@ -30,7 +29,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        print("in Did Select ")
+        print("****in Did Select**** ")
         print("Creating Calloutview ")
 
         // Create SwiftUI callout for this annotation
@@ -72,6 +71,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
                 let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
                 // customView = CallOutView is a SwiftUI View
+
                 let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image)
                 //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
                 let callout = MapCalloutView(rootView: AnyView(customView))

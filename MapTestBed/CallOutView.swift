@@ -21,129 +21,56 @@ struct CallOutView: View {
     
     var body: some View {
         let directionsVM = DirectionsViewModel()
-        var computedRoutes:[MKRoute] = []
         VStack{
             HStack{
-                //MARK: - Directions Button
-                Button(action:
-                        {
-                    print("In CallOutView")
-                    print("Selected Annotation: \(String(describing: selectedAnnotation.title))")
-                    //                    print("End Destination: \(String(describing: appState.endDestination?.title))")
-                    
-                    let start = MKMapItem.forCurrentLocation()
-                    //                    let interimDestination = MKMapItem(placemark: MKPlacemark(coordinate: appState.destinationLandmarks[0]?.coordinate ?? selectedAnnotation.coordinate ) )
-                    //                    let destination = MKMapItem(placemark: MKPlacemark(coordinate: appState.destinationLandmarks[1]?.coordinate ?? selectedAnnotation.coordinate ) )
-                    //                    let destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedAnnotation.coordinate ) )
-                    
-                    print()
-                    print("start coordinates: \(start.placemark.coordinate)")
-                    print("currentLocation: \(start)")
-                    //                    print("destination: \(destination)")
-                    
-                    // Put route coordinates into routeCoords array starting with the current user location (start)
-                    var routeCoords: [MKMapItem] = []
-                    routeCoords.append(start)
-                    print()
-                    for place in appState.destinationLandmarks {
-                        print(place!.title!)
-                        
-                        routeCoords.append(MKMapItem(placemark: MKPlacemark(coordinate: place?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0) ) ))
-                        
-                    }
-                    let numberOfRoutes = routeCoords.count - 1
-                    print("numberOfRoutes: \(numberOfRoutes)")
-                    
-                    // clear all annotations
-                    mapView.removeAnnotations(mapView.annotations)
-                    
-                    // clear all overlays
-                    mapView.removeOverlays(mapView.overlays)
-                    
-                    //remove all elements of previous routeSteps directions
-                    appState.routeSteps.removeAll()
-                    
-                    // iterate over each route segment. routeCoords[0] = "current location"
-                    
-//MARK: - call to async directions
-                    Task {
-//                        computedRoutes.append(await directionsVM.calculateDirections(routePoints: routeCoords))
-
-                        computedRoutes = await directionsVM.calculateDirections(routePoints: routeCoords)
-                        await processRoutes(computedRoutes: computedRoutes)
-                    }
-//MARK: -
-                    
+                
+                //MARK: - Add Destination Button
+                Button(action: {
+                    appState.destinationLandmarks.append(selectedAnnotation)
                     
                 },
-                       label: {Text("Get Directions")})
+                       label: {Text("Add Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(5)
                 .shadow(radius: 10)
                 
-                //MARK: - Set Final Destination Button
-                Button(action: {
-                    appState.destinationLandmarks.append(selectedAnnotation)
-                    
-                    //                    if appState.destinationLandmarks.isEmpty {
-                    //                        appState.destinationLandmarks.append(selectedAnnotation)
-                    //                    } else {
-                    //                        appState.destinationLandmarks.removeLast()
-                    //                        appState.destinationLandmarks.append(selectedAnnotation)
-                    //                    }
-                },
-                       label: {Text("Set As Final Destination")})
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(5)
-                .shadow(radius: 10)
-                //MARK: - Set Interim Destination Button
-                Button(action: {
-                    if appState.destinationLandmarks.isEmpty {
-                        appState.destinationLandmarks.append(selectedAnnotation)
-                    } else {
-                        let numDestinations = appState.destinationLandmarks.count
-                        appState.destinationLandmarks.insert(selectedAnnotation,at: numDestinations - 1)
-                    }
-                },
-                       label: {Text("Set As Interim Destination")})
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(5)
-                .shadow(radius: 10)
             }
-
-            
-            
-            //MARK: - Add map snapShot
-            if (snapShot != nil) {
-                Image(uiImage: snapShot! )
-            }
-            //MARK: - Add site information
-            Text(selectedAnnotation.address ?? "")
-                .font(.body)
-                .padding(.bottom)
-            HStack{
-                Text(selectedAnnotation.phone ?? "")
+                //MARK: - Add map snapShot
+                if (snapShot != nil) {
+                    Image(uiImage: snapShot! )
+                }
+                //MARK: - Add site information
+                Text(selectedAnnotation.address ?? "")
                     .font(.body)
-                Spacer()
+                    .padding(.bottom)
+                HStack{
+                    Text(selectedAnnotation.phone ?? "")
+                        .font(.body)
+                    Spacer()
+                }
             }
+            .onDisappear{
+                print("CallOutView onDisappear called!")
+            }
+            
         }
-        .onDisappear{
-            print("CallOutView onDisappear called!")
-        }
-        
-    }
     
 //MARK: - PROCESS ROUTES
     func processRoutes(computedRoutes: [MKRoute]) async {
         print("In processRoutesTest")
         print("number of Routes: \(computedRoutes.count)")
         let numberOfRoutes = computedRoutes.count
+        
+        
+        // clear all overlays
+        mapView.removeOverlays(mapView.overlays) // this call works!
+        // clear all annotations
+
+        mapView.removeAnnotations(mapView.annotations) // this call does not work!
+        appState.landmarks.removeAll()
+
         for  index in 0...numberOfRoutes - 1{
             
             print("route#: \(index)")
@@ -158,9 +85,15 @@ struct CallOutView: View {
             //                        //
             mapView.addSubview(positioningView)
             //                        //
+            
+//            appState.landmarks.removeAll()
+
+            
+           
             //                        //
             // Add annotation
-            mapView.addAnnotation(appState.destinationLandmarks[index]!) // Fix
+//            mapView.addAnnotation(appState.destinationLandmarks[index]!) // This does not work
+            appState.landmarks.append(appState.destinationLandmarks[index]!)
             //                        //
             //                        //
             //                        //

@@ -19,6 +19,8 @@ struct SearchResultsList: View {
     @StateObject private var locationManager = LocationManager()
     @Binding var showSearchResultsList: Bool
     @Binding var selectedTab: String
+ 
+
     
     var distanceFormatter = DistanceFormatter()
     
@@ -38,7 +40,7 @@ struct SearchResultsList: View {
     
     var body: some View {
         VStack{
-            Text("Search Results")
+            Text(!landmarks.isEmpty ? "Search Results" : "")
                 .font(.title)
                 .padding([.top,.bottom])
             List(landmarks) { landmark in

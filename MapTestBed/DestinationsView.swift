@@ -11,12 +11,13 @@ import MapKit
 struct DestinationsView: View {
     
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var searchVM: SearchResultsViewModel
     
     var body: some View {
         
         NavigationView {
             VStack{
- 
+                
                 
                 List {
                     ForEach(appState.destinationLandmarks.indices, id: \.self) { index in
@@ -29,14 +30,20 @@ struct DestinationsView: View {
                     .onDelete(perform: delete)
                 }
                 .toolbar {
-                    EditButton()
+                    ToolbarItem(placement: .navigation){
+                        GetDirectionsButton()
+                    }
+                    ToolbarItem(){
+                        EditButton()
+                    }
+                    
                 }
             }
             .navigationTitle("Destinations")
             .onDisappear{
                 print("DestinationView onDisappear called")
             }
-           
+            
         }
     }
     func move(from source: IndexSet, to destination: Int) {

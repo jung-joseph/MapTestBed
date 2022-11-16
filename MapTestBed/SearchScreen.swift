@@ -11,17 +11,21 @@ struct SearchScreen: View {
     
     @State private var search: String = ""
     @State  private var showSearchResultsList = false
+    @State private var selectedCategory: String = ""
     @Binding var selectedTab: String
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var settings: Settings
+    
+
     
     var body: some View {
         VStack{
 
             Spacer()
             Spacer()
-            TextField("Search Map", text: $search)
+            TextField("Search Map" , text: $search)
+
                 .textFieldStyle(.roundedBorder)
                 .padding([.leading,.trailing],25)
                 .onSubmit {
@@ -32,133 +36,72 @@ struct SearchScreen: View {
 //                    }
                         showSearchResultsList = true
                 }
+                .onAppear{
+                    search = appState.categoryOfInterest ?? ""
+                }
             
             VStack{
                 HStack{
-                    Button("Clear"){
+                    Button("Clear All"){
                         search = ""
                         appState.destinationLandmarks.removeAll()
                         appState.categoryOfInterest = ""
                         appState.landmarks.removeAll()
-//                        showSearchResultsList.toggle()
-                    }
-                    .onSubmit {
-//                        DispatchQueue.main.async {
-//                            searchVM.search(query: search) {   landmarks in
-//                                appState.landmarks = landmarks
-//                            }
-//                        }
-//                        showSearchResultsList = true
+                        appState.map.removeOverlays(appState.map.overlays)
+                        selectedCategory = "Clear All"
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
+                    .background(selectedCategory == "Clear All" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
+                    .foregroundColor(selectedCategory == "Clear All" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
+                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                     
-                    Button("Set Category of Interest"){
+                    Button("Set as Search Category"){
                         appState.categoryOfInterest = search
+                        search = appState.categoryOfInterest ?? ""
+                        //                    DispatchQueue.main.async {
+                                                searchVM.search(query: search) {   landmarks in
+                                                    appState.landmarks = landmarks
+                                                }
+                        //                    }
+                                                showSearchResultsList = true
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
+                    .background(selectedCategory == "Set as Search Category" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
+                    .foregroundColor(selectedCategory == "Set as Search Category" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
+                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                     
                 }
                 .padding()
                 
                 ScrollView(.horizontal){
                     HStack{
-                        Button("Dog Parks", action:
-                        {
-                            search = "Dog Parks"
-                            appState.categoryOfInterest = "Dog Parks"
-                            searchVM.search(query: search) {   landmarks in
-                                appState.landmarks = landmarks
-                            }
-                            showSearchResultsList = true
+                        
+                        CategoryButton(name: "Dog Parks", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
 
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 10)
                         
-                        Button("EV Chargers", action:
-                        {
-                            search = "EV Chargers"
-                            appState.categoryOfInterest = "EV Chargers"
-                            searchVM.search(query: search) {   landmarks in
-                                appState.landmarks = landmarks
-                            }
-                            showSearchResultsList = true
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 10)
-                        
-                        Button("Historical Sites", action:
-                        {
-                            search = "Historical Sites"
-                            appState.categoryOfInterest = "Historical Sites"
-                            searchVM.search(query: search) {   landmarks in
-                                appState.landmarks = landmarks
-                            }
-                            showSearchResultsList = true
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 10)
-                        
-                        Button("Coffee", action:
-                        {
-                            search = "Coffee"
-                            appState.categoryOfInterest = "Coffee"
-                            searchVM.search(query: search) {   landmarks in
-                                appState.landmarks = landmarks
-                            }
-                            showSearchResultsList = true
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 10)
+                        CategoryButton(name: "EV Chargers", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+
                         
                         
-                        
-                        Button("Rest Areas", action:
-                        {
-                            search = "Rest Areas"
-                            appState.categoryOfInterest = "Rest Areas"
-                            searchVM.search(query: search) {   landmarks in
-                                appState.landmarks = landmarks
-                            }
-                            showSearchResultsList = true
-                        })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(5)
-                        .shadow(radius: 10)
+                        CategoryButton(name: "Historical Sites", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+
+
+                        CategoryButton(name: "Hotels", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+
+
+
+                        CategoryButton(name: "Coffee", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+
+
+ 
+                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+
                         
 
                     }
                 }
                 .padding(.top, 0)
-                
-               
-                VStack(alignment: .leading){
-//                    Text("End Destination: \(appState.destinationLandmarks[appState.destinationLandmarks.count - 1]?.title ?? "")")
-//                        Text("Interim Destination: \(appState.destinationLandmarks[appState.destinationLandmarks.count - 2]?.title ?? "")")
-//                        Text("Interim Search Category: \(appState.categoryOfInterest ?? "")")
-                    }
+
                 
             }
             
@@ -171,6 +114,6 @@ struct SearchScreen: View {
 
 struct SearchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SearchScreen(selectedTab: .constant("Search"))
+        SearchScreen(selectedTab: .constant("Search") )
     }
 }

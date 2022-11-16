@@ -25,10 +25,7 @@ class DirectionsViewModel: ObservableObject {
         do {
             for index in 0...routePoints.count - 2{
                 
-                //                    guard let startPlacemark = try await getPlacemarkBy(coordinate: routePoints[index]),
-                //                          let destinationPlacemark = try await getPlacemarkBy(coordinate: routePoints[index + 1]) else {
-                //                        return
-                //                    }
+               
                 
                 let directionsRequest = MKDirections.Request()
                 directionsRequest.transportType = .automobile
@@ -36,11 +33,11 @@ class DirectionsViewModel: ObservableObject {
                 directionsRequest.source = routePoints[index]
                 directionsRequest.destination = routePoints[index + 1]
                 
-                //                directionsRequest.source = MKMapItem(placemark: MKPlacemark(placemark: startPlacemark))
-                //                directionsRequest.destination = MKMapItem(placemark: MKPlacemark(placemark: destinationPlacemark))
                 
                 let directions = MKDirections(request: directionsRequest)
+//                MARK: - GET THE ROUTE
                 let response = try await directions.calculate()
+//                MARK: -
                 
                 guard let route = response.routes.first else {
                     return []
@@ -77,39 +74,7 @@ class DirectionsViewModel: ObservableObject {
 
     }
     
-//    func calculateDirections(routePoints: [String]) async {
-//
-//            do {
-//                for index in 0...routePoints.count - 2{
-//
-//                    guard let startPlacemark = try await getPlacemarkBy(address: routePoints[index]),
-//                          let destinationPlacemark = try await getPlacemarkBy(address: routePoints[index + 1]) else {
-//                        return
-//                    }
-//
-//                let directionsRequest = MKDirections.Request()
-//                directionsRequest.transportType = .automobile
-//                directionsRequest.source = MKMapItem(placemark: MKPlacemark(placemark: startPlacemark))
-//                directionsRequest.destination = MKMapItem(placemark: MKPlacemark(placemark: destinationPlacemark))
-//
-//                let directions = MKDirections(request: directionsRequest)
-//                let response = try await directions.calculate()
-//
-//                guard let route = response.routes.first else {
-//                    return
-//                }
-//                    //                steps = route.steps
-//                    for step in 0...route.steps.count - 1 {
-//                        steps.append(route.steps[step])
-//                    }
-//
-//            }
-//            } catch {
-//                print(error)
-//
-//        }
-//
-//    }
+
     
     private func getPlacemarkBy(address: String) async throws -> CLPlacemark? {
         

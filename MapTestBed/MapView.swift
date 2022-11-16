@@ -9,43 +9,52 @@ import Foundation
 import MapKit
 import SwiftUI
 import UIKit
+import CoreLocation
 
 
-struct MapView: UIViewRepresentable {
-    typealias UIViewType = MKMapView
+struct MapView {
+//    typealias UIViewType = MKMapView
     
+//    let map = MKMapView( )
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var settings: Settings
-
+    
     private var annotations: [LandmarkAnnotation] = []
     private var selectedLandmark: LandmarkAnnotation?
-
     
-//    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.16444, longitude: -106.5117), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    
+    //    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.16444, longitude: -106.5117), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
     init(annotations: [LandmarkAnnotation], selectedLandmark: LandmarkAnnotation?) {
         self.annotations = annotations
         self.selectedLandmark = selectedLandmark
+
     }
     
+    func makeCoordinator() -> MapViewCoordinator {
+        return MapViewCoordinator()
+    }
+}
+
+extension MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
+
     func makeUIView(context: Context) -> MKMapView {
-        let map = MKMapView( )
-        map.showsUserLocation = true
-        map.showsTraffic = true
-        map.delegate = context.coordinator
-        map.mapType = .standard
+//        let map = MKMapView( )
+        
+
+        appState.map.showsUserLocation = true
+        appState.map.showsTraffic = true
+        appState.map.delegate = context.coordinator
+        appState.map.mapType = .standard
 
        
 //        map.mapType = .standard
 
-        return map
+        return appState.map
     }
     
-//    func makeUIView(context: UIViewRepresentableContext<MyMapView>) -> WrappableMapView {
-//        mapView.showsUserLocation = true
-//        mapView.delegate = mapView
-//        mapView.mapType = .hybrid
-//        return mapView
-//    }
+
     
     func updateUIView(_ map: MKMapView, context: Context) {
         
@@ -75,9 +84,7 @@ struct MapView: UIViewRepresentable {
         
     }
     
-    func makeCoordinator() -> MapViewCoordinator {
-        return MapViewCoordinator()
-    }
+    
     
     
 }
