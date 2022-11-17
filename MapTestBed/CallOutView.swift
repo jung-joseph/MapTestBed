@@ -20,7 +20,6 @@ struct CallOutView: View {
     
     
     var body: some View {
-        let directionsVM = DirectionsViewModel()
         VStack{
             HStack{
                 
@@ -51,9 +50,9 @@ struct CallOutView: View {
                     Spacer()
                 }
             }
-            .onDisappear{
-                print("CallOutView onDisappear called!")
-            }
+//            .onDisappear{
+//                print("CallOutView onDisappear called!")
+//            }
             
         }
     

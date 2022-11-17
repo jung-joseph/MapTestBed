@@ -48,6 +48,7 @@ struct SearchScreen: View {
                         appState.categoryOfInterest = ""
                         appState.landmarks.removeAll()
                         appState.map.removeOverlays(appState.map.overlays)
+                        appState.routeSteps.removeAll()
                         selectedCategory = "Clear All"
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
