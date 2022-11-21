@@ -109,6 +109,8 @@ struct SearchScreen: View {
             
             SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark
+                print("SearchResultsListView Trailing closure")
+                print("selected landmark: \(String(describing: landmark.title))")
             }
         }
     }

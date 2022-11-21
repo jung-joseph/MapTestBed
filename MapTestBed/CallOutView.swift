@@ -28,10 +28,9 @@ struct CallOutView: View {
                 //MARK: - Add Destination Button
                 Button(action: {
                     appState.destinationLandmarks.append(selectedAnnotation)
-//    Experiment on removing annotationView Callout
-//                    annotationView.canShowCallout = false
-//    Experiment on removing annotationView Callout
-//                    appState.map.canShowCallout = false
+//    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    appState.selectedLandmark = nil
+
                 },
                        label: {Text("Add Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
