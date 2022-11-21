@@ -13,6 +13,8 @@ struct DestinationsView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var searchVM: SearchResultsViewModel
     
+    @Binding var showDestinationsView: Bool
+    
     var body: some View {
         
         NavigationView {
@@ -31,7 +33,8 @@ struct DestinationsView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigation){
-                        GetDirectionsButton()
+                        GetDirectionsButton(showDestinationsView: $showDestinationsView)
+                            
                     }
                     ToolbarItem(){
                         EditButton()
@@ -56,6 +59,6 @@ struct DestinationsView: View {
 
 struct DestinationsView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationsView()
+        DestinationsView(showDestinationsView: .constant(false))
     }
 }

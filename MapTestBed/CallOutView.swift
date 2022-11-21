@@ -14,6 +14,8 @@ struct CallOutView: View {
     
     var selectedAnnotation: LandmarkAnnotation
     var snapShot: UIImage?
+    var annotationView: MKAnnotationView
+    
     var distanceFormatter = DistanceFormatter()
     
     @EnvironmentObject var appState: AppState
@@ -26,7 +28,10 @@ struct CallOutView: View {
                 //MARK: - Add Destination Button
                 Button(action: {
                     appState.destinationLandmarks.append(selectedAnnotation)
-                    
+//    Experiment on removing annotationView Callout
+//                    annotationView.canShowCallout = false
+//    Experiment on removing annotationView Callout
+//                    appState.map.canShowCallout = false
                 },
                        label: {Text("Add Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -50,6 +55,7 @@ struct CallOutView: View {
                     Spacer()
                 }
             }
+    
 //            .onDisappear{
 //                print("CallOutView onDisappear called!")
 //            }

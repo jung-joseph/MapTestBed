@@ -10,9 +10,10 @@ import SwiftUI
 struct SearchScreen: View {
     
     @State private var search: String = ""
-    @State  private var showSearchResultsList = false
     @State private var selectedCategory: String = ""
     @Binding var selectedTab: String
+    @Binding var showSearchView:Bool
+
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var settings: Settings
@@ -34,7 +35,7 @@ struct SearchScreen: View {
                             appState.landmarks = landmarks
                         }
 //                    }
-                        showSearchResultsList = true
+                        showSearchView = true
                 }
                 .onAppear{
                     search = appState.categoryOfInterest ?? ""
@@ -64,7 +65,7 @@ struct SearchScreen: View {
                                                     appState.landmarks = landmarks
                                                 }
                         //                    }
-                                                showSearchResultsList = true
+                                                showSearchView = true
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .background(selectedCategory == "Set as Search Category" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
@@ -77,25 +78,25 @@ struct SearchScreen: View {
                 ScrollView(.horizontal){
                     HStack{
                         
-                        CategoryButton(name: "Dog Parks", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "Dog Parks", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
                         
-                        CategoryButton(name: "EV Chargers", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "EV Chargers", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
                         
                         
-                        CategoryButton(name: "Historical Sites", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "Historical Sites", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
 
-                        CategoryButton(name: "Hotels", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "Hotels", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
 
 
-                        CategoryButton(name: "Coffee", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "Coffee", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
 
  
-                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchResultsList, selectedCategory: $selectedCategory)
+                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
                         
 
@@ -106,7 +107,7 @@ struct SearchScreen: View {
                 
             }
             
-            SearchResultsList(landmarks: appState.landmarks, showSearchResultsList: $showSearchResultsList, selectedTab: $selectedTab) { landmark in
+            SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark
             }
         }
@@ -115,6 +116,6 @@ struct SearchScreen: View {
 
 struct SearchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SearchScreen(selectedTab: .constant("Search") )
+        SearchScreen(selectedTab: .constant("Search"), showSearchView: .constant(false) )
     }
 }

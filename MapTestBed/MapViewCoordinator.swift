@@ -67,16 +67,19 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
 
 
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
                 // customView = CallOutView is a SwiftUI View
 
-                let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image)
-                //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+                let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image, annotationView: view)
+                
+//                                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+
                 let callout = MapCalloutView(rootView: AnyView(customView))
                 view.detailCalloutAccessoryView = callout
-            }
+//            }
         }
 
         
@@ -104,7 +107,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     //    MARK: - calloutAccessoryControlTapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        print("CallOut control tapped")
+        print("CallOut control tapped")
 
     }
     

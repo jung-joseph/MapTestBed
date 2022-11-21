@@ -15,7 +15,7 @@ import CoreLocation
 struct MapView {
 //    typealias UIViewType = MKMapView
     
-//    let map = MKMapView( )
+//    let map = MKMapView( ) // map is now part of appState
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var settings: Settings
     

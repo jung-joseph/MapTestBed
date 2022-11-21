@@ -13,6 +13,9 @@ struct GetDirectionsButton: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var settings: Settings
+    
+    @Binding var showDestinationsView: Bool
+    
     var distanceFormatter = DistanceFormatter()
 
     var body: some View {
@@ -23,6 +26,9 @@ struct GetDirectionsButton: View {
         Button(action:
                 {
             print(" In GetDirectionsButton")
+            
+            showDestinationsView = false
+
             // start at the current user location
             let start = MKMapItem.forCurrentLocation()
             // Put route coordinates into routeCoords array starting with the current user location (start)
@@ -64,12 +70,14 @@ struct GetDirectionsButton: View {
         .foregroundColor(.white)
         .cornerRadius(5)
         .shadow(radius: 10)
+
+       
     }
     
     
     struct GetDirectionsButton_Previews: PreviewProvider {
         static var previews: some View {
-            GetDirectionsButton()
+            GetDirectionsButton(showDestinationsView: .constant(false))
         }
     }
     

@@ -12,7 +12,7 @@
 		5354374B2918487F000D7B8C /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354374A2918487F000D7B8C /* DestinationsView.swift */; };
 		5393555E2901F29000183754 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555D2901F29000183754 /* SearchResultsViewModel.swift */; };
 		539355602901F34000183754 /* LocalSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555F2901F34000183754 /* LocalSearchService.swift */; };
-		539355622901F8D300183754 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355612901F8D300183754 /* SearchResultsList.swift */; };
+		539355622901F8D300183754 /* SearchResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355612901F8D300183754 /* SearchResultsListView.swift */; };
 		539355642901F90400183754 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355632901F90400183754 /* Settings.swift */; };
 		539355662901F90E00183754 /* DistanceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355652901F90E00183754 /* DistanceFormatter.swift */; };
 		539355682901F92F00183754 /* DistanceUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539355672901F92F00183754 /* DistanceUnit.swift */; };
@@ -49,7 +49,7 @@
 		538511862900AC2B004FB303 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5393555D2901F29000183754 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		5393555F2901F34000183754 /* LocalSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalSearchService.swift; sourceTree = "<group>"; };
-		539355612901F8D300183754 /* SearchResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
+		539355612901F8D300183754 /* SearchResultsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsListView.swift; sourceTree = "<group>"; };
 		539355632901F90400183754 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		539355652901F90E00183754 /* DistanceFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceFormatter.swift; sourceTree = "<group>"; };
 		539355672901F92F00183754 /* DistanceUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceUnit.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				53B225CF28FF59C400D14717 /* LocationManager.swift */,
 				5393555D2901F29000183754 /* SearchResultsViewModel.swift */,
 				5393555F2901F34000183754 /* LocalSearchService.swift */,
-				539355612901F8D300183754 /* SearchResultsList.swift */,
+				539355612901F8D300183754 /* SearchResultsListView.swift */,
 				539355632901F90400183754 /* Settings.swift */,
 				539392FF290C224000C21689 /* SettingsScreen.swift */,
 				539355652901F90E00183754 /* DistanceFormatter.swift */,
@@ -249,7 +249,7 @@
 				539355662901F90E00183754 /* DistanceFormatter.swift in Sources */,
 				53939300290C224000C21689 /* SettingsScreen.swift in Sources */,
 				53EBBEF9292564D300096DF5 /* CategoryButton.swift in Sources */,
-				539355622901F8D300183754 /* SearchResultsList.swift in Sources */,
+				539355622901F8D300183754 /* SearchResultsListView.swift in Sources */,
 				53BD203F28D80AB600480B29 /* AppState.swift in Sources */,
 				5354374B2918487F000D7B8C /* DestinationsView.swift in Sources */,
 				53FDD5F3290971310018002B /* ButtonUIStack.swift in Sources */,

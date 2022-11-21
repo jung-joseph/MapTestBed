@@ -22,7 +22,7 @@ struct MainView: View {
         let tabColor = Color(.black)
         
         TabView(selection: $selectedTab){
-            
+//MARK: - MAPSCREEN
             MapScreen()
                 .tabItem {
                     Image(systemName: "map.fill").foregroundColor(tabColor)
@@ -39,9 +39,13 @@ struct MainView: View {
 //                }
 //                .tag("Search")
             
+//MARK: - SEARCHSCREEN
+
             DummyView()
                 .onAppear(){
-                    selectedTab = "Map"
+//                    selectedTab = "Map"
+                    selectedTab = ""
+
                     showSearchView.toggle()
                 }
                 .tabItem {
@@ -50,7 +54,7 @@ struct MainView: View {
                 }
                 .tag("Search")
                 .sheet(isPresented: $showSearchView) {
-                    SearchScreen(selectedTab: $selectedTab)
+                    SearchScreen(selectedTab: $selectedTab,showSearchView: $showSearchView)
                         .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
                 }
             
@@ -61,6 +65,9 @@ struct MainView: View {
 //                    Text("Destinations")
 //                }
 //                .tag("Destinations")
+            
+//MARK: - DESTINATIONSVIEW
+
             DummyView()
                 .onAppear(){
                     selectedTab = "Map"
@@ -72,10 +79,12 @@ struct MainView: View {
                 }
                 .tag("Destinations")
                 .sheet(isPresented: $showDestinationsView) {
-                    DestinationsView()
+                    DestinationsView(showDestinationsView: $showDestinationsView)
                         .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
                 }
             
+//MARK: - ROUTEVIEW
+
             DummyView()
                 .onAppear(){
                     selectedTab = "Map"
@@ -100,6 +109,9 @@ struct MainView: View {
 //                    Text("Settings")
 //                }
 //                .tag("Settings")
+            
+//MARK: - SETTTINGSSCREEN
+
             DummyView()
                 .onAppear(){
                     selectedTab = "Map"

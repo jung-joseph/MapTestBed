@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct SearchResultsList: View {
+struct SearchResultsListView: View {
     
     
     let landmarks: [LandmarkAnnotation]
@@ -17,18 +17,21 @@ struct SearchResultsList: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var localSearchService: LocalSearchService
     @StateObject private var locationManager = LocationManager()
-    @Binding var showSearchResultsList: Bool
+    @Binding var showSearchView: Bool
     @Binding var selectedTab: String
  
 
     
     var distanceFormatter = DistanceFormatter()
     
-    init(landmarks: [LandmarkAnnotation],showSearchResultsList: Binding<Bool> , selectedTab: Binding<String>, onSelect: @escaping(LandmarkAnnotation)-> Void) {
+    init(landmarks: [LandmarkAnnotation],showSearchView: Binding<Bool> , selectedTab: Binding<String>, onSelect: @escaping(LandmarkAnnotation)-> Void) {
         self.landmarks = landmarks
-        self._showSearchResultsList = showSearchResultsList // Must use "_" to initialize!
+        self._showSearchView = showSearchView // Must use "_" to initialize!
+
         self._selectedTab = selectedTab
         self.onSelect = onSelect
+        print("******Landmark selected from list*****")
+        print("selectedTab: \(selectedTab)")
     }
     
     func formatDistance(for landmark: LandmarkAnnotation) -> String {
@@ -43,6 +46,7 @@ struct SearchResultsList: View {
             Text(!landmarks.isEmpty ? "Search Results" : "")
                 .font(.title)
                 .padding([.top,.bottom])
+            
             List(landmarks) { landmark in
                 VStack(alignment: .leading) {
                     Text(landmark.title ?? "")
@@ -60,15 +64,24 @@ struct SearchResultsList: View {
                 }//VStack
                 .listRowBackground(appState.selectedLandmark == landmark ? Color(UIColor.lightGray): Color.white)
                 .contentShape(Rectangle())
+                .onSubmit {
+                    print("SearchResultsList onSubmit fired")
+
+                }
                 .onTapGesture {
+                    print("SearchResultsList onTapGesture fired")
                     onSelect(landmark)
+                    
                     withAnimation{
                         localSearchService.region = MKCoordinateRegion.regionFromLandmark(landmark)
                     }
                     selectedTab = "Map"
+//                    Remove search list after an annotation is selected
+                    self.showSearchView = false
                 }
                 
             }// List
+            
         }
        
     }
@@ -76,9 +89,9 @@ struct SearchResultsList: View {
 }
 
 
-struct SearchResultsList_Previews: PreviewProvider {
+struct SearchResultsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultsList(landmarks: [], showSearchResultsList: .constant(false) , selectedTab: .constant("Search"),onSelect: {_ in })
+        SearchResultsListView(landmarks: [], showSearchView: .constant(false) , selectedTab: .constant("Search"),onSelect: {_ in })
     }
     
     
