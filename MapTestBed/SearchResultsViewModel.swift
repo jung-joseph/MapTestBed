@@ -23,10 +23,10 @@ class SearchResultsViewModel: ObservableObject {
     
     func search(query: String, completion: @escaping ([LandmarkAnnotation]) -> Void) {
 
-        if query.count < 4 {
-            completion([])
-            return
-        }
+//        if query.count < 4 {
+//            completion([])
+//            return
+//        }
 
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = query

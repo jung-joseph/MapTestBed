@@ -29,8 +29,10 @@ struct GetDirectionsButton: View {
             
             showDestinationsView = false
 
-            // start at the current user location
-            let start = MKMapItem.forCurrentLocation()
+            // start at the selected starting location (current location, Home, or Selected Start Location) or the current user location, if none selected
+//            let start = appState.startLocation ?? MKMapItem.forCurrentLocation()
+            let start = MKMapItem(placemark: MKPlacemark(coordinate: appState.startLocation?.coordinate ?? MKMapItem.forCurrentLocation().placemark.coordinate))
+            
             // Put route coordinates into routeCoords array starting with the current user location (start)
             var routeCoords: [MKMapItem] = []
             routeCoords.append(start)
@@ -95,6 +97,13 @@ struct GetDirectionsButton: View {
         //        mapView.removeAnnotations(mapView.annotations) // ?
         appState.landmarks.removeAll()
         
+        // add annotation for starting point
+        let startLandmark = appState.startLocation ?? MKMapItem.forCurrentLocation()
+
+//        let startLandmark = LandmarkAnnotation(mapItem: appState.startLocation ?? MKMapItem.forCurrentLocation())
+        
+        appState.landmarks.append(appState.startLocation!)
+
         for  index in 0...numberOfRoutes - 1{
             
             print("route#: \(index)")

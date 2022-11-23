@@ -111,29 +111,29 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
     }
     
-    //MARK: - calculate route
-    
-    func calculateRoute(start: MKMapItem, destination: MKMapItem, completion: @escaping (MKRoute?) -> Void) {
-        let directionsRequest = MKDirections.Request()
-        directionsRequest.transportType = .automobile
-        directionsRequest.source = start
-        directionsRequest.destination = destination
-        
-        print(" calculating route from MapViewCoordinator")
-        
-        let directions = MKDirections(request: directionsRequest)
-        directions.calculate { response, error in
-            if let error = error {
-                print("Unable to calculate directions \(error)")
-            }
-            
-            guard let response = response,
-                  let route = response.routes.first else {
-                return
-            }
-            completion(route)
-        }
-    }
+//    //MARK: - calculate route
+//    
+//    func calculateRoute(start: MKMapItem, destination: MKMapItem, completion: @escaping (MKRoute?) -> Void) {
+//        let directionsRequest = MKDirections.Request()
+//        directionsRequest.transportType = .automobile
+//        directionsRequest.source = start
+//        directionsRequest.destination = destination
+//        
+//        print(" calculating route from MapViewCoordinator")
+//        
+//        let directions = MKDirections(request: directionsRequest)
+//        directions.calculate { response, error in
+//            if let error = error {
+//                print("Unable to calculate directions \(error)")
+//            }
+//            
+//            guard let response = response,
+//                  let route = response.routes.first else {
+//                return
+//            }
+//            completion(route)
+//        }
+//    }
     
     // MARK: - renderFor overlay
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

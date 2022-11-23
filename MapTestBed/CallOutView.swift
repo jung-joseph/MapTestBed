@@ -39,6 +39,37 @@ struct CallOutView: View {
                 .cornerRadius(5)
                 .shadow(radius: 10)
                 
+                //MARK: - Set as Starting Location
+                Button(action: {
+//                    appState.selectedStartLocation = MKMapItem(placemark: MKPlacemark(coordinate: selectedAnnotation.coordinate) )
+
+                    appState.selectedStartLocation = selectedAnnotation
+//    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    appState.selectedLandmark = nil
+
+                },
+                       label: {Text("Starting Location")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
+                
+                //MARK: - Set as Home
+                Button(action: {
+//                    appState.homeLocation = MKMapItem(placemark: MKPlacemark(coordinate: selectedAnnotation.coordinate) )
+
+                    appState.homeLocation = selectedAnnotation
+//    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    appState.selectedLandmark = nil
+
+                },
+                       label: {Text("Set as Home")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
             }
                 //MARK: - Add map snapShot
                 if (snapShot != nil) {
