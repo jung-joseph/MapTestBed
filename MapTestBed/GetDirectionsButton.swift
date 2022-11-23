@@ -31,6 +31,9 @@ struct GetDirectionsButton: View {
 
             // start at the current user location
             let start = MKMapItem.forCurrentLocation()
+            
+            print("start location: \(start.placemark.coordinate)")
+            print()
             // Put route coordinates into routeCoords array starting with the current user location (start)
             var routeCoords: [MKMapItem] = []
             routeCoords.append(start)
