@@ -16,9 +16,10 @@ struct DestinationsView: View {
     @State var startLocation: LandmarkAnnotation?
     @Binding var showDestinationsView: Bool
     //
-//    let currentLocation = MKMapItem.forCurrentLocation()
+    var currentLocation:MKMapItem = MKMapItem.forCurrentLocation()
 //    let currentLocationAnnotation = Landmark(placemark: currentLocation.placemark)
     //LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+
     var body: some View {
         
         NavigationView {
@@ -26,21 +27,18 @@ struct DestinationsView: View {
                 
                 Text("Set Start Location:")
                 
-//                Picker(selection: $appState.startLocation) {
-//                    Text("Current Location").tag(currentLocation)
-//                    Text("Home").tag(MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate  ))  )
-//                    Text("Selected Start Location").tag(appState.selectedStartLocation != nil  ? appState.selectedStartLocation : nil)
-//                } label: {
-//                    EmptyView()
-//                }.pickerStyle(.segmented)
 
-//                print("Start Location: \(startLocation.title)")
                 
                 HStack{
                     Button("Current Location"){
-                        appState.startLocation =  LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
-
+//                        appState.startLocation =  LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                        print("currentLocation: \(currentLocation.placemark.coordinate)")
+                        appState.startLocation =  LandmarkAnnotation(mapItem: currentLocation)
+                        print(" Setting current location as Start Location: \(String(describing: appState.startLocation?.coordinate))")
 //                        appState.startLocation =  MKMapItem.forCurrentLocation()
+                            let tempLocation  =  MKMapItem.forCurrentLocation()
+                        print("tempLocation: \(tempLocation.placemark.coordinate)")
+
                     }
                     .frame(width: 100, height: 50)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
