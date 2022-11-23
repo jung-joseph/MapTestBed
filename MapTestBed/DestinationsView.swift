@@ -15,10 +15,10 @@ struct DestinationsView: View {
     
     @State var startLocation: LandmarkAnnotation?
     @Binding var showDestinationsView: Bool
-    //
+   
+    
     var currentLocation:MKMapItem = MKMapItem.forCurrentLocation()
-//    let currentLocationAnnotation = Landmark(placemark: currentLocation.placemark)
-    //LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+
 
     var body: some View {
         
@@ -30,47 +30,25 @@ struct DestinationsView: View {
 
                 
                 HStack{
-                    Button("Current Location"){
-//                        appState.startLocation =  LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
-                        print("currentLocation: \(currentLocation.placemark.coordinate)")
-                        appState.startLocation =  LandmarkAnnotation(mapItem: currentLocation)
-                        print(" Setting current location as Start Location: \(String(describing: appState.startLocation?.coordinate))")
-//                        appState.startLocation =  MKMapItem.forCurrentLocation()
-                            let tempLocation  =  MKMapItem.forCurrentLocation()
-                        print("tempLocation: \(tempLocation.placemark.coordinate)")
-
-                    }
-                    .frame(width: 100, height: 50)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
                     
-                    Button("Home"){
-//                        appState.startLocation = MKMapItem()
-                        appState.startLocation = appState.homeLocation
-//                        appState.startLocation = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation?.coordinate ?? currentLocation.placemark.coordinate))
-                    }
-                    .frame(width: 100, height: 50)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
-                    Button("Selected Start Location"){
-                        appState.startLocation = appState.selectedStartLocation
-//                        appState.startLocation = MKMapItem(placemark: MKPlacemark(coordinate: appState.selectedStartLocation?.coordinate ?? currentLocation.placemark.coordinate ))
-
-                    }
-                    .frame(width: 125, height: 50)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
+                    Picker(selection: $appState.startLocationType) {
+                        Text("Current Location").tag("currentLocation")
+                        Text("Home").tag("home").tag("home")
+                        Text("Selected Location").tag("selectedLocation")
+                    } label:{
+                        EmptyView()
+                    }.pickerStyle(.segmented)
+                    
                 }
-
+                if appState.startLocationType == "currentLocation" && appState.startLocation?.title != nil{
+                    Text("Starting location: Using Current Location")
+                } else if appState.startLocationType == "home" && appState.homeLocation?.title != nil{
+                    Text("Starting location: \(appState.homeLocation!.title!)")
+                } else if  appState.startLocationType == "selectedLocation" && appState.selectedStartLocation?.title != nil {
+                    Text("Starting location: \(appState.selectedStartLocation!.title!)")
+                } else {
+                    Text("Starting location: Using Current Location")
+                }
                 List {
                     ForEach(appState.destinationLandmarks.indices, id: \.self) { index in
                         HStack {

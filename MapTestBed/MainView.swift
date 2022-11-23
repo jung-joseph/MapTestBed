@@ -31,13 +31,7 @@ struct MainView: View {
                 .tag("Map")
             
             
-//            SearchScreen(selectedTab: $selectedTab)
-//                .tabItem {
-//                    Image(systemName: "magnifyingglass.circle.fill")
-//                        .foregroundColor(.red)
-//                    Text("Search")
-//                }
-//                .tag("Search")
+
             
 //MARK: - SEARCHSCREEN
 
@@ -59,12 +53,7 @@ struct MainView: View {
                 }
             
             
-//            DestinationsView()
-//                .tabItem {
-//                    Image(systemName: "mappin.and.ellipse")
-//                    Text("Destinations")
-//                }
-//                .tag("Destinations")
+
             
 //MARK: - DESTINATIONSVIEW
 
@@ -80,7 +69,7 @@ struct MainView: View {
                 .tag("Destinations")
                 .sheet(isPresented: $showDestinationsView) {
                     DestinationsView(showDestinationsView: $showDestinationsView)
-                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25)])
+                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.35)])
                 }
             
 //MARK: - ROUTEVIEW
@@ -103,14 +92,9 @@ struct MainView: View {
             
 
             
-//            SettingsScreen(settings: settings)
-//                .tabItem {
-//                    Image(systemName: "gear.circle.fill").foregroundColor(tabColor)
-//                    Text("Settings")
-//                }
-//                .tag("Settings")
+
             
-//MARK: - SETTTINGSSCREEN
+//MARK: - SETTINGS SCREEN
 
             DummyView()
                 .onAppear(){

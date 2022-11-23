@@ -29,23 +29,23 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        print("****in Did Select**** ")
-        print("Creating Calloutview ")
+//        print("****in Did Select**** ")
+//        print("Creating Calloutview ")
 
         // Create SwiftUI callout for this annotation
         guard let annotation = view.annotation as? LandmarkAnnotation else {
             return
         }
-        print("annotationTitle: \(String(describing: annotation.title))")
+//        print("annotationTitle: \(String(describing: annotation.title))")
 //        print("annotationAddress: \(String(describing: annotation.address))")
 //        print("annotationCoordinates: \(annotation.coordinate)")
 
 //        let start = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate) )
-        let start = MKMapItem.forCurrentLocation()
-        print("coordinates: \(start.placemark.coordinate)")
-        print("currentLocation: \(start)")
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate ) )
-        print("destination: \(destination)")
+//        let start = MKMapItem.forCurrentLocation()
+//        print("coordinates: \(start.placemark.coordinate)")
+//        print("currentLocation: \(start)")
+//        let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate ) )
+//        print("destination: \(destination)")
 
 
         view.canShowCallout = true

@@ -24,6 +24,11 @@ struct CallOutView: View {
     var body: some View {
         VStack{
             HStack{
+                Text("Set as: ")
+                    .frame(alignment: .topLeading)
+                Spacer()
+            }
+            HStack{
                 
                 //MARK: - Add Destination Button
                 Button(action: {
@@ -32,7 +37,7 @@ struct CallOutView: View {
                     appState.selectedLandmark = nil
 
                 },
-                       label: {Text("Add Destination")})
+                       label: {Text("A Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .background(Color.blue)
                 .foregroundColor(.white)
@@ -41,7 +46,6 @@ struct CallOutView: View {
                 
                 //MARK: - Set as Starting Location
                 Button(action: {
-//                    appState.selectedStartLocation = MKMapItem(placemark: MKPlacemark(coordinate: selectedAnnotation.coordinate) )
 
                     appState.selectedStartLocation = selectedAnnotation
 //    Remove selectedLandmark so that  annotationView Callout is dismissed
@@ -64,7 +68,7 @@ struct CallOutView: View {
                     appState.selectedLandmark = nil
 
                 },
-                       label: {Text("Set as Home")})
+                       label: {Text("Home")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .background(Color.blue)
                 .foregroundColor(.white)
@@ -94,8 +98,8 @@ struct CallOutView: View {
     
 //MARK: - PROCESS ROUTES
     func processRoutes(computedRoutes: [MKRoute]) async {
-        print("In processRoutesTest")
-        print("number of Routes: \(computedRoutes.count)")
+//        print("In processRoutesTest")
+//        print("number of Routes: \(computedRoutes.count)")
         let numberOfRoutes = computedRoutes.count
         
         
@@ -108,7 +112,7 @@ struct CallOutView: View {
 
         for  index in 0...numberOfRoutes - 1{
             
-            print("route#: \(index)")
+//            print("route#: \(index)")
                                     //
                                     //
             let controller = RouteContentViewController(route: computedRoutes[index])
@@ -146,24 +150,14 @@ struct CallOutView: View {
                 let iconName = directionsIcon(step.instructions)
                 let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
                 let stepInstructions = step.instructions
-           //
-           //                            print("\(iconName)")
-           //                            print("\(stepInstructions)")
-           //                            print("\(distance)")
-           //
+          
+                
                 let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-           //
-           //                            print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
-           //
+           
+                
                 appState.routeSteps.append(arrayElement)
-           //
-           //                        }
-           //                        let placeName = appState.destinationLandmarks[index]?.title
-           //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: placeName, distance: ""))
-           //                        // add a blank line
-           //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: "", distance: ""))
-           //
-           //
+          
+                
             }
         }
     }
@@ -189,7 +183,7 @@ struct CallOutView: View {
         directionsRequest.source = start
         directionsRequest.destination = destination
         
-        print(" In calculating route CallOutView")
+//        print(" In calculating route CallOutView")
         
         let directions = MKDirections(request: directionsRequest)
         directions.calculate { response, error in

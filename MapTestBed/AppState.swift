@@ -16,12 +16,11 @@ class AppState: ObservableObject {
     @Published var routeSteps: [RouteStep] = []
     @Published var routes: [MKRoute?] = []
     @Published var destinationLandmarks: [LandmarkAnnotation?] = []
-//    @Published var endDestination: LandmarkAnnotation?
-//    @Published var interimDestination: LandmarkAnnotation?
+
     @Published var categoryOfInterest: String?
     @Published var startLocation: LandmarkAnnotation?
+    @Published var startLocationType: String = "currentLocation"
 
-//    @Published var startLocation: MKMapItem?
     @Published var homeLocation: LandmarkAnnotation?
     @Published var selectedStartLocation: LandmarkAnnotation?
 

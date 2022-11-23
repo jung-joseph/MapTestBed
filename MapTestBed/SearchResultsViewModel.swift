@@ -41,7 +41,7 @@ class SearchResultsViewModel: ObservableObject {
             
             search.start { response, error in
                 
-                print("search started!")
+//                print("search started!")
                 
                 guard let response = response, error == nil else {
                     print("Error: \(error?.localizedDescription ?? "Unknown error")")
@@ -59,11 +59,11 @@ class SearchResultsViewModel: ObservableObject {
                 completion(self.landmarkAnnotations)
 
                 
-                print("vmLandMarkAnnotiations")
-                print("landmarkAnnotations count \(self.landmarkAnnotations.count)")
-                for i in 0...self.landmarkAnnotations.count-1 {
-                    print(self.landmarkAnnotations[i].mapItem.name as Any)
-                }
+//                print("vmLandMarkAnnotiations")
+//                print("landmarkAnnotations count \(self.landmarkAnnotations.count)")
+//                for i in 0...self.landmarkAnnotations.count-1 {
+//                    print(self.landmarkAnnotations[i].mapItem.name as Any)
+//                }
             }
             
             

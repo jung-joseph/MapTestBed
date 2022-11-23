@@ -30,8 +30,7 @@ struct SearchResultsListView: View {
 
         self._selectedTab = selectedTab
         self.onSelect = onSelect
-        print("******Landmark selected from list*****")
-        print("selectedTab: \(selectedTab)")
+
     }
     
     func formatDistance(for landmark: LandmarkAnnotation) -> String {

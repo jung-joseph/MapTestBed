@@ -75,7 +75,7 @@ extension MapView: UIViewRepresentable {
     }
     
     private func registerMapAnnotations(map: MKMapView) {
-        print("registering  \(annotations.count) annotations")
+//        print("registering  \(annotations.count) annotations")
         
         for annotation in annotations {
             map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: annotation.title ?? "")

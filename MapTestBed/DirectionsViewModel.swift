@@ -42,8 +42,8 @@ class DirectionsViewModel: ObservableObject {
                 guard let route = response.routes.first else {
                     return []
                 }
-                print("calculateDirections")
-                print("routePoints.count: \(routePoints.count)")
+//                print("calculateDirections")
+//                print("routePoints.count: \(routePoints.count)")
                 computedRoutes.append(route)
                 
                 //                steps = route.steps
@@ -54,7 +54,7 @@ class DirectionsViewModel: ObservableObject {
                     let distance = "\(self.distanceFormatter.format(distanceInMeters: step.distance))"
                     let stepInstructions = step.instructions
                     
-                    print("iconName: \(iconName) stepInstructions: \(stepInstructions) distance: \(distance)")
+//                    print("iconName: \(iconName) stepInstructions: \(stepInstructions) distance: \(distance)")
 //                    print("stepInstructions: \(stepInstructions)")
 //                    print("distance: \(distance)")
                     

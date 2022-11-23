@@ -42,7 +42,7 @@ struct SearchScreen: View {
                 }
             
             VStack{
-                ScrollView(.horizontal){
+//                ScrollView(.horizontal){
                     HStack{
 //MARK: - CLEAR ALL
                         Button("Clear All"){
@@ -78,9 +78,9 @@ struct SearchScreen: View {
                         .foregroundColor(selectedCategory == "Set as Search Category" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                         
-                    }
-                }
-                .padding()
+                    } .padding()
+//                }
+               
                 
                 ScrollView(.horizontal){
                     HStack{
@@ -116,8 +116,8 @@ struct SearchScreen: View {
             
             SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark
-                print("SearchResultsListView Trailing closure")
-                print("selected landmark: \(String(describing: landmark.title))")
+//                print("SearchResultsListView Trailing closure")
+//                print("selected landmark: \(String(describing: landmark.title))")
             }
         }
     }
