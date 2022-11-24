@@ -98,13 +98,16 @@ struct SearchScreen: View {
                         CategoryButton(name: "Hotels", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
 
-
                         CategoryButton(name: "Coffee", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
-
+                        
+                        CategoryButton(name: "Fast Food", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
  
-                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
+                        CategoryButton(name: "Restaurants", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
+                        
+                        
+                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
                         
 
                     }

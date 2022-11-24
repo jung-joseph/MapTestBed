@@ -91,8 +91,8 @@ struct CallOutView: View {
             //MARK: - Add URL
             HStack{
                 if selectedAnnotation.url != nil {
-                    Text("Website")
-                        .font(.body)
+                    Text(selectedAnnotation.url!.absoluteString)
+                        .font(.system(size: 14))
                         .foregroundColor(.blue)
                         .onTapGesture {
                             if UIApplication.shared.canOpenURL(selectedAnnotation.url!) {
