@@ -81,8 +81,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 //        MARK: - viewFor annotation
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
-            print("annotation: \(String(describing: annotation.title))")
-//            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "")
+
 
             if annotation.title == "Home" || annotation.title == "SelectedStartLocation"{
                 let annotationView = MKMarkerAnnotationView()
