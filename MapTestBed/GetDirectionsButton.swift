@@ -141,7 +141,7 @@ struct GetDirectionsButton: View {
         // add annotation for starting point
         
         appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation()))
-
+        
         for  index in 0...numberOfRoutes - 1{
             
 //            print("route#: \(index)")

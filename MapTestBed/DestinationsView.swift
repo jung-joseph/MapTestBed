@@ -15,7 +15,8 @@ struct DestinationsView: View {
     
     @State var startLocation: LandmarkAnnotation?
     @Binding var showDestinationsView: Bool
-   
+//    @State private var homeIsSet: Bool = false
+//    @State private var startingLocationIsSet: Bool
     
     var currentLocation:MKMapItem = MKMapItem.forCurrentLocation()
 
@@ -26,6 +27,7 @@ struct DestinationsView: View {
             VStack{
                 
                 Text("Set Start Location:")
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
 
                 
@@ -33,22 +35,37 @@ struct DestinationsView: View {
                     
                     Picker(selection: $appState.startLocationType) {
                         Text("Current Location").tag("currentLocation")
-                        Text("Home").tag("home").tag("home")
+                        Text("Home").tag("home")
                         Text("Selected Location").tag("selectedLocation")
                     } label:{
                         EmptyView()
                     }.pickerStyle(.segmented)
                     
                 }
-                if appState.startLocationType == "currentLocation" && appState.startLocation?.title != nil{
-                    Text("Starting location: Using Current Location")
-                } else if appState.startLocationType == "home" && appState.homeLocation?.title != nil{
-                    Text("Starting location: \(appState.homeLocation!.title!)")
-                } else if  appState.startLocationType == "selectedLocation" && appState.selectedStartLocation?.title != nil {
-                    Text("Starting location: \(appState.selectedStartLocation!.title!)")
-                } else {
-                    Text("Starting location: Using Current Location")
+                
+                if appState.startLocationType == "currentLocation" {
+                    if appState.startLocation?.coordinate != nil {
+                        Text("Starting location: Using Current Location")
+                    } else {
+                        Text("Starting location: Using Current Location")
+                        }
+                    }
+                if appState.startLocationType == "home" {
+                    if appState.homeLocation?.title != nil {
+                        Text("Starting location: \(appState.homeLocation!.title!)")
+                    } else {
+                        Text("Home Location not set - Using Current Location")
+                    }
                 }
+                if appState.startLocationType == "selectedLocation" {
+                    if appState.selectedStartLocation?.title != nil {
+                        Text("Starting location: \(appState.selectedStartLocation!.title!)")
+                    } else {
+                        Text("Start Location not set; Using Current Location")
+                    }
+                }
+                                
+                
                 List {
                     ForEach(appState.destinationLandmarks.indices, id: \.self) { index in
                         HStack {

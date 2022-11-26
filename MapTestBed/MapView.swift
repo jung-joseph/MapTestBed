@@ -65,7 +65,7 @@ extension MapView: UIViewRepresentable {
         
         registerMapAnnotations(map:map)
         map.addAnnotations(annotations)
-        
+
         if let selectedLandmark = selectedLandmark {
             map.selectAnnotation(selectedLandmark, animated: true)
         }
