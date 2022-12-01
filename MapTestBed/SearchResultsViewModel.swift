@@ -18,7 +18,7 @@ class SearchResultsViewModel: ObservableObject {
     
     
     init(){
-        print("SearchResultsViewModel Created")
+//        print("SearchResultsViewModel Created")
     }
     
     func search(query: String, completion: @escaping ([LandmarkAnnotation]) -> Void) {

@@ -58,7 +58,7 @@ extension MapView: UIViewRepresentable {
     
     func updateUIView(_ map: MKMapView, context: Context) {
         
-        print("updateUIView called")
+//        print("updateUIView called")
         map.mapType = settings.mapType
 
         map.removeAnnotations(map.annotations)

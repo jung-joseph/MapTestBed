@@ -19,7 +19,9 @@ class LocationManager: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.startUpdatingLocation()
         locationManager.delegate = self

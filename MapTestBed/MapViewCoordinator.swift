@@ -21,7 +21,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
-        print("ChangeVisibleRegion: \(mapView.centerCoordinate)")
+//        print("ChangeVisibleRegion: \(mapView.centerCoordinate)")
         
     }
     
@@ -58,7 +58,9 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
 
 //            DispatchQueue.main.async {
-                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
+                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 75))
+
+//                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
                 // customView = CallOutView is a SwiftUI View
 
@@ -106,7 +108,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     //    MARK: - calloutAccessoryControlTapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("CallOut control tapped")
+//
 
     }
     

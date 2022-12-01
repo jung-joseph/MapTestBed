@@ -47,12 +47,26 @@ struct SearchScreen: View {
 //MARK: - CLEAR ALL
                         Button("Clear All"){
                             search = ""
-                            appState.destinationLandmarks.removeAll()
-                            appState.categoryOfInterest = ""
                             appState.landmarks.removeAll()
-                            appState.map.removeOverlays(appState.map.overlays)
+                            
+                            appState.selectedLandmark = nil
+                            
+                            appState.route = nil
+
                             appState.routeSteps.removeAll()
+
+                            appState.destinationLandmarks.removeAll()
+                            
+                            appState.categoryOfInterest = ""
+                            
                             appState.startLocation = nil
+
+                            appState.homeLocation = nil
+                            
+                            appState.selectedStartLocation = nil
+                            
+                            appState.map.removeOverlays(appState.map.overlays)
+                            
                             selectedCategory = "Clear All"
                         }
                         .textFieldStyle(RoundedBorderTextFieldStyle())

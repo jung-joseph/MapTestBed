@@ -65,34 +65,15 @@ struct CallOutView: View {
                     
                     appState.homeLocation = selectedAnnotation
                     appState.homeLocation?.mapItem.name = "Home"
+                    
+                    // Store home lat and long in UserDefaults
+                    UserDefaults.standard.set(selectedAnnotation.coordinate.latitude, forKey: "homeLat")
+                    UserDefaults.standard.set(selectedAnnotation.coordinate.longitude, forKey: "homeLon")
+                    
                     //    Remove selectedLandmark so that  annotationView Callout is dismissed
                     appState.selectedLandmark = nil
                     
-//                    https://stackoverflow.com/questions/56463518/how-to-save-an-array-of-type-mkmapitem
-                    
-//                    let defaults = UserDefaults.standard
-//                    do {
-//
-//                            let data = try NSKeyedArchiver.archivedData(withRootObject: selectedAnnotation , requiringSecureCoding: false)
-//                            defaults.set(data, forKey: "homeLocation")
-//                            print("Data save with no errors")
-//                            print()
-//
-//
-//
-//// ?? LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0))))
-////                        if let dataOut = UserDefaults.standard.data(forKey: "homeLocation"){
-////                            if let temp = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(dataOut) as? MKMapItem {
-////                                print("Data retrieved with no errors")
-////                                print(temp)
-////                            }
-////                        }
-//
-//                    }
-//                    catch {
-//                        print("Couldn't save home location to UserDefaults")
-//                        print(error)
-//                    }
+
  
                     
                 },

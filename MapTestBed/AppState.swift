@@ -21,9 +21,7 @@ class AppState: ObservableObject {
     @Published var startLocation: LandmarkAnnotation?
     @Published var startLocationType: String = "currentLocation"
 
-    @Published var homeLocation: LandmarkAnnotation?
- 
-
+    @Published var homeLocation: LandmarkAnnotation? 
     @Published var selectedStartLocation: LandmarkAnnotation?
 
     @Published var map = MKMapView()

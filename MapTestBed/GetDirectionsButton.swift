@@ -42,15 +42,29 @@ struct GetDirectionsButton: View {
                 
             } else if appState.startLocationType == "home" {
                 
+                //                let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
+                //                let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
+              
+                let homeLon:Double? = UserDefaults.standard.double(forKey: "homeLon")
+                let homeLat:Double? = UserDefaults.standard.double(forKey: "homeLat")
+                
                 if appState.homeLocation != nil {
-                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
+                    let homeCoords = CLLocationCoordinate2D(latitude: homeLat!, longitude: homeLon!)
+                    let homeStart = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
+                    appState.homeLocation = homeStart
+                    appState.homeLocation?.mapItem.name = "Home"
                     appState.startLocation = appState.homeLocation
+                    
+                    start = MKMapItem(placemark: MKPlacemark(coordinate: homeCoords))
+                    
+                    //                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
+                    //                    appState.startLocation = appState.homeLocation
                 } else {
                     start = MKMapItem.forCurrentLocation()
                     appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
                 }
                 
-
+                
                 
             } else if appState.startLocationType == "selectedLocation" {
                 

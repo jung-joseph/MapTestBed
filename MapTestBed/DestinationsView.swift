@@ -50,13 +50,41 @@ struct DestinationsView: View {
                         Text("Starting location: Using Current Location")
                         }
                     }
+//  Check if Home has been set
+                
+//                if appState.startLocationType == "home"{
+//                    let homeLat = UserDefaults.standard.double(forKey: "homeLat")
+//                    let homeLon = UserDefaults.standard.double(forKey: "homeLon")
+//                    let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
+//                    let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
+//
+//                    if homeLatExist == true {
+//                        let homeCoords2D = CLLocationCoordinate2D(latitude: homeLat, longitude: homeLon)
+//                        let homePlacemark = MKPlacemark(coordinate: homeCoords2D)
+//                        let homeMapItem = MKMapItem(placemark: homePlacemark)
+//                        let homeAnnotation = LandmarkAnnotation(mapItem: homeMapItem)
+//                        appState.homeLocation = homeAnnotation
+//                    }
+//
+//
+//                }
+                
+                
+                
+                
                 if appState.startLocationType == "home" {
+
+
                     if appState.homeLocation?.title != nil {
                         Text("Starting location: \(appState.homeLocation!.title!)")
                     } else {
                         Text("Home Location not set - Using Current Location")
                     }
+
+
                 }
+                
+                
                 if appState.startLocationType == "selectedLocation" {
                     if appState.selectedStartLocation?.title != nil {
                         Text("Starting location: \(appState.selectedStartLocation!.title!)")

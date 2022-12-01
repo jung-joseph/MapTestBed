@@ -18,10 +18,11 @@ struct MapScreen: View {
                 MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
                 .ignoresSafeArea(.all, edges: .top)
                     .onAppear{
-                        print("onAppear for MapView Called")
+//                        print("onAppear for MapView Called")
                     }
                 
                 VStack{
+
                     HStack{
                         Spacer()
                         Button(action: {
@@ -34,7 +35,7 @@ struct MapScreen: View {
                                 .frame(width: 25, height: 25)
                         }
                         )
-                        .padding()
+                        .padding([.top, .trailing], 20)
                     }
                     Spacer()
                 }
