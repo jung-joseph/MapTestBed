@@ -45,7 +45,7 @@ struct SearchScreen: View {
 //                ScrollView(.horizontal){
                     HStack{
 //MARK: - CLEAR ALL
-                        Button("Clear All"){
+                        Button("Clear Map"){
                             search = ""
                             appState.landmarks.removeAll()
                             
@@ -67,13 +67,28 @@ struct SearchScreen: View {
                             
                             appState.map.removeOverlays(appState.map.overlays)
                             
-                            selectedCategory = "Clear All"
+                            UserDefaults.resetStandardUserDefaults()
+                            
+                            selectedCategory = "Clear Map"
                         }
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .background(selectedCategory == "Clear All" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
                         .foregroundColor(selectedCategory == "Clear All" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
 
+//MARK: - Clear Home
+                        
+                        Button("Clear Home"){
+                            search = ""
+  
+                            
+                            UserDefaults.resetStandardUserDefaults()
+                            
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(selectedCategory == "Clear Home" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
+                        .foregroundColor(selectedCategory == "Clear Home" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                         
 //MARK: - SET AS SEARCH CATEGORY
 
