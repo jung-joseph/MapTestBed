@@ -42,38 +42,59 @@ struct SearchScreen: View {
                 }
             
             VStack{
-                HStack{
-                    Button("Clear All"){
-                        search = ""
-                        appState.destinationLandmarks.removeAll()
-                        appState.categoryOfInterest = ""
-                        appState.landmarks.removeAll()
-                        appState.map.removeOverlays(appState.map.overlays)
-                        appState.routeSteps.removeAll()
-                        selectedCategory = "Clear All"
-                    }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(selectedCategory == "Clear All" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
-                    .foregroundColor(selectedCategory == "Clear All" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
-                    
-                    Button("Set as Search Category"){
-                        appState.categoryOfInterest = search
-                        search = appState.categoryOfInterest ?? ""
-                        //                    DispatchQueue.main.async {
-                                                searchVM.search(query: search) {   landmarks in
-                                                    appState.landmarks = landmarks
-                                                }
-                        //                    }
-                                                showSearchView = true
-                    }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(selectedCategory == "Set as Search Category" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
-                    .foregroundColor(selectedCategory == "Set as Search Category" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
-                    
-                }
-                .padding()
+//                ScrollView(.horizontal){
+                    HStack{
+//MARK: - CLEAR ALL
+                        Button("Clear All"){
+                            search = ""
+                            appState.landmarks.removeAll()
+                            
+                            appState.selectedLandmark = nil
+                            
+                            appState.route = nil
+
+                            appState.routeSteps.removeAll()
+
+                            appState.destinationLandmarks.removeAll()
+                            
+                            appState.categoryOfInterest = ""
+                            
+                            appState.startLocation = nil
+
+                            appState.homeLocation = nil
+                            
+                            appState.selectedStartLocation = nil
+                            
+                            appState.map.removeOverlays(appState.map.overlays)
+                            
+                            selectedCategory = "Clear All"
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(selectedCategory == "Clear All" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
+                        .foregroundColor(selectedCategory == "Clear All" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
+
+                        
+//MARK: - SET AS SEARCH CATEGORY
+
+                        Button("Set as Search Category"){
+                            appState.categoryOfInterest = search
+                            search = appState.categoryOfInterest ?? ""
+                            //                    DispatchQueue.main.async {
+                                                    searchVM.search(query: search) {   landmarks in
+                                                        appState.landmarks = landmarks
+                                                    }
+                            //                    }
+                                                    showSearchView = true
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(selectedCategory == "Set as Search Category" ? Color(#colorLiteral(red: 0.4982050061, green: 0.5490344763, blue: 0.5528618097, alpha: 1)) : Color(#colorLiteral(red: 0.9254772663, green: 0.9412199855, blue: 0.9449794888, alpha: 1)))
+                        .foregroundColor(selectedCategory == "Set as Search Category" ? Color.white: Color(#colorLiteral(red: 0.204610765, green: 0.2861392498, blue: 0.3685011268, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 16.0, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
+                        
+                    } .padding()
+//                }
+               
                 
                 ScrollView(.horizontal){
                     HStack{
@@ -91,13 +112,16 @@ struct SearchScreen: View {
                         CategoryButton(name: "Hotels", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
 
-
                         CategoryButton(name: "Coffee", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
-
+                        
+                        CategoryButton(name: "Fast Food", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
  
-                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
 
+                        CategoryButton(name: "Restaurants", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
+                        
+                        
+                        CategoryButton(name: "Rest Areas", search: $search, showSearchResultsList: $showSearchView, selectedCategory: $selectedCategory)
                         
 
                     }
@@ -109,8 +133,8 @@ struct SearchScreen: View {
             
             SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
                 appState.selectedLandmark = landmark
-                print("SearchResultsListView Trailing closure")
-                print("selected landmark: \(String(describing: landmark.title))")
+//                print("SearchResultsListView Trailing closure")
+//                print("selected landmark: \(String(describing: landmark.title))")
             }
         }
     }

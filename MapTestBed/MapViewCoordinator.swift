@@ -21,7 +21,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         
-        print("ChangeVisibleRegion: \(mapView.centerCoordinate)")
+//        print("ChangeVisibleRegion: \(mapView.centerCoordinate)")
         
     }
     
@@ -29,23 +29,13 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        print("****in Did Select**** ")
-        print("Creating Calloutview ")
+
 
         // Create SwiftUI callout for this annotation
         guard let annotation = view.annotation as? LandmarkAnnotation else {
             return
         }
-        print("annotationTitle: \(String(describing: annotation.title))")
-//        print("annotationAddress: \(String(describing: annotation.address))")
-//        print("annotationCoordinates: \(annotation.coordinate)")
 
-//        let start = MKMapItem(placemark: MKPlacemark(coordinate: mapView.userLocation.coordinate) )
-        let start = MKMapItem.forCurrentLocation()
-        print("coordinates: \(start.placemark.coordinate)")
-        print("currentLocation: \(start)")
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate ) )
-        print("destination: \(destination)")
 
 
         view.canShowCallout = true
@@ -68,7 +58,9 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
 
 //            DispatchQueue.main.async {
-                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
+                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 75))
+
+//                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
                 imageView.image = snapshot.image
                 // customView = CallOutView is a SwiftUI View
 
@@ -88,11 +80,20 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         
     }
     
-    //    MARK: - viewFor annotation
-    //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        MARK: - viewFor annotation
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
-  
-    //    }
+
+
+            if annotation.title == "Home" || annotation.title == "SelectedStartLocation"{
+                let annotationView = MKMarkerAnnotationView()
+                annotationView.glyphTintColor = .blue
+                annotationView.markerTintColor = .green
+                return annotationView
+            }
+            
+            return nil
+        }
     
     
     //MARK: - didUpdate userLocation
@@ -107,33 +108,11 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
     //    MARK: - calloutAccessoryControlTapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("CallOut control tapped")
+//
 
     }
     
-    //MARK: - calculate route
-    
-    func calculateRoute(start: MKMapItem, destination: MKMapItem, completion: @escaping (MKRoute?) -> Void) {
-        let directionsRequest = MKDirections.Request()
-        directionsRequest.transportType = .automobile
-        directionsRequest.source = start
-        directionsRequest.destination = destination
-        
-        print(" calculating route from MapViewCoordinator")
-        
-        let directions = MKDirections(request: directionsRequest)
-        directions.calculate { response, error in
-            if let error = error {
-                print("Unable to calculate directions \(error)")
-            }
-            
-            guard let response = response,
-                  let route = response.routes.first else {
-                return
-            }
-            completion(route)
-        }
-    }
+
     
     // MARK: - renderFor overlay
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

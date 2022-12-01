@@ -24,65 +24,124 @@ struct CallOutView: View {
     var body: some View {
         VStack{
             HStack{
+                Text("Set as: ")
+                    .frame(alignment: .topLeading)
+                Spacer()
+            }
+            HStack{
                 
                 //MARK: - Add Destination Button
                 Button(action: {
                     appState.destinationLandmarks.append(selectedAnnotation)
-//    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
                     appState.selectedLandmark = nil
-
+                    
                 },
-                       label: {Text("Add Destination")})
+                       label: {Text("A Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(5)
                 .shadow(radius: 10)
                 
+                //MARK: - Set as Starting Location
+                Button(action: {
+                    
+                    appState.selectedStartLocation = selectedAnnotation
+                    appState.selectedStartLocation?.mapItem.name = "SelectedStartLocation"
+                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    appState.selectedLandmark = nil
+                    
+                },
+                       label: {Text("Starting Location")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
+                
+                //MARK: - Set as Home
+                Button(action: {
+                    
+                    appState.homeLocation = selectedAnnotation
+                    appState.homeLocation?.mapItem.name = "Home"
+                    
+                    // Store home lat and long in UserDefaults
+                    UserDefaults.standard.set(selectedAnnotation.coordinate.latitude, forKey: "homeLat")
+                    UserDefaults.standard.set(selectedAnnotation.coordinate.longitude, forKey: "homeLon")
+                    
+                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
+                    appState.selectedLandmark = nil
+                    
+
+ 
+                    
+                },
+                       label: {Text("Home")})
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(5)
+                .shadow(radius: 10)
             }
-                //MARK: - Add map snapShot
-                if (snapShot != nil) {
-                    Image(uiImage: snapShot! )
-                }
-                //MARK: - Add site information
-                Text(selectedAnnotation.address ?? "")
+            //MARK: - Add map snapShot
+            if (snapShot != nil) {
+                Image(uiImage: snapShot! )
+            }
+            //MARK: - Add site information
+            Text(selectedAnnotation.address ?? "")
+                .font(.body)
+                .padding(.bottom)
+            HStack{
+                Text(selectedAnnotation.phone ?? "")
                     .font(.body)
-                    .padding(.bottom)
-                HStack{
-                    Text(selectedAnnotation.phone ?? "")
-                        .font(.body)
+                Spacer()
+            }
+            //MARK: - Add URL
+            HStack{
+                if selectedAnnotation.url != nil {
+                    Text(selectedAnnotation.url!.absoluteString)
+                        .font(.system(size: 14))
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            if UIApplication.shared.canOpenURL(selectedAnnotation.url!) {
+                                UIApplication.shared.open(selectedAnnotation.url!)
+                            }
+                            
+                        }
                     Spacer()
                 }
             }
-    
-//            .onDisappear{
-//                print("CallOutView onDisappear called!")
-//            }
-            
         }
+        
+        //            .onDisappear{
+        //                print("CallOutView onDisappear called!")
+        //            }
+        
+    }
     
-//MARK: - PROCESS ROUTES
+    //MARK: - PROCESS ROUTES
     func processRoutes(computedRoutes: [MKRoute]) async {
-        print("In processRoutesTest")
-        print("number of Routes: \(computedRoutes.count)")
+        //        print("In processRoutesTest")
+        //        print("number of Routes: \(computedRoutes.count)")
         let numberOfRoutes = computedRoutes.count
         
         
         // clear all overlays
         mapView.removeOverlays(mapView.overlays) // this call works!
         // clear all annotations
-
+        
         mapView.removeAnnotations(mapView.annotations) // this call does not work!
         appState.landmarks.removeAll()
-
+        
         for  index in 0...numberOfRoutes - 1{
             
-            print("route#: \(index)")
-                                    //
-                                    //
+            //            print("route#: \(index)")
+            //
+            //
             let controller = RouteContentViewController(route: computedRoutes[index])
             let routePopover = RoutePopover(controller: controller)
-                                    //
+            //
             //                        //
             let positioningView = UIView(frame: CGRect(x: mapView.frame.width/2.6, y:0, width: mapView.frame.width/2, height: 0.0))
             //                        //
@@ -90,13 +149,13 @@ struct CallOutView: View {
             mapView.addSubview(positioningView)
             //                        //
             
-//            appState.landmarks.removeAll()
-
+            //            appState.landmarks.removeAll()
             
-           
+            
+            
             //                        //
             // Add annotation
-//            mapView.addAnnotation(appState.destinationLandmarks[index]!) // This does not work
+            //            mapView.addAnnotation(appState.destinationLandmarks[index]!) // This does not work
             appState.landmarks.append(appState.destinationLandmarks[index]!)
             //                        //
             //                        //
@@ -111,33 +170,23 @@ struct CallOutView: View {
                 if step.instructions.isEmpty {
                     continue
                 }
-           //
+                //
                 let iconName = directionsIcon(step.instructions)
                 let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
                 let stepInstructions = step.instructions
-           //
-           //                            print("\(iconName)")
-           //                            print("\(stepInstructions)")
-           //                            print("\(distance)")
-           //
+                
+                
                 let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-           //
-           //                            print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
-           //
+                
+                
                 appState.routeSteps.append(arrayElement)
-           //
-           //                        }
-           //                        let placeName = appState.destinationLandmarks[index]?.title
-           //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: placeName, distance: ""))
-           //                        // add a blank line
-           //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: "", distance: ""))
-           //
-           //
+                
+                
             }
         }
     }
     
-
+    
     //MARK: - directionIcons
     private func directionsIcon(_ instruction: String) -> String {
         if instruction.contains("Turn right"){
@@ -158,7 +207,7 @@ struct CallOutView: View {
         directionsRequest.source = start
         directionsRequest.destination = destination
         
-        print(" In calculating route CallOutView")
+        //        print(" In calculating route CallOutView")
         
         let directions = MKDirections(request: directionsRequest)
         directions.calculate { response, error in

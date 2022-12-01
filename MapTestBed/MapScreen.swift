@@ -14,11 +14,32 @@ struct MapScreen: View {
     
     var body: some View {
         
-            MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
-            .ignoresSafeArea(.all, edges: .top)
-                .onAppear{
-                    print("onAppear for MapView Called")
+            ZStack {
+                MapView(annotations: appState.landmarks,selectedLandmark: appState.selectedLandmark)
+                .ignoresSafeArea(.all, edges: .top)
+                    .onAppear{
+//                        print("onAppear for MapView Called")
+                    }
+                
+                VStack{
+
+                    HStack{
+                        Spacer()
+                        Button(action: {
+                            let region = MKCoordinateRegion(center: appState.map.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                            appState.map.setRegion(region, animated: true)
+                        },
+                               label: {
+                            Image(systemName: "location.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                        }
+                        )
+                        .padding([.top, .trailing], 20)
+                    }
+                    Spacer()
                 }
+            }
             
 
 

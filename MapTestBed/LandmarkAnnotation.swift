@@ -18,13 +18,17 @@ class LandmarkAnnotation: NSObject, MKAnnotation, Identifiable, ObservableObject
         self.mapItem = mapItem
     }
     
-    var title: String? {
+    dynamic var title: String? {
         mapItem.name
     }
 
     
     var phone: String? {
         mapItem.phoneNumber ?? ""
+    }
+    
+    var url: URL? {
+        mapItem.url
     }
     
     var address: String? {
@@ -57,6 +61,4 @@ class LandmarkAnnotation: NSObject, MKAnnotation, Identifiable, ObservableObject
         
         return userLocation.distance(from: placeLocation)
     }
-    
-
 }

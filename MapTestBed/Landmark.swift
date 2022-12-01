@@ -26,6 +26,7 @@ struct Landmark: Identifiable, Hashable {
     var name: String {
         self.placemark.name ?? ""
     }
+  
     
     var address: String {
         guard let postalAddress = self.placemark.postalAddress else {

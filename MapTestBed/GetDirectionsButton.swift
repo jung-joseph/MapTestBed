@@ -26,27 +26,83 @@ struct GetDirectionsButton: View {
         Button(action:
                 {
             print(" In GetDirectionsButton")
+            print("startLocationType: \(appState.startLocationType)")
             
             showDestinationsView = false
-
-            // start at the current user location
-            let start = MKMapItem.forCurrentLocation()
             
-            print("start location: \(start.placemark.coordinate)")
-            print()
+
+            
+            var start: MKMapItem? = nil
+            
+            if appState.startLocationType == "currentLocation" {
+           
+                start = MKMapItem.forCurrentLocation()
+                appState.startLocation = LandmarkAnnotation(mapItem: start!)
+
+                
+            } else if appState.startLocationType == "home" {
+                
+                //                let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
+                //                let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
+              
+                let homeLon:Double? = UserDefaults.standard.double(forKey: "homeLon")
+                let homeLat:Double? = UserDefaults.standard.double(forKey: "homeLat")
+                
+                if appState.homeLocation != nil {
+                    let homeCoords = CLLocationCoordinate2D(latitude: homeLat!, longitude: homeLon!)
+                    let homeStart = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
+                    appState.homeLocation = homeStart
+                    appState.homeLocation?.mapItem.name = "Home"
+                    appState.startLocation = appState.homeLocation
+                    
+                    start = MKMapItem(placemark: MKPlacemark(coordinate: homeCoords))
+                    
+                    //                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
+                    //                    appState.startLocation = appState.homeLocation
+                } else {
+                    start = MKMapItem.forCurrentLocation()
+                    appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                }
+                
+                
+                
+            } else if appState.startLocationType == "selectedLocation" {
+                
+                if appState.selectedStartLocation != nil {
+                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.selectedStartLocation!.coordinate))
+                    appState.startLocation = appState.selectedStartLocation
+                } else {
+                    start = MKMapItem.forCurrentLocation()
+                    appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                }
+
+                                     
+            } else {
+                   start = MKMapItem.forCurrentLocation()
+            }
+                                     
+
             // Put route coordinates into routeCoords array starting with the current user location (start)
             var routeCoords: [MKMapItem] = []
-            routeCoords.append(start)
+            
+
+            routeCoords.append(start ?? MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 51.5073, longitude: -0.1277))))
+            
+
+            print("routeCoords.count \(routeCoords.count)")
             
             for place in appState.destinationLandmarks {
-                print(place!.title!)
+                print("Place:\(place!.title!)")
+                print("destinationLandmarks.count \(appState.destinationLandmarks.count)")
                 
                 routeCoords.append(MKMapItem(placemark: MKPlacemark(coordinate: place?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0) ) ))
                 
+
+                
             }
             // set the number of route segments
-            let numberOfRoutes = routeCoords.count - 1
-            print("numberOfRouteSegments: \(numberOfRoutes)")
+//            let numberOfRoutes = routeCoords.count - 1
+
             // clear all annotations
             appState.landmarks.removeAll() // this works
 //            **************************************************
@@ -58,10 +114,10 @@ struct GetDirectionsButton: View {
             
             //MARK: - call to async directions
             Task {
-                //                        computedRoutes.append(await directionsVM.calculateDirections(routePoints: routeCoords))
                 
                 computedRoutes = await directionsVM.calculateDirections(routePoints: routeCoords)
                 await processRoutes(computedRoutes: computedRoutes)
+                
             }
             //MARK: -
             
@@ -86,21 +142,23 @@ struct GetDirectionsButton: View {
     
     //MARK: - PROCESS ROUTES
     func processRoutes(computedRoutes: [MKRoute]) async {
-        print("In processRoutesTest")
-        print("number of Routes: \(computedRoutes.count)")
+//        print("In processRoutesTest")
+//        print("number of Routes: \(computedRoutes.count)")
         let numberOfRoutes = computedRoutes.count
         
         
-        // clear all overlays
-        //        mapView.removeOverlays(mapView.overlays) // ?
+
         // clear all annotations
         
-        //        mapView.removeAnnotations(mapView.annotations) // ?
         appState.landmarks.removeAll()
+        
+        // add annotation for starting point
+        
+        appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation()))
         
         for  index in 0...numberOfRoutes - 1{
             
-            print("route#: \(index)")
+//            print("route#: \(index)")
             //
             //
             let controller = RouteContentViewController(route: computedRoutes[index])
@@ -108,26 +166,17 @@ struct GetDirectionsButton: View {
             //
             //                        //
             let positioningView = UIView(frame: CGRect(x: appState.map.frame.width/2.6, y:0, width: appState.map.frame.width/2, height: 0.0))
-            //                        //
-            //                        //
+  
             appState.map.addSubview(positioningView)
-            //                        //
+  
             
-            //            appState.landmarks.removeAll()
-            
-            
-            
-            //                        //
             // Add annotation
-            //            mapView.addAnnotation(appState.destinationLandmarks[index]!) // This does not work
             appState.landmarks.append(appState.destinationLandmarks[index]!)
-            //                        //
-            //                        //
-            //                        //
-            //                            // add overlay on the map
+        
+            // add overlay on the map
             appState.map.addOverlay(computedRoutes[index].polyline, level: .aboveRoads)
-            //
-            //
+            
+            
             routePopover.show(routePopover, sender: self)
             //
             for step in computedRoutes[index].steps {
@@ -138,24 +187,14 @@ struct GetDirectionsButton: View {
                 let iconName = directionsIcon(step.instructions)
                 let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
                 let stepInstructions = step.instructions
-                //
-                //                            print("\(iconName)")
-                //                            print("\(stepInstructions)")
-                //                            print("\(distance)")
-                //
+              
+                
                 let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-                //
-                //                            print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
-                //
+                
+                
                 appState.routeSteps.append(arrayElement)
-                //
-                //                        }
-                //                        let placeName = appState.destinationLandmarks[index]?.title
-                //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: placeName, distance: ""))
-                //                        // add a blank line
-                //                        appState.routeSteps.append(RouteStep(imageName: "", instructions: "", distance: ""))
-                //
-                //
+                
+                
             }
         }
     }
