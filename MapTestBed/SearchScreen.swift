@@ -82,7 +82,11 @@ struct SearchScreen: View {
                             search = ""
   
                             
-                            UserDefaults.resetStandardUserDefaults()
+//                            UserDefaults.resetStandardUserDefaults()
+                            UserDefaults.standard.removeObject(forKey: "homeLat")
+                            UserDefaults.standard.removeObject(forKey: "homeLon")
+                            appState.homeLocation = nil
+
                             
                         }
                         .textFieldStyle(RoundedBorderTextFieldStyle())

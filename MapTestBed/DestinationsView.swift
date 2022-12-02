@@ -105,13 +105,20 @@ struct DestinationsView: View {
                     .onDelete(perform: delete)
                 }
                 .toolbar {
-                    ToolbarItem(placement: .navigation){
-                        GetDirectionsButton(showDestinationsView: $showDestinationsView)
-                            
-                    }
-                    ToolbarItem(){
-                        EditButton()
-                    }
+
+                    
+                        ToolbarItem(placement: .navigationBarLeading){
+                            GetDirectionsButton(showDestinationsView: $showDestinationsView)
+                        }
+                    
+                    ToolbarItem(placement: .navigationBarLeading){
+                            AddHomeButton()
+                        }
+                    
+                        ToolbarItem(placement: .navigationBarTrailing){
+                            EditButton()
+                        }
+                  
                     
                 }
             }

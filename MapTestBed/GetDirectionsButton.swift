@@ -25,8 +25,8 @@ struct GetDirectionsButton: View {
 
         Button(action:
                 {
-            print(" In GetDirectionsButton")
-            print("startLocationType: \(appState.startLocationType)")
+//            print("  Go! Button")
+//            print("startLocationType: \(appState.startLocationType)")
             
             showDestinationsView = false
             
@@ -89,11 +89,11 @@ struct GetDirectionsButton: View {
             routeCoords.append(start ?? MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 51.5073, longitude: -0.1277))))
             
 
-            print("routeCoords.count \(routeCoords.count)")
+//            print("routeCoords.count \(routeCoords.count)")
             
             for place in appState.destinationLandmarks {
-                print("Place:\(place!.title!)")
-                print("destinationLandmarks.count \(appState.destinationLandmarks.count)")
+//                print("Place:\(place!.title!)")
+//                print("destinationLandmarks.count \(appState.destinationLandmarks.count)")
                 
                 routeCoords.append(MKMapItem(placemark: MKPlacemark(coordinate: place?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0) ) ))
                 
@@ -123,7 +123,7 @@ struct GetDirectionsButton: View {
             
         },
                label:
-                {Text("Get Directions")})
+                {Text("Go!")})
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .background(Color.blue)
         .foregroundColor(.white)
