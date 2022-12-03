@@ -32,7 +32,7 @@
 		53BD204328D80AFD00480B29 /* LandmarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */; };
 		53D13915291EAAF500A5820A /* DirectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D13914291EAAF500A5820A /* DirectionsViewModel.swift */; };
 		53EBBEF9292564D300096DF5 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBBEF8292564D300096DF5 /* CategoryButton.swift */; };
-		53EBBEFB2925719100096DF5 /* GetDirectionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBBEFA2925719100096DF5 /* GetDirectionsButton.swift */; };
+		53EBBEFB2925719100096DF5 /* GoDirectionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */; };
 		53FDD5E32902E45F0018002B /* MapCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E22902E45F0018002B /* MapCalloutView.swift */; };
 		53FDD5E52902E5760018002B /* CallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E42902E5760018002B /* CallOutView.swift */; };
 		53FDD5E729070DB60018002B /* RouteContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E629070DB60018002B /* RouteContentViewController.swift */; };
@@ -71,7 +71,7 @@
 		53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotation.swift; sourceTree = "<group>"; };
 		53D13914291EAAF500A5820A /* DirectionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsViewModel.swift; sourceTree = "<group>"; };
 		53EBBEF8292564D300096DF5 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
-		53EBBEFA2925719100096DF5 /* GetDirectionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDirectionsButton.swift; sourceTree = "<group>"; };
+		53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoDirectionsButton.swift; sourceTree = "<group>"; };
 		53FDD5E22902E45F0018002B /* MapCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCalloutView.swift; sourceTree = "<group>"; };
 		53FDD5E42902E5760018002B /* CallOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallOutView.swift; sourceTree = "<group>"; };
 		53FDD5E629070DB60018002B /* RouteContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteContentViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				5354374A2918487F000D7B8C /* DestinationsView.swift */,
 				53D13914291EAAF500A5820A /* DirectionsViewModel.swift */,
 				53EBBEF8292564D300096DF5 /* CategoryButton.swift */,
-				53EBBEFA2925719100096DF5 /* GetDirectionsButton.swift */,
+				53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */,
 				5313DC28293A50AF00562BC7 /* AddHomeButton.swift */,
 			);
 			path = MapTestBed;
@@ -243,7 +243,7 @@
 				53FDD5E729070DB60018002B /* RouteContentViewController.swift in Sources */,
 				53D13915291EAAF500A5820A /* DirectionsViewModel.swift in Sources */,
 				53B225CE28FF547100D14717 /* MKCoordinateRegion+ extensions.swift in Sources */,
-				53EBBEFB2925719100096DF5 /* GetDirectionsButton.swift in Sources */,
+				53EBBEFB2925719100096DF5 /* GoDirectionsButton.swift in Sources */,
 				53FDD613290B25280018002B /* RouteView.swift in Sources */,
 				53FDD611290AC88C0018002B /* SearchScreen.swift in Sources */,
 				539355682901F92F00183754 /* DistanceUnit.swift in Sources */,

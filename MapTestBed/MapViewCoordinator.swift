@@ -48,13 +48,13 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         options.camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 500, pitch: 65, heading: 0)
         let snapshotter = MKMapSnapshotter(options: options)
 
-//        DispatchQueue.main.async {
+ 
             snapshotter.start { snapshot, error in
                 guard let snapshot = snapshot, error == nil else {
                     print(error as Any)
                     return
                 }
-
+ 
 
 
 //            DispatchQueue.main.async {
@@ -84,11 +84,26 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
 
-
-            if annotation.title == "Home" || annotation.title == "SelectedStartLocation"{
+            
+            if annotation.title == "Home" {
                 let annotationView = MKMarkerAnnotationView()
+                annotationView.glyphImage = UIImage(systemName: "house.circle")
+                annotationView.glyphTintColor = .blue
+                annotationView.markerTintColor = .red
+                annotationView.displayPriority = .required
+                return annotationView
+                
+            } else if annotation.title == "SelectedStartLocation"{
+                let annotationView = MKMarkerAnnotationView()
+                annotationView.displayPriority = .required
                 annotationView.glyphTintColor = .blue
                 annotationView.markerTintColor = .green
+                return annotationView
+
+            } else if annotation.title != "My Location"{
+                let annotationView = MKMarkerAnnotationView()
+                // set display Priority to .required
+                annotationView.displayPriority = .required
                 return annotationView
             }
             

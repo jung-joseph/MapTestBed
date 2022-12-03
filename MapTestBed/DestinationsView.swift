@@ -50,27 +50,7 @@ struct DestinationsView: View {
                         Text("Starting location: Using Current Location")
                         }
                     }
-//  Check if Home has been set
-                
-//                if appState.startLocationType == "home"{
-//                    let homeLat = UserDefaults.standard.double(forKey: "homeLat")
-//                    let homeLon = UserDefaults.standard.double(forKey: "homeLon")
-//                    let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
-//                    let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
-//
-//                    if homeLatExist == true {
-//                        let homeCoords2D = CLLocationCoordinate2D(latitude: homeLat, longitude: homeLon)
-//                        let homePlacemark = MKPlacemark(coordinate: homeCoords2D)
-//                        let homeMapItem = MKMapItem(placemark: homePlacemark)
-//                        let homeAnnotation = LandmarkAnnotation(mapItem: homeMapItem)
-//                        appState.homeLocation = homeAnnotation
-//                    }
-//
-//
-//                }
-                
-                
-                
+
                 
                 if appState.startLocationType == "home" {
 
@@ -108,14 +88,15 @@ struct DestinationsView: View {
 
                     
                         ToolbarItem(placement: .navigationBarLeading){
-                            GetDirectionsButton(showDestinationsView: $showDestinationsView)
+//  Mark: - Go Directions Button
+                            GoDirectionsButton(showDestinationsView: $showDestinationsView)
                         }
-                    
                     ToolbarItem(placement: .navigationBarLeading){
+//  Mark: - Add Home (as a destination) Button
                             AddHomeButton()
                         }
-                    
                         ToolbarItem(placement: .navigationBarTrailing){
+//  Mark: - Edit List  Button
                             EditButton()
                         }
                   

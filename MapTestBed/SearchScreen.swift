@@ -30,11 +30,10 @@ struct SearchScreen: View {
                 .textFieldStyle(.roundedBorder)
                 .padding([.leading,.trailing],25)
                 .onSubmit {
-//                    DispatchQueue.main.async {
+ 
                         searchVM.search(query: search) {   landmarks in
                             appState.landmarks = landmarks
                         }
-//                    }
                         showSearchView = true
                 }
                 .onAppear{
@@ -82,10 +81,11 @@ struct SearchScreen: View {
                             search = ""
   
                             
-//                            UserDefaults.resetStandardUserDefaults()
-                            UserDefaults.standard.removeObject(forKey: "homeLat")
-                            UserDefaults.standard.removeObject(forKey: "homeLon")
-                            appState.homeLocation = nil
+                            DispatchQueue.main.async{
+                                UserDefaults.standard.removeObject(forKey: "homeLat")
+                                UserDefaults.standard.removeObject(forKey: "homeLon")
+                                appState.homeLocation = nil
+                            }
 
                             
                         }
@@ -99,11 +99,11 @@ struct SearchScreen: View {
                         Button("Set as Search Category"){
                             appState.categoryOfInterest = search
                             search = appState.categoryOfInterest ?? ""
-                            //                    DispatchQueue.main.async {
-                                                    searchVM.search(query: search) {   landmarks in
-                                                        appState.landmarks = landmarks
-                                                    }
-                            //                    }
+ 
+                            searchVM.search(query: search) {   landmarks in
+                                appState.landmarks = landmarks
+                            }
+                            
                                                     showSearchView = true
                         }
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -150,11 +150,12 @@ struct SearchScreen: View {
                 
             }
             
-            SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
-                appState.selectedLandmark = landmark
-//                print("SearchResultsListView Trailing closure")
-//                print("selected landmark: \(String(describing: landmark.title))")
-            }
+           
+                SearchResultsListView(landmarks: appState.landmarks, showSearchView: $showSearchView, selectedTab: $selectedTab) { landmark in
+                    appState.selectedLandmark = landmark
+                }
+           
+            
         }
     }
 }

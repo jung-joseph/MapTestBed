@@ -46,40 +46,43 @@ struct SearchResultsListView: View {
                 .font(.title)
                 .padding([.top,.bottom])
             
-            List(landmarks) { landmark in
-                VStack(alignment: .leading) {
-                    Text(landmark.title ?? "")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                 
-                    Text(landmark.address ?? "")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text(landmark.phone ?? "")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text(formatDistance(for:landmark))
-                        .font(.caption)
-                        .opacity(0.4)
-                }//VStack
-                .listRowBackground(appState.selectedLandmark == landmark ? Color(UIColor.lightGray): Color.white)
-                .contentShape(Rectangle())
-                .onSubmit {
-                    print("SearchResultsList onSubmit fired")
 
-                }
-                .onTapGesture {
-                    print("SearchResultsList onTapGesture fired")
-                    onSelect(landmark)
-                    
-                    withAnimation{
-                        localSearchService.region = MKCoordinateRegion.regionFromLandmark(landmark)
+            
+                List(landmarks) { landmark in
+                    VStack(alignment: .leading) {
+                        Text(landmark.title ?? "")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                     
+                        Text(landmark.address ?? "")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(landmark.phone ?? "")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(formatDistance(for:landmark))
+                            .font(.caption)
+                            .opacity(0.4)
+                    }//VStack
+                    .listRowBackground(appState.selectedLandmark == landmark ? Color(UIColor.lightGray): Color.white)
+                    .contentShape(Rectangle())
+                    .onSubmit {
+                        print("SearchResultsList onSubmit fired")
+
                     }
-                    selectedTab = "Map"
-//                    Remove search list after an annotation is selected
-                    self.showSearchView = false
-                }
-                
-            }// List
+                    .onTapGesture {
+                        print("SearchResultsList onTapGesture fired")
+                        onSelect(landmark)
+                        
+                        withAnimation{
+                            localSearchService.region = MKCoordinateRegion.regionFromLandmark(landmark)
+                        }
+                        selectedTab = "Map"
+    //                    Remove search list after an annotation is selected
+                        self.showSearchView = false
+                    }
+                    
+                }// List
+            
             
         }
        

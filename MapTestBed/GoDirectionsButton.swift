@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct GetDirectionsButton: View {
+struct GoDirectionsButton: View {
     
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var searchVM: SearchResultsViewModel
@@ -32,55 +32,68 @@ struct GetDirectionsButton: View {
             
 
             
-            var start: MKMapItem? = nil
-            
-            if appState.startLocationType == "currentLocation" {
+//            Task{
+                var start: MKMapItem? = nil
+                
+                if appState.startLocationType == "currentLocation" {
+               
+                    start = MKMapItem.forCurrentLocation()
+                    appState.startLocation = LandmarkAnnotation(mapItem: start!)
+                    print("currentLocation lat: \(appState.startLocation!.coordinate.longitude) lon: \(appState.startLocation!.coordinate.latitude)")
+
+                    
+                } else if appState.startLocationType == "home" {
+                    
+                    //                let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
+                    //                let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
+                  
+                    let homeLon:Double? = UserDefaults.standard.double(forKey: "homeLon")
+                    let homeLat:Double? = UserDefaults.standard.double(forKey: "homeLat")
+                    
+                    if appState.homeLocation != nil {
+                        let homeCoords = CLLocationCoordinate2D(latitude: homeLat!, longitude: homeLon!)
+                        let homeStart = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
+                        appState.homeLocation = homeStart
+                        appState.homeLocation?.mapItem.name = "Home"
+                        appState.startLocation = appState.homeLocation
+                        
+                        start = MKMapItem(placemark: MKPlacemark(coordinate: homeCoords))
+                        
+                        //                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
+                        //                    appState.startLocation = appState.homeLocation
+                    } else {
+                        start = MKMapItem.forCurrentLocation()
+                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                    }
+                    
+                    
+                    
+                } else if appState.startLocationType == "selectedLocation" {
+                    
+                    if appState.selectedStartLocation != nil {
+                        start = MKMapItem(placemark: MKPlacemark(coordinate: appState.selectedStartLocation!.coordinate))
+                        appState.startLocation = appState.selectedStartLocation
+                    } else {
+                        start = MKMapItem.forCurrentLocation()
+                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                    }
+
+                                         
+                } else {
+                       start = MKMapItem.forCurrentLocation()
+                }
            
-                start = MKMapItem.forCurrentLocation()
-                appState.startLocation = LandmarkAnnotation(mapItem: start!)
-
-                
-            } else if appState.startLocationType == "home" {
-                
-                //                let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
-                //                let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
-              
-                let homeLon:Double? = UserDefaults.standard.double(forKey: "homeLon")
-                let homeLat:Double? = UserDefaults.standard.double(forKey: "homeLat")
-                
-                if appState.homeLocation != nil {
-                    let homeCoords = CLLocationCoordinate2D(latitude: homeLat!, longitude: homeLon!)
-                    let homeStart = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
-                    appState.homeLocation = homeStart
-                    appState.homeLocation?.mapItem.name = "Home"
-                    appState.startLocation = appState.homeLocation
-                    
-                    start = MKMapItem(placemark: MKPlacemark(coordinate: homeCoords))
-                    
-                    //                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
-                    //                    appState.startLocation = appState.homeLocation
-                } else {
-                    start = MKMapItem.forCurrentLocation()
-                    appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
-                }
-                
-                
-                
-            } else if appState.startLocationType == "selectedLocation" {
-                
-                if appState.selectedStartLocation != nil {
-                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.selectedStartLocation!.coordinate))
-                    appState.startLocation = appState.selectedStartLocation
-                } else {
-                    start = MKMapItem.forCurrentLocation()
-                    appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
-                }
-
-                                     
+            
+            // Update map region to startLocation
+            
+            if appState.startLocationType == "currentLocation"{
+                let region = MKCoordinateRegion(center: appState.map.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                appState.map.setRegion(region, animated: true)
             } else {
-                   start = MKMapItem.forCurrentLocation()
+                
+                let region = MKCoordinateRegion(center: appState.startLocation?.coordinate ?? appState.map.userLocation.coordinate , span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                appState.map.setRegion(region, animated: true)
             }
-                                     
 
             // Put route coordinates into routeCoords array starting with the current user location (start)
             var routeCoords: [MKMapItem] = []
@@ -134,9 +147,9 @@ struct GetDirectionsButton: View {
     }
     
     
-    struct GetDirectionsButton_Previews: PreviewProvider {
+    struct GoDirectionsButton_Previews: PreviewProvider {
         static var previews: some View {
-            GetDirectionsButton(showDestinationsView: .constant(false))
+            GoDirectionsButton(showDestinationsView: .constant(false))
         }
     }
     
