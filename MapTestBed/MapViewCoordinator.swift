@@ -54,13 +54,30 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
                     print(error as Any)
                     return
                 }
- 
+ //MARK: - ADD PIN TO ANNOTATION LOCATION
+ // https://stackoverflow.com/questions/49136068/draw-mkpointannotation-with-title-in-mksnapshot-image
+                
+                let customPin = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.red,renderingMode: .alwaysOriginal)
 
-            DispatchQueue.main.async { // put on the main queue
+                    
+                UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
+                        snapshot.image.draw(at: CGPoint.zero)
+                let point:CGPoint = snapshot.point(for: annotation.coordinate)
+                if let customPin = customPin {
+                    self.drawPin(point: point, customPin: customPin)
+                }
+                if let title = annotation.title {
+                    self.drawTitle(title: title, at: point, attributes: self.titleAttributes())
+                }
+                let compositeImage = UIGraphicsGetImageFromCurrentImageContext()
                 let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 75)) // save Original code <-
 
+                imageView.image = compositeImage
+
+            DispatchQueue.main.async { // put on the main queue
+
                 
-                imageView.image = snapshot.image // <- original code
+//                imageView.image = snapshot.image // <- original code
  
                 // customView = CallOutView is a SwiftUI View
 
@@ -145,4 +162,39 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 //    }
     
     
+//MARK: - HELPER FUNCTIONS
+    
+    private func drawTitle(title: String,
+                               at point: CGPoint,
+                           attributes: [NSAttributedString.Key: NSObject]) {
+            let titleSize = title.size(withAttributes: attributes)
+            title.draw(with: CGRect(
+                x: point.x - titleSize.width / 2.0,
+                y: point.y + 1,
+                width: titleSize.width,
+                height: titleSize.height),
+                       options: .usesLineFragmentOrigin,
+                       attributes: attributes,
+                       context: nil)
+        }
+
+    private func titleAttributes() -> [NSAttributedString.Key: NSObject] {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            let titleFont = UIFont.systemFont(ofSize: 10, weight: UIFont.Weight.semibold)
+        let attrs = [NSAttributedString.Key.font: titleFont,
+                     NSAttributedString.Key.paragraphStyle: paragraphStyle]
+            return attrs
+        }
+
+        private func drawPin(point: CGPoint, customPin: UIImage) {
+            let pinPoint = CGPoint(
+                x: point.x - customPin.size.width / 2.0,
+                y: point.y - customPin.size.height)
+            customPin.draw(at: pinPoint)
+        }
+
 }
+
+
+
