@@ -14,7 +14,7 @@ struct MainView: View {
     @State var showDestinationsView: Bool = false
     @State var showSearchView: Bool = false
     @State var showSettingsView: Bool = false
-
+    
     
     @EnvironmentObject var settings: Settings
     
@@ -22,7 +22,7 @@ struct MainView: View {
         let tabColor = Color(.black)
         
         TabView(selection: $selectedTab){
-//MARK: - MAPSCREEN
+            //MARK: - MAPSCREEN
             MapScreen()
                 .tabItem {
                     Image(systemName: "map.fill").foregroundColor(tabColor)
@@ -31,15 +31,15 @@ struct MainView: View {
                 .tag("Map")
             
             
-
             
-//MARK: - SEARCHSCREEN
-
+            
+            //MARK: - SEARCHSCREEN
+            
             DummyView()
                 .onAppear(){
-//                    selectedTab = "Map"
+                    //                    selectedTab = "Map"
                     selectedTab = ""
-
+                    
                     showSearchView.toggle()
                 }
                 .tabItem {
@@ -53,10 +53,10 @@ struct MainView: View {
                 }
             
             
-
             
-//MARK: - DESTINATIONSVIEW
-
+            
+            //MARK: - DESTINATIONSVIEW
+            
             DummyView()
                 .onAppear(){
                     selectedTab = "Map"
@@ -72,8 +72,8 @@ struct MainView: View {
                         .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.35)])
                 }
             
-//MARK: - ROUTEVIEW
-
+            //MARK: - ROUTEVIEW
+            
             DummyView()
                 .onAppear(){
                     selectedTab = "Map"
@@ -84,21 +84,38 @@ struct MainView: View {
                     Text("Route")
                 }
                 .tag("Route")
-        
-        .sheet(isPresented: $showRouteSheet) {
-            RouteView()
-                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.05)])
-        }
             
-
+                .sheet(isPresented: $showRouteSheet) {
+                    RouteView()
+                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.25), .fraction(0.05)])
+                }
             
-
             
-//MARK: - SETTINGS SCREEN
-
-            DummyView()
+            
+            
+            
+            //MARK: - SETTINGS SCREEN
+            
+//            DummyView()
+//                .onAppear(){
+//                    selectedTab = "Map"
+//                    showSettingsView.toggle()
+//                }
+//                .tabItem {
+//                    Image(systemName: "gear.circle.fill").foregroundColor(tabColor)
+//                    Text("Settings")
+//                }
+//                .tag("Settings")
+//
+//                .sheet(isPresented: $showSettingsView) {
+//                    SettingsScreen(settings: settings)
+//                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
+//                }
+//
+            
+            SettingsScreen(settings: settings)
                 .onAppear(){
-                    selectedTab = "Map"
+                    selectedTab = "Settings"
                     showSettingsView.toggle()
                 }
                 .tabItem {
@@ -106,13 +123,15 @@ struct MainView: View {
                     Text("Settings")
                 }
                 .tag("Settings")
+            
+//                .sheet(isPresented: $showSettingsView) {
+//                    SettingsScreen(settings: settings)
+//                        .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
+//                }
+//            MARK: -
+            
+        }
         
-        .sheet(isPresented: $showSettingsView) {
-            SettingsScreen(settings: settings)
-                .presentationDetents([.large, .medium, .fraction(0.75), .fraction(0.50)])
-        }
-        }
-
     }
 }
 
@@ -126,9 +145,9 @@ extension UITabBarController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let standardAppearance = UITabBarAppearance()
-    
+        
         standardAppearance.selectionIndicatorTintColor = .red
-
+        
         tabBar.standardAppearance = standardAppearance
     }
 }
