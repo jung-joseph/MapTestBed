@@ -24,6 +24,8 @@ struct MapScreen: View {
                 VStack{
 
                     HStack{
+                        
+                        
                         Spacer()
                         Button(action: {
                             let region = MKCoordinateRegion(center: appState.map.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))

@@ -17,6 +17,8 @@ struct GoDirectionsButton: View {
     @Binding var showDestinationsView: Bool
     
     var distanceFormatter = DistanceFormatter()
+    
+    
 
     var body: some View {
         
@@ -39,7 +41,7 @@ struct GoDirectionsButton: View {
                
                     start = MKMapItem.forCurrentLocation()
                     appState.startLocation = LandmarkAnnotation(mapItem: start!)
-                    print("currentLocation lat: \(appState.startLocation!.coordinate.longitude) lon: \(appState.startLocation!.coordinate.latitude)")
+//                    print("currentLocation lat: \(appState.startLocation!.coordinate.longitude) lon: \(appState.startLocation!.coordinate.latitude)")
 
                     
                 } else if appState.startLocationType == "home" {
@@ -95,7 +97,7 @@ struct GoDirectionsButton: View {
                 appState.map.setRegion(region, animated: true)
             }
 
-            // Put route coordinates into routeCoords array starting with the current user location (start)
+            // Put route coordinates into routeCoords array starting with the appropriate starting location (start)
             var routeCoords: [MKMapItem] = []
             
 
@@ -105,7 +107,10 @@ struct GoDirectionsButton: View {
 //            print("routeCoords.count \(routeCoords.count)")
             
             for place in appState.destinationLandmarks {
-//                print("Place:\(place!.title!)")
+                
+                print("Destination:\(place!.title!)")
+                
+                
 //                print("destinationLandmarks.count \(appState.destinationLandmarks.count)")
                 
                 routeCoords.append(MKMapItem(placemark: MKPlacemark(coordinate: place?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0) ) ))

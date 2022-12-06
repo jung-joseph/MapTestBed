@@ -16,13 +16,14 @@ class DirectionsViewModel: ObservableObject {
     @Published var steps: [MKRoute.Step] = []
     var distanceFormatter = DistanceFormatter()
 
-    
+
 
     func calculateDirections(routePoints: [MKMapItem]) async -> [MKRoute]{
         var instructions: [RouteStep] = []
         var computedRoutes: [MKRoute] = []
 
         do {
+            // loop over each segment of the route
             for index in 0...routePoints.count - 2{
                 
                
@@ -34,6 +35,8 @@ class DirectionsViewModel: ObservableObject {
                 directionsRequest.destination = routePoints[index + 1]
                 
                 
+                
+                
                 let directions = MKDirections(request: directionsRequest)
 //                MARK: - GET THE ROUTE
                 let response = try await directions.calculate()
@@ -42,10 +45,35 @@ class DirectionsViewModel: ObservableObject {
                 guard let route = response.routes.first else {
                     return []
                 }
-//                print("calculateDirections")
-//                print("routePoints.count: \(routePoints.count)")
+ 
                 computedRoutes.append(route)
                 
+//                print("Destination: \(String(describing: routePoints[index].name))")
+//                appState.arrivalVM.destination = routePoints[index].name
+                
+                // time Estimate
+                let expectedTravelTimeInSeconds = route.expectedTravelTime
+                
+                let timeFormatter = TimeFormatter()
+                
+                let travelTime = timeFormatter.expectedTravelTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
+                
+                
+                
+                print("Travel time: \(travelTime)")
+                
+             
+                
+                let arrivalTime = timeFormatter.expectedArrivalTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
+                
+                
+                
+                
+                print("Expected Arrival Time: \(arrivalTime)")
+
+                
+                
+
                 //                steps = route.steps
                 for step in route.steps{
                     //                        steps.append(route.steps[step])
@@ -54,12 +82,11 @@ class DirectionsViewModel: ObservableObject {
                     let distance = "\(self.distanceFormatter.format(distanceInMeters: step.distance))"
                     let stepInstructions = step.instructions
                     
-//                    print("iconName: \(iconName) stepInstructions: \(stepInstructions) distance: \(distance)")
-//                    print("stepInstructions: \(stepInstructions)")
-//                    print("distance: \(distance)")
                     
+                   
                     let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
-//                    print("arrayElement: \(String(describing: arrayElement.imageName)), \(String(describing: arrayElement.instructions)), \(String(describing: arrayElement.distance))")
+
+                    
                     instructions.append(arrayElement)
                     
                 }

@@ -175,6 +175,9 @@ struct CallOutView: View {
                 let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
                 let stepInstructions = step.instructions
                 
+                //
+               
+                
                 
                 let arrayElement = RouteStep(imageName: iconName, instructions: stepInstructions, distance: distance)
                 

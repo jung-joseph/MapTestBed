@@ -41,14 +41,14 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         view.canShowCallout = true
 
         let options = MKMapSnapshotter.Options()
+        
         let size = 250.0
         options.size = CGSize(width: size, height: size/2)
         options.showsBuildings = true
         options.mapType = .standard
         options.camera = MKMapCamera(lookingAtCenter: annotation.coordinate, fromDistance: 500, pitch: 65, heading: 0)
+        
         let snapshotter = MKMapSnapshotter(options: options)
-
- 
             snapshotter.start { snapshot, error in
                 guard let snapshot = snapshot, error == nil else {
                     print(error as Any)
@@ -56,12 +56,12 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
                 }
  
 
+            DispatchQueue.main.async { // put on the main queue
+                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 75)) // save Original code <-
 
-//            DispatchQueue.main.async {
-                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 75))
-
-//                let imageView = UIImageView(frame: CGRect(x:0, y: 0, width: 100, height: 100))
-                imageView.image = snapshot.image
+                
+                imageView.image = snapshot.image // <- original code
+ 
                 // customView = CallOutView is a SwiftUI View
 
                 let customView = CallOutView(mapView: mapView,selectedAnnotation: annotation,snapShot: imageView.image, annotationView: view)
@@ -71,7 +71,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
                 let callout = MapCalloutView(rootView: AnyView(customView))
                 view.detailCalloutAccessoryView = callout
-//            }
+            }
         }
 
         

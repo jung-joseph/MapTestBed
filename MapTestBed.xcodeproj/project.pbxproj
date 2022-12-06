@@ -10,6 +10,8 @@
 		53072E5E290DCC9F00F9D885 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53072E5D290DCC9F00F9D885 /* DummyView.swift */; };
 		53072E60290EB14000F9D885 /* MKTypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53072E5F290EB14000F9D885 /* MKTypeExtension.swift */; };
 		5313DC29293A50AF00562BC7 /* AddHomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313DC28293A50AF00562BC7 /* AddHomeButton.swift */; };
+		53307915293D236F00573618 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53307914293D236F00573618 /* TimeFormatter.swift */; };
+		53307917293EA08A00573618 /* ArrivalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53307916293EA08A00573618 /* ArrivalViewModel.swift */; };
 		5354374B2918487F000D7B8C /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354374A2918487F000D7B8C /* DestinationsView.swift */; };
 		5393555E2901F29000183754 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555D2901F29000183754 /* SearchResultsViewModel.swift */; };
 		539355602901F34000183754 /* LocalSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393555F2901F34000183754 /* LocalSearchService.swift */; };
@@ -47,6 +49,8 @@
 		53072E5D290DCC9F00F9D885 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		53072E5F290EB14000F9D885 /* MKTypeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKTypeExtension.swift; sourceTree = "<group>"; };
 		5313DC28293A50AF00562BC7 /* AddHomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHomeButton.swift; sourceTree = "<group>"; };
+		53307914293D236F00573618 /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
+		53307916293EA08A00573618 /* ArrivalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalViewModel.swift; sourceTree = "<group>"; };
 		5354374A2918487F000D7B8C /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
 		538511862900AC2B004FB303 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5393555D2901F29000183754 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 				53EBBEF8292564D300096DF5 /* CategoryButton.swift */,
 				53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */,
 				5313DC28293A50AF00562BC7 /* AddHomeButton.swift */,
+				53307914293D236F00573618 /* TimeFormatter.swift */,
+				53307916293EA08A00573618 /* ArrivalViewModel.swift */,
 			);
 			path = MapTestBed;
 			sourceTree = "<group>";
@@ -257,7 +263,9 @@
 				5354374B2918487F000D7B8C /* DestinationsView.swift in Sources */,
 				53FDD5F3290971310018002B /* ButtonUIStack.swift in Sources */,
 				53FDD60F290AC6C00018002B /* MainView.swift in Sources */,
+				53307915293D236F00573618 /* TimeFormatter.swift in Sources */,
 				5313DC29293A50AF00562BC7 /* AddHomeButton.swift in Sources */,
+				53307917293EA08A00573618 /* ArrivalViewModel.swift in Sources */,
 				539355642901F90400183754 /* Settings.swift in Sources */,
 				53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */,
 				53BD203D28D80AA300480B29 /* MapScreen.swift in Sources */,
