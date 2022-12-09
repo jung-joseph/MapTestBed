@@ -74,7 +74,7 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
 
                 imageView.image = compositeImage
 
-            DispatchQueue.main.async { // put on the main queue
+//            DispatchQueue.main.async { // put on the main queue
 
                 
 //                imageView.image = snapshot.image // <- original code
@@ -85,10 +85,10 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
                 
 //                                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
 //                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-
-                let callout = MapCalloutView(rootView: AnyView(customView))
-                view.detailCalloutAccessoryView = callout
-            }
+                
+                    let callout = MapCalloutView(rootView: AnyView(customView))
+                    view.detailCalloutAccessoryView = callout
+//                }
         }
 
         
