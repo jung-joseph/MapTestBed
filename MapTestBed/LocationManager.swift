@@ -57,11 +57,23 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {return}
+        
+        print("in didUpdateLocation")
+        
+        guard let location = locations.first else {
+            print(" did not unWrap location")
 
+            return
+            
+        }
+        print("Getting location and setting region")
         DispatchQueue.main.async { [weak self] in
             self?.location = location
             self?.region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))
+            print("Location from locationManager")
+            print("lat: \(location.coordinate.latitude)")
+            print("lon: \(location.coordinate.longitude)")
+
         }
     }
 }

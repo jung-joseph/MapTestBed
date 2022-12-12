@@ -33,6 +33,7 @@
 		53BD204128D80AE200480B29 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD204028D80AE200480B29 /* Landmark.swift */; };
 		53BD204328D80AFD00480B29 /* LandmarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */; };
 		53D13915291EAAF500A5820A /* DirectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D13914291EAAF500A5820A /* DirectionsViewModel.swift */; };
+		53D182622947AD5800CCAE82 /* TurnByTurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D182612947AD5800CCAE82 /* TurnByTurnView.swift */; };
 		53EBBEF9292564D300096DF5 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBBEF8292564D300096DF5 /* CategoryButton.swift */; };
 		53EBBEFB2925719100096DF5 /* GoDirectionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */; };
 		53FDD5E32902E45F0018002B /* MapCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FDD5E22902E45F0018002B /* MapCalloutView.swift */; };
@@ -74,6 +75,7 @@
 		53BD204028D80AE200480B29 /* Landmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		53BD204228D80AFD00480B29 /* LandmarkAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotation.swift; sourceTree = "<group>"; };
 		53D13914291EAAF500A5820A /* DirectionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsViewModel.swift; sourceTree = "<group>"; };
+		53D182612947AD5800CCAE82 /* TurnByTurnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnByTurnView.swift; sourceTree = "<group>"; };
 		53EBBEF8292564D300096DF5 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		53EBBEFA2925719100096DF5 /* GoDirectionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoDirectionsButton.swift; sourceTree = "<group>"; };
 		53FDD5E22902E45F0018002B /* MapCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCalloutView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				5313DC28293A50AF00562BC7 /* AddHomeButton.swift */,
 				53307914293D236F00573618 /* TimeFormatter.swift */,
 				53307916293EA08A00573618 /* ArrivalViewModel.swift */,
+				53D182612947AD5800CCAE82 /* TurnByTurnView.swift */,
 			);
 			path = MapTestBed;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				53307917293EA08A00573618 /* ArrivalViewModel.swift in Sources */,
 				539355642901F90400183754 /* Settings.swift in Sources */,
 				53BD202B28D806F400480B29 /* MapTestBedApp.swift in Sources */,
+				53D182622947AD5800CCAE82 /* TurnByTurnView.swift in Sources */,
 				53BD203D28D80AA300480B29 /* MapScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -22,7 +22,9 @@ struct MapScreen: View {
                     }
                 
                 VStack{
-
+                    
+                    TurnByTurnView()
+                    
                     HStack{
                         
                         
