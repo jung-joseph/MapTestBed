@@ -4,7 +4,6 @@
 //
 //  Created by Joseph Jung on 11/16/22.
 //
-
 import SwiftUI
 import MapKit
 
@@ -13,12 +12,23 @@ struct GoDirectionsButton: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var searchVM: SearchResultsViewModel
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var locationManager: LocationManager
     
     @Binding var showDestinationsView: Bool
     
     var distanceFormatter = DistanceFormatter()
     
+    var currentLocation: CLLocation {
+        if let currentLocation = locationManager.location {
+            return currentLocation
+        } else {
+            return CLLocation(latitude: 0.0, longitude: 0.0)
+        }
+    }
     
+    var mapItemForCurrentLocation: MKMapItem {
+        MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
+    }
 
     var body: some View {
         
@@ -32,14 +42,17 @@ struct GoDirectionsButton: View {
             
             showDestinationsView = false
             
-
+           
             
 //            Task{
                 var start: MKMapItem? = nil
                 
                 if appState.startLocationType == "currentLocation" {
-               
-                    start = MKMapItem.forCurrentLocation()
+                    
+                    start = mapItemForCurrentLocation
+//                    start = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
+//                    start = MKMapItem(placemark: <#T##MKPlacemark#>currentLocation
+//                    start = MKMapItem.forCurrentLocation()
                     appState.startLocation = LandmarkAnnotation(mapItem: start!)
 //                    print("currentLocation lat: \(appState.startLocation!.coordinate.longitude) lon: \(appState.startLocation!.coordinate.latitude)")
 
@@ -64,8 +77,11 @@ struct GoDirectionsButton: View {
                         //                    start = MKMapItem(placemark: MKPlacemark(coordinate: appState.homeLocation!.coordinate))
                         //                    appState.startLocation = appState.homeLocation
                     } else {
-                        start = MKMapItem.forCurrentLocation()
-                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                        start = mapItemForCurrentLocation
+                        appState.startLocation = LandmarkAnnotation(mapItem: mapItemForCurrentLocation)
+
+//                        start = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
+//                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
                     }
                     
                     
@@ -76,24 +92,34 @@ struct GoDirectionsButton: View {
                         start = MKMapItem(placemark: MKPlacemark(coordinate: appState.selectedStartLocation!.coordinate))
                         appState.startLocation = appState.selectedStartLocation
                     } else {
-                        start = MKMapItem.forCurrentLocation()
-                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
+                        start = mapItemForCurrentLocation
+                        appState.startLocation = LandmarkAnnotation(mapItem: mapItemForCurrentLocation)
+
+//                        start = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
+//                        appState.startLocation = LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation())
                     }
 
                                          
                 } else {
-                       start = MKMapItem.forCurrentLocation()
+//                    start = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
+                       start = mapItemForCurrentLocation
                 }
            
             
             // Update map region to startLocation
             
             if appState.startLocationType == "currentLocation"{
-                let region = MKCoordinateRegion(center: appState.map.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                
+//                let region = MKCoordinateRegion(center: appState.map.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                
+                let region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
                 appState.map.setRegion(region, animated: true)
             } else {
                 
-                let region = MKCoordinateRegion(center: appState.startLocation?.coordinate ?? appState.map.userLocation.coordinate , span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+//                let region = MKCoordinateRegion(center: appState.startLocation?.coordinate ?? appState.map.userLocation.coordinate , span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                
+                let region = MKCoordinateRegion(center: appState.startLocation?.coordinate ?? currentLocation.coordinate , span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+
                 appState.map.setRegion(region, animated: true)
             }
 
@@ -172,8 +198,9 @@ struct GoDirectionsButton: View {
         
         // add annotation for starting point
         
-        appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation()))
-        
+//        appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation()))
+        appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))))
+
         for  index in 0...numberOfRoutes - 1{
             
 //            print("route#: \(index)")

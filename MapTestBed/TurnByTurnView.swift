@@ -6,21 +6,27 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct TurnByTurnView: View {
     
     @EnvironmentObject var appState: AppState
-    var locationManager = LocationManager()
+    @EnvironmentObject var locationManager: LocationManager
     
+    
+   
     var body: some View {
+        
+        
         VStack{
             Text("User Location")
             
-            Text("Lat: \(appState.map.userLocation.coordinate.latitude)")
-            Text("Lon: \(appState.map.userLocation.coordinate.longitude)")
+//            Text("Lat: \(appState.map.userLocation.coordinate.latitude)")
+//            Text("Lon: \(appState.map.userLocation.coordinate.longitude)")
             
-            Text("Lat: \(locationManager.location?.coordinate.latitude ?? 1000.0)")
-            Text("Lon: \(locationManager.location?.coordinate.longitude ?? 1000.0)")
+            Text("Lat: \(locationManager.location?.coordinate.latitude ?? CLLocation(latitude:0.0 , longitude: 0.0).coordinate.latitude)")
+            Text("Lon: \(locationManager.location?.coordinate.longitude ?? CLLocation(latitude:0.0 , longitude: 0.0).coordinate.longitude)")
+
         }
     }
 }
