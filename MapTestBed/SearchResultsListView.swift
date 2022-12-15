@@ -66,11 +66,11 @@ struct SearchResultsListView: View {
                     .listRowBackground(appState.selectedLandmark == landmark ? Color(UIColor.lightGray): Color.white)
                     .contentShape(Rectangle())
                     .onSubmit {
-                        print("SearchResultsList onSubmit fired")
+//                        print("SearchResultsList onSubmit fired")
 
                     }
                     .onTapGesture {
-                        print("SearchResultsList onTapGesture fired")
+//                        print("SearchResultsList onTapGesture fired")
                         onSelect(landmark)
                         
                         withAnimation{

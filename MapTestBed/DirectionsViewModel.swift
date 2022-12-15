@@ -13,10 +13,14 @@ import MapKit
 @MainActor
 class DirectionsViewModel: ObservableObject {
     
+    @ObservedObject var settings: Settings
     @Published var steps: [MKRoute.Step] = []
     var distanceFormatter = DistanceFormatter()
 
-
+    init(settings: Settings) {
+        self.settings = settings
+ 
+    }
 
     func calculateDirections(routePoints: [MKMapItem]) async -> [MKRoute]{
         var instructions: [RouteStep] = []
@@ -29,7 +33,9 @@ class DirectionsViewModel: ObservableObject {
                
                 
                 let directionsRequest = MKDirections.Request()
-                directionsRequest.transportType = .automobile
+                directionsRequest.transportType = settings.transportationType
+//                directionsRequest.transportType = .automobile
+
                 
                 directionsRequest.source = routePoints[index]
                 directionsRequest.destination = routePoints[index + 1]
@@ -52,24 +58,24 @@ class DirectionsViewModel: ObservableObject {
 //                appState.arrivalVM.destination = routePoints[index].name
                 
                 // time Estimate
-                let expectedTravelTimeInSeconds = route.expectedTravelTime
+//                let expectedTravelTimeInSeconds = route.expectedTravelTime
                 
-                let timeFormatter = TimeFormatter()
+//                let timeFormatter = TimeFormatter()
                 
-                let travelTime = timeFormatter.expectedTravelTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
+//                let travelTime = timeFormatter.expectedTravelTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
                 
                 
                 
-                print("Travel time: \(travelTime)")
+//                print("Travel time: \(travelTime)")
                 
              
                 
-                let arrivalTime = timeFormatter.expectedArrivalTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
+//                let arrivalTime = timeFormatter.expectedArrivalTimeString(expectedTravelTime: expectedTravelTimeInSeconds)
                 
                 
                 
                 
-                print("Expected Arrival Time: \(arrivalTime)")
+//                print("Expected Arrival Time: \(arrivalTime)")
 
                 
                 
@@ -92,7 +98,8 @@ class DirectionsViewModel: ObservableObject {
                 }
                 
                 
-            }
+            } // Loop over each Route Segment
+            
         } catch {
                 print(error)
            

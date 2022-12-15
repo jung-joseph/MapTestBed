@@ -12,6 +12,7 @@ struct DestinationsView: View {
     
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var searchVM: SearchResultsViewModel
+    @EnvironmentObject var settings: Settings
     
     @State var startLocation: LandmarkAnnotation?
     @Binding var showDestinationsView: Bool
@@ -105,7 +106,7 @@ struct DestinationsView: View {
             }
             .navigationTitle("Destinations")
             .onDisappear{
-                print("DestinationView onDisappear called")
+//                print("DestinationView onDisappear called")
             }
             
         }

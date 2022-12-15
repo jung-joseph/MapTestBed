@@ -12,6 +12,7 @@ struct SettingsScreen: View {
     @ObservedObject var settings: Settings
     
     let  mapTypes = [MKMapType.standard, MKMapType.hybrid, MKMapType.satellite]
+    let transportationTypes = [MKDirectionsTransportType.automobile, MKDirectionsTransportType.walking, MKDirectionsTransportType.transit]
     
     var body: some View {
         
@@ -54,6 +55,22 @@ struct SettingsScreen: View {
                         .padding(.trailing, 20)
                 }
                 
+                Divider()
+                
+                HStack{
+                    Text("Transportation Type")
+                    //            Picker("", selection: $settings.mapType){
+                    
+                    Picker("", selection: $settings.transportationType){
+                        ForEach(transportationTypes, id: \.self) {type in
+                            Text(type.title)
+                        }
+                        
+                    }.fixedSize()
+                        .padding(.trailing, 20)
+                }
+                
+           
             }.padding()
                 .frame(minWidth:400, minHeight: 400)
                 .navigationTitle("Settings")

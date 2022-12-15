@@ -14,6 +14,7 @@ class Settings: ObservableObject {
     @Published var isDarkMode: Bool = false
     @Published var distanceUnit: DistanceUnit = .miles
     @Published var mapType: MKMapType = .standard
+    @Published var transportationType: MKDirectionsTransportType = .automobile //.walking; .transit
 //    @Published var selectedMapTypeString: String = ".standard"
 
 

@@ -15,15 +15,19 @@ struct AddHomeButton: View {
     var body: some View {
         Button(action:{
             if appState.homeLocation == nil && homeIsStored() {
-                print("homeLocation is nil - but coords are stored")
-                let homeLat = UserDefaults.standard.double(forKey: "homeLat")
-                let homeLon = UserDefaults.standard.double(forKey: "homeLon")
-                let homeCoords = CLLocationCoordinate2D(latitude: homeLat, longitude: homeLon)
-                let home = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
-                appState.homeLocation = home
-                appState.homeLocation?.mapItem.name = "Home"
+                DispatchQueue.main.async {
+                    print("homeLocation is nil - but coords are stored")
+                    let homeLat = UserDefaults.standard.double(forKey: "homeLat")
+                    let homeLon = UserDefaults.standard.double(forKey: "homeLon")
+                    let homeCoords = CLLocationCoordinate2D(latitude: homeLat, longitude: homeLon)
+                    let home = LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: homeCoords)))
+                    appState.homeLocation = home
+                    appState.homeLocation?.mapItem.name = "Home"
+                }
             }
-            appState.destinationLandmarks.append(appState.homeLocation)
+            DispatchQueue.main.async {
+                appState.destinationLandmarks.append(appState.homeLocation)
+            }
         },
             label: {
             

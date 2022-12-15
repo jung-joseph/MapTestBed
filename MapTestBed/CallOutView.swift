@@ -32,10 +32,11 @@ struct CallOutView: View {
                 
                 //MARK: - Add Destination Button
                 Button(action: {
-                    appState.destinationLandmarks.append(selectedAnnotation)
-                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
-                    appState.selectedLandmark = nil
-                    
+                    DispatchQueue.main.async {
+                        appState.destinationLandmarks.append(selectedAnnotation)
+                        //    Remove selectedLandmark so that  annotationView Callout is dismissed
+                        appState.selectedLandmark = nil
+                    }
                 },
                        label: {Text("A Destination")})
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -47,10 +48,12 @@ struct CallOutView: View {
                 //MARK: - Set as Starting Location
                 Button(action: {
                     
-                    appState.selectedStartLocation = selectedAnnotation
-                    appState.selectedStartLocation?.mapItem.name = "SelectedStartLocation"
-                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
-                    appState.selectedLandmark = nil
+                    DispatchQueue.main.async{
+                        appState.selectedStartLocation = selectedAnnotation
+                        appState.selectedStartLocation?.mapItem.name = "SelectedStartLocation"
+                        //    Remove selectedLandmark so that  annotationView Callout is dismissed
+                        appState.selectedLandmark = nil
+                    }
                     
                 },
                        label: {Text("Starting Location")})
@@ -63,15 +66,17 @@ struct CallOutView: View {
                 //MARK: - Set as Home
                 Button(action: {
                     
-                    appState.homeLocation = selectedAnnotation
-                    appState.homeLocation?.mapItem.name = "Home"
-                    
-                    // Store home lat and long in UserDefaults
-                    UserDefaults.standard.set(selectedAnnotation.coordinate.latitude, forKey: "homeLat")
-                    UserDefaults.standard.set(selectedAnnotation.coordinate.longitude, forKey: "homeLon")
-                    
-                    //    Remove selectedLandmark so that  annotationView Callout is dismissed
-                    appState.selectedLandmark = nil
+                    DispatchQueue.main.async{
+                        appState.homeLocation = selectedAnnotation
+                        appState.homeLocation?.mapItem.name = "Home"
+                        
+                        // Store home lat and long in UserDefaults
+                        UserDefaults.standard.set(selectedAnnotation.coordinate.latitude, forKey: "homeLat")
+                        UserDefaults.standard.set(selectedAnnotation.coordinate.longitude, forKey: "homeLon")
+                        
+                        //    Remove selectedLandmark so that  annotationView Callout is dismissed
+                        appState.selectedLandmark = nil
+                    }
                     
 
  

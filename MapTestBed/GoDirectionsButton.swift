@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import MapKit
+import AVFoundation
 
 struct GoDirectionsButton: View {
     
@@ -15,6 +16,9 @@ struct GoDirectionsButton: View {
     @EnvironmentObject var locationManager: LocationManager
     
     @Binding var showDestinationsView: Bool
+    
+    
+    @State var speechsynthesizer = AVSpeechSynthesizer()
     
     var distanceFormatter = DistanceFormatter()
     
@@ -32,7 +36,7 @@ struct GoDirectionsButton: View {
 
     var body: some View {
         
-        let directionsVM = DirectionsViewModel()
+        let directionsVM = DirectionsViewModel(settings: settings)
         var computedRoutes:[MKRoute] = []
 
         Button(action:
@@ -50,17 +54,15 @@ struct GoDirectionsButton: View {
                 if appState.startLocationType == "currentLocation" {
                     
                     start = mapItemForCurrentLocation
-//                    start = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))
-//                    start = MKMapItem(placemark: <#T##MKPlacemark#>currentLocation
-//                    start = MKMapItem.forCurrentLocation()
+
+                    
                     appState.startLocation = LandmarkAnnotation(mapItem: start!)
 //                    print("currentLocation lat: \(appState.startLocation!.coordinate.longitude) lon: \(appState.startLocation!.coordinate.latitude)")
 
                     
                 } else if appState.startLocationType == "home" {
                     
-                    //                let homeLatExist = UserDefaults.standard.bool(forKey: "homeLat")
-                    //                let homeLonExist = UserDefaults.standard.bool(forKey: "homeLon")
+                   
                   
                     let homeLon:Double? = UserDefaults.standard.double(forKey: "homeLon")
                     let homeLat:Double? = UserDefaults.standard.double(forKey: "homeLat")
@@ -134,7 +136,7 @@ struct GoDirectionsButton: View {
             
             for place in appState.destinationLandmarks {
                 
-                print("Destination:\(place!.title!)")
+//                print("Destination:\(place!.title!)")
                 
                 
 //                print("destinationLandmarks.count \(appState.destinationLandmarks.count)")
@@ -156,7 +158,7 @@ struct GoDirectionsButton: View {
             //remove all elements of previous routeSteps directions
             appState.routeSteps.removeAll()
             
-            //MARK: - call to async directions
+            //MARK: - COMPUTE ROUTES         call to async calculateDirections
             Task {
                 
                 computedRoutes = await directionsVM.calculateDirections(routePoints: routeCoords)
@@ -167,7 +169,7 @@ struct GoDirectionsButton: View {
             
         },
                label:
-                {Text("Go!")})
+                {Text("Show Route")})
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .background(Color.blue)
         .foregroundColor(.white)
@@ -200,10 +202,19 @@ struct GoDirectionsButton: View {
         
 //        appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem.forCurrentLocation()))
         appState.landmarks.append(appState.startLocation ?? LandmarkAnnotation(mapItem: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:currentLocation.coordinate.latitude, longitude:currentLocation.coordinate.longitude)))))
-
+// clear previous travel times
+        appState.travelTime.removeAll()
+        
+// clear all routes
+        appState.routes.removeAll()
+        
+//        MARK: - Loop over all route segments
         for  index in 0...numberOfRoutes - 1{
             
-//            print("route#: \(index)")
+
+            for route in computedRoutes {
+                appState.routes.append(route)
+            }
             //
             //
             let controller = RouteContentViewController(route: computedRoutes[index])
@@ -224,7 +235,20 @@ struct GoDirectionsButton: View {
             
             routePopover.show(routePopover, sender: self)
             //
+            var stepCounter = 0
+            //
+            // Stop monitoring all previous monitoredRegions
+            for monitoredRegion in locationManager.locationManager.monitoredRegions {
+                locationManager.locationManager.stopMonitoring(for: monitoredRegion)
+            }
+            // Extract Segment Travel Time
+            let expectedTravelTimeInSeconds = computedRoutes[index].expectedTravelTime
+            appState.travelTime.append(expectedTravelTimeInSeconds)
+            
             for step in computedRoutes[index].steps {
+                
+                stepCounter += 1
+                
                 if step.instructions.isEmpty {
                     continue
                 }
@@ -239,9 +263,21 @@ struct GoDirectionsButton: View {
                 
                 appState.routeSteps.append(arrayElement)
                 
+                // set-up regions around step coordinates
+                let region = CLCircularRegion(center: step.polyline.coordinate, radius: 20, identifier: "\(stepCounter)")
+                locationManager.locationManager.startMonitoring(for: region)
                 
+                
+              
             }
+
         }
+//               // speech test
+//
+//                    let initialMessage = "turn here, then turn there"
+//                    let speechUtterance = AVSpeechUtterance(string: initialMessage)
+//                    speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+//                    speechsynthesizer.speak(speechUtterance)
     }
     
     

@@ -15,6 +15,7 @@ class AppState: ObservableObject {
     @Published var route: MKRoute?
     @Published var routeSteps: [RouteStep] = []
     @Published var routes: [MKRoute?] = []
+    @Published var travelTime: [TimeInterval?] = []
     @Published var destinationLandmarks: [LandmarkAnnotation?] = []
 
     @Published var categoryOfInterest: String?

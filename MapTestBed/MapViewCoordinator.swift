@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 import SwiftUI
 import UIKit
+import AVFoundation
 
 final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     
@@ -16,7 +17,8 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var settings: Settings
     
-    
+    @State var speechsynthesizer = AVSpeechSynthesizer()
+
     
     // MARK: - mapViewDidChangeVisibleRegion
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
@@ -194,6 +196,14 @@ final class MapViewCoordinator: NSObject, MKMapViewDelegate{
         customPin.draw(at: pinPoint)
     }
     
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+//                       // speech test
+//        
+//                            let initialMessage = "turn here, then turn there"
+//                            let speechUtterance = AVSpeechUtterance(string: initialMessage)
+//                            speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+//                            speechsynthesizer.speak(speechUtterance)
+    }
 }
 
 
