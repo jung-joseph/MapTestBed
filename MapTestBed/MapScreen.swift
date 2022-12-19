@@ -12,6 +12,8 @@ struct MapScreen: View {
     
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var locationManager: LocationManager
+    
+    
     var currentLocation: CLLocation {
         if let currentLocation = locationManager.location {
             return currentLocation
@@ -30,7 +32,7 @@ struct MapScreen: View {
                 
                 VStack{
                     
-                    TurnByTurnView()
+                    TurnByTurnScreen()
                     
                     HStack{
                         

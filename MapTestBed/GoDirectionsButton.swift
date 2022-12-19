@@ -208,6 +208,9 @@ struct GoDirectionsButton: View {
 // clear all routes
         appState.routes.removeAll()
         
+//remove all elements of previous routeSteps directions
+        appState.routeSteps.removeAll()
+        
 //        MARK: - Loop over all route segments
         for  index in 0...numberOfRoutes - 1{
             
@@ -234,8 +237,7 @@ struct GoDirectionsButton: View {
             
             
             routePopover.show(routePopover, sender: self)
-            //
-            var stepCounter = 0
+           
             //
             // Stop monitoring all previous monitoredRegions
             for monitoredRegion in locationManager.locationManager.monitoredRegions {
@@ -244,14 +246,41 @@ struct GoDirectionsButton: View {
             // Extract Segment Travel Time
             let expectedTravelTimeInSeconds = computedRoutes[index].expectedTravelTime
             appState.travelTime.append(expectedTravelTimeInSeconds)
+            //
+            var stepCounter = 0
+            // set-up region at user location
+//            if let location = locationManager.location {
+//                 let currentLocation = CLLocationCoordinate2D(latitude: location.coordinate.latitude , longitude: location.coordinate.longitude)
+//                // set-up regions around step coordinates
+//                let region = CLCircularRegion(center: currentLocation, radius: 20, identifier: "\(stepCounter)")
+//
+//                locationManager.locationManager.startMonitoring(for: region)
+//            } else {
+//                let currentLocation = CLLocationCoordinate2D(latitude: 51.5072 , longitude: -0.1276)
+//               // set-up regions around step coordinates
+//               let region = CLCircularRegion(center: currentLocation, radius: 20, identifier: "\(stepCounter)")
+//                locationManager.locationManager.startMonitoring(for: region)
+//            }
+            // set-up start region
+            print("stepCounter: \(stepCounter)")
+            print("latitude: \(computedRoutes[index].steps[0].polyline.coordinate.latitude)")
+            print("longitude: \(computedRoutes[index].steps[0].polyline.coordinate.longitude)")
             
-            for step in computedRoutes[index].steps {
+            let region = CLCircularRegion(center: computedRoutes[index].steps[0].polyline.coordinate, radius: 20, identifier: "\(stepCounter)")
+            locationManager.locationManager.startMonitoring(for: region)
+            
+            
+//            for step in computedRoutes[index].steps {
+            for(loopIndex, step) in computedRoutes[index].steps.enumerated() {
+                print("loopIndex: \(loopIndex)")
                 
-                stepCounter += 1
                 
                 if step.instructions.isEmpty {
                     continue
                 }
+                
+                stepCounter += 1
+
                 //
                 let iconName = directionsIcon(step.instructions)
                 let distance = "\(distanceFormatter.format(distanceInMeters: step.distance))"
@@ -264,6 +293,10 @@ struct GoDirectionsButton: View {
                 appState.routeSteps.append(arrayElement)
                 
                 // set-up regions around step coordinates
+                print("stepCounter: \(stepCounter)")
+                print("coordinates: \(step.polyline.coordinate.latitude)")
+                print("coordinates: \(step.polyline.coordinate.longitude)")
+
                 let region = CLCircularRegion(center: step.polyline.coordinate, radius: 20, identifier: "\(stepCounter)")
                 locationManager.locationManager.startMonitoring(for: region)
                 

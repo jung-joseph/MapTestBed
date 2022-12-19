@@ -8,6 +8,8 @@
 import Foundation
 import CoreLocation
 import MapKit
+import SwiftUI
+import AVFoundation
 
 class LocationManager: NSObject, ObservableObject {
     
@@ -17,10 +19,12 @@ class LocationManager: NSObject, ObservableObject {
     //    @Published var region = MKCoordinateRegion.defaultRegion()
     @Published var region = MKCoordinateRegion()
     @Published var location: CLLocation?
-    @Published var enteringRegion: String?
-    @Published var exitingRegion: String?
+    @Published var enteringRegion: String = "0"
+    @Published var exitingRegion: String = "0"
     
     
+    var speechsynthesizer = AVSpeechSynthesizer()
+
     
     override init() {
         super.init()
@@ -67,6 +71,9 @@ extension LocationManager: CLLocationManagerDelegate {
             let identifier = region.identifier
             enteringRegion = identifier
         }
+//        print("enteringRegion: \(enteringRegion)")
+//        let intRegion = Int(enteringRegion) != nil ? Int(enteringRegion) : 0
+//        speakNextInstruction(step: appState.routeSteps[intRegion!])
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -75,6 +82,8 @@ extension LocationManager: CLLocationManagerDelegate {
             let identifier = region.identifier
             exitingRegion = identifier
         }
+//        let intRegion = Int(exitingRegion) != nil ? Int(exitingRegion) : 0
+//        speakNextInstruction(step: appState.routeSteps[intRegion!])
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -96,6 +105,14 @@ extension LocationManager: CLLocationManagerDelegate {
 //            print("lon: \(location.coordinate.longitude)")
             
         }
+    }
+    func speakNextInstruction(step: RouteStep){
+//        var speechsynthesizer = AVSpeechSynthesizer()
+
+        let message = "In \(step.distance ?? "0") \(step.instructions ?? "0")"
+        let speechUtterance = AVSpeechUtterance(string: message)
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+        speechsynthesizer.speak(AVSpeechUtterance(string: message))
     }
 }
 
