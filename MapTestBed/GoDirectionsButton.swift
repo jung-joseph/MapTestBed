@@ -261,6 +261,8 @@ struct GoDirectionsButton: View {
 //               let region = CLCircularRegion(center: currentLocation, radius: 20, identifier: "\(stepCounter)")
 //                locationManager.locationManager.startMonitoring(for: region)
 //            }
+            
+            
             // set-up start region
             print("stepCounter: \(stepCounter)")
             print("latitude: \(computedRoutes[index].steps[0].polyline.coordinate.latitude)")

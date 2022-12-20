@@ -71,7 +71,7 @@ extension LocationManager: CLLocationManagerDelegate {
             let identifier = region.identifier
             enteringRegion = identifier
         }
-//        print("enteringRegion: \(enteringRegion)")
+        print("enteringRegion: \(enteringRegion)")
 //        let intRegion = Int(enteringRegion) != nil ? Int(enteringRegion) : 0
 //        speakNextInstruction(step: appState.routeSteps[intRegion!])
     }
@@ -82,6 +82,8 @@ extension LocationManager: CLLocationManagerDelegate {
             let identifier = region.identifier
             exitingRegion = identifier
         }
+        print("exitingRegion: \(exitingRegion)")
+
 //        let intRegion = Int(exitingRegion) != nil ? Int(exitingRegion) : 0
 //        speakNextInstruction(step: appState.routeSteps[intRegion!])
     }

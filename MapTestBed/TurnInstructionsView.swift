@@ -11,31 +11,29 @@ import AVFoundation
 struct TurnInstructionsView: View {
     
     @EnvironmentObject var appState: AppState
-    var enteringRegion: Int
-    var exitingRegion: Int
+    @EnvironmentObject var locationManager: LocationManager
+
+    var stepNumber: Int
+    var arrival: Bool
+    
     let speechsynthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
     var body: some View {
         //        if !appState.routes.isEmpty{
         
         
-        HStack{
-            Image(systemName: appState.routeSteps[enteringRegion].imageName!)
-            Text("\(appState.routeSteps[enteringRegion].distance!)")
-            Text("\(appState.routeSteps[enteringRegion].instructions!) ")
-                .onChange(of: enteringRegion, perform: {_ in
-                    
-                    
-                    print("onRecieve")
-                    print("region \(enteringRegion)")
-                    print("\(appState.routeSteps[enteringRegion])")
-                    
-                    DispatchQueue.main.async {
-                        self.speakNextInstruction(speech: speechsynthesizer, step: appState.routeSteps[enteringRegion])
-                    }
-                                       
-                })
+        if !appState.routeSteps.isEmpty{
+            HStack{
+                if !arrival { // general case
+                    Image(systemName: appState.routeSteps[stepNumber].imageName!)
+                    Text("\(appState.routeSteps[stepNumber].distance!)")
+                    Text("\(appState.routeSteps[stepNumber].instructions!) ")
+                } else { // arrival
+                    Image(systemName: appState.routeSteps[stepNumber].imageName!)
+                    Text("\(appState.routeSteps[stepNumber].instructions!) ")
 
+                }
+            }
         }
     }
     
@@ -53,6 +51,6 @@ struct TurnInstructionsView: View {
     
 struct TurnInstructionsView_Previews: PreviewProvider {
     static var previews: some View {
-        TurnInstructionsView(enteringRegion: 0, exitingRegion: 0)
+        TurnInstructionsView(stepNumber: 0, arrival: false)
     }
 }
